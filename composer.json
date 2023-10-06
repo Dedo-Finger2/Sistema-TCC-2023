@@ -1,5 +1,5 @@
 {
-    "name": "Sistema-TCC-2023",
+    "name": "vendor/sistema-tcc",
     "type": "project",
     "description": "Um sistema que busca melhorar a gestão de transporte público em Camaçari.",
     "keywords": ["laravel", "framework"],
