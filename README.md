@@ -1,2 +1,2 @@
 # Sobre
-Um projetinho bacana pra um TCC.
+Um sistema que visa ajudar a gestão de transporte público de um munícipio, usando como base a demanda da população.
