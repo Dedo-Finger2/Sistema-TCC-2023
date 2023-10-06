@@ -16,3 +16,15 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+/*
+|--------------------------------------------------------------------------
+| Rota com controlador
+|--------------------------------------------------------------------------
+|
+| Essa rota usa um controlador ao invés de usar uma closure, possui um nome
+| e tem um middleware aplicado vamos usar esse tipo de rota
+| e não aquela usada acima.
+|
+*/
+// Route::get('/', [Controller::class, 'metodo'])->name('controller.metodo')->middleware('auth');
