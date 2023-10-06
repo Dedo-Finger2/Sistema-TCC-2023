@@ -29,7 +29,7 @@ Para instalar o <futuro_nome_do_projeto>, siga estas etapas:
 Windows:
 * clonando respositório
 ```
-git clone [link](https://github.com/Dedo-Finger2/Sistema-TCC-2023.git)
+git clone https://github.com/Dedo-Finger2/Sistema-TCC-2023.git
 ```
 ```
 cd nome_pasta_projeto
