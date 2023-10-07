@@ -11,9 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('requisicaos', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        Schema::create('requisicoes', function (Blueprint $table) {
+            $table->id('id_requisicao');
+
+            // id inteiro vazio
+            $table->unsignedBigInteger('id_usuario');
+            $table->unsignedBigInteger('id_feedback')->nullable(true);
+
+            $table->dateTime('date_time')->nullable(false);
+            // id_usuario referencia id_usuario da tabela usuarios
+            $table->foreign('id_usuario')->references('id_usuario')->on('usuarios');
+
+            $table->foreign('id_feedback')->references('id_feedback')->on('feedbacks');
+
         });
     }
 
