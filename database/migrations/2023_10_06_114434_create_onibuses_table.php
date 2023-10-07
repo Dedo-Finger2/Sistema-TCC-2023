@@ -12,8 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('onibuses', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->id('id_onibus');
+            $table->string('numeracao',5)->nullable(false);
+            $table->unsignedBigInteger('id_empresa');
+            $table->foreign('id_empresa')->references('id_empresa')->on('empresas');
         });
     }
 
