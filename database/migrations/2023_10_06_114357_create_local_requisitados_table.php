@@ -11,9 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('local_requisitados', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        Schema::create('locais_requisitados', function (Blueprint $table) {
+            $table->id('id_local');
+
+            $table->string('nome', 45)->nullable(false);
+            $table->unsignedBigInteger('id_endereco');
+
+            $table->foreign('id_endereco')->references('id_endereco')->on('enderecos');
         });
     }
 
