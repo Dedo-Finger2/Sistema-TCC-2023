@@ -12,8 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('rotas', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->id('rota');
+            $table->int('id_origem_onibus')->nullable(true);
+            $table->unsignedBigInteger('id_destino');
+            $table->foreign('id_onibus')->references('id_onibus')->on('onibus');
         });
     }
 
