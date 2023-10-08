@@ -12,12 +12,19 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('locais_requisitados', function (Blueprint $table) {
-            $table->id('id_local');
+            /*
+            | ------------------------
+            | Tablea de locais Requisitados
+            | ------------------------
+            | nesta tabela vamos armazenar os locaisque os usuários requisitam enquanto usam nossa plataforma
+            */
+            $table->id('id_local'); // ID
 
-            $table->string('nome', 45)->nullable(false);
-            $table->unsignedBigInteger('id_endereco');
+            $table->string('nome', 150)->nullable(false); // Nome do local (endereço descrito pelo usuario)
 
-            $table->foreign('id_endereco')->references('id_endereco')->on('enderecos');
+            $table->unsignedBigInteger('id_endereco')->nullable(true); // Chave estrangeira (não referenciada)
+
+            $table->foreign('id_endereco')->references('id_endereco')->on('enderecos'); // Referenciando chave estrangeria
         });
     }
 

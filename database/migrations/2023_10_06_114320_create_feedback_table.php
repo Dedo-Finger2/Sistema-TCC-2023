@@ -12,18 +12,23 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('feedbacks', function (Blueprint $table) {
-
-            $table->id('id_feedback');
+            /*
+            | ------------------------
+            | Tablea de Feedbacks
+            | ------------------------
+            | nesta tabela vamos guardar os feedbacks que os usuários darem para as requisições que fizeram no nosso sistema.
+            */
+            $table->id('id_feedback'); // ID
 
             // id inteiro vazio
-            $table->unsignedBigInteger('id_usuario');
+            $table->unsignedBigInteger('id_usuario'); // Chave estrangeira (não referenciada)
 
-            $table->string('comentario', 45)->nullable(false);
-            $table->date('data')->nullable(false);
-            $table->tinyInteger('feedback')->nullable(false);
+            $table->string('comentario', 255)->nullable(true); // comentário do usuário
+            $table->date('data')->nullable(false);                    // data do feedback
+            $table->boolean('feedback')->nullable(false);            // indicação do feedback: positivo = TRUE, negativo = FALSE
 
             // id_usuario referencia id_usuario da tabela usuarios
-            $table->foreign('id_usuario')->references('id_usuario')->on('usuarios');
+            $table->foreign('id_usuario')->references('id_usuario')->on('usuarios'); // Referenciando a chave estrangeira
         });
     }
 
