@@ -12,17 +12,23 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('requisicoes', function (Blueprint $table) {
-            $table->id('id_requisicao');
+            /*
+            | ------------------------
+            | Tablea de requisições
+            | ------------------------
+            | nesta tabela vamos estar guardando dados sobre os requisições que os usuários fizerem.
+            */
+            $table->id('id_requisicao'); // ID
 
             // id inteiro vazio
-            $table->unsignedBigInteger('id_usuario');
-            $table->unsignedBigInteger('id_feedback')->nullable(true);
+            $table->unsignedBigInteger('id_usuario')->nullable(false); // Chave estrangeira (não referenciada)
+            $table->unsignedBigInteger('id_feedback')->nullable(true); // Chave estrangeira (não referenciada)
 
-            $table->dateTime('date_time')->nullable(false);
+            $table->dateTime('data_hora')->nullable(false); // Data e hora em que a requisição foi feita
+
             // id_usuario referencia id_usuario da tabela usuarios
-            $table->foreign('id_usuario')->references('id_usuario')->on('usuarios');
-
-            $table->foreign('id_feedback')->references('id_feedback')->on('feedbacks');
+            $table->foreign('id_usuario')->references('id_usuario')->on('usuarios');     // Referenciando a chave estrangeira
+            $table->foreign('id_feedback')->references('id_feedback')->on('feedbacks'); // Referenciando a chave estrangeira
 
         });
     }

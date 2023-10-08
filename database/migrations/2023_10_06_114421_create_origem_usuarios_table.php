@@ -11,17 +11,24 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('origem_usuarios', function (Blueprint $table) {
-            $table->unsignedBigInteger('id_local');
-            $table->unsignedBigInteger('id_requisicao');
-            $table->unsignedBigInteger('id_usuario');
-            $table->string('nome', 100)->nullable(false);
-            $table->unsignedBigInteger('id_endereco')->nullable(true);
+        Schema::create('origens_usuarios', function (Blueprint $table) {
+            /*
+            | ------------------------
+            | Tablea (associativa) de Origens dos usuarios
+            | ------------------------
+            | nesta tabela vamos armazenar a origem do usuário ao fazer uma requisição
+            */
+            $table->unsignedBigInteger('id_local')->nullable(false);       // Chave estrangeira (não referenciada)
+            $table->unsignedBigInteger('id_requisicao')->nullable(false); // Chave estrangeira (não referenciada)
+            $table->unsignedBigInteger('id_usuario')->nullable(false);   // Chave estrangeira (não referenciada)
+            $table->unsignedBigInteger('id_endereco')->nullable(true);  // Chave estrangeira (não referenciada)
 
-            $table->foreign('id_local')->references('id_local')->on('locais');
-            $table->foreign('id_requisicao')->references('id_requisicao')->on('requisicoes');
-            $table->foreign('id_usuario')->references('id_usuario')->on('usuarios');
-            $table->foreign('id_endereco')->references('id_endereco')->on('enderecos');
+            $table->string('nome', 100)->nullable(false); // Nome da origem (endereço escolhido/escrito pelo usuário)
+
+            $table->foreign('id_local')->references('id_local')->on('locais_requisitados');    // Referenciando chave estrangeira
+            $table->foreign('id_requisicao')->references('id_requisicao')->on('requisicoes'); // Referenciando chave estrangeira
+            $table->foreign('id_usuario')->references('id_usuario')->on('usuarios');         // Referenciando chave estrangeira
+            $table->foreign('id_endereco')->references('id_endereco')->on('enderecos');     // Referenciando chave estrangeira
         });
     }
 

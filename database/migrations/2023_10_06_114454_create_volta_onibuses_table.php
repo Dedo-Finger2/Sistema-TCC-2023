@@ -11,11 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('volta_onibuses', function (Blueprint $table) {
-            $table->id('origem_onibus');
-            $table->time('horario')->nullable(false);
-            $table->unsignedBigInteger('id_endereco');
-            $table->foreign('id_endereco')->references('id_endereco')->on('enderecos');
+        Schema::create('voltas_onibus', function (Blueprint $table) {
+            /*
+            | ------------------------
+            | Tablea de Voltas dos ônibus (Origem)
+            | ------------------------
+            | nesta tabela vamos estar armazenando as origens dos ônibus (Voltas).
+            */
+            $table->id('id_volta_onibus'); // ID
+            $table->time('horario', 5)->nullable(false); // Horário da volta
+
+            $table->unsignedBigInteger('id_endereco')->nullable(false); // Chave estrangeira (não referenciada)
+
+            $table->foreign('id_endereco')->references('id_endereco')->on('enderecos'); // Referenciando chave estrangeira
         });
     }
 

@@ -12,9 +12,20 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('itinerarios', function (Blueprint $table) {
-            $table->id('id_itinerario');
-            $table->string('codigo_itinerario',10)->unsignedBigInteger('id_des');
+            /*
+            | ------------------------
+            | Tablea de Itinerários
+            | ------------------------
+            | nesta tabela vamos estar armazenando informações sobre os itinerários.
+            */
+            $table->id('id_itinerario'); // ID
+            $table->string('codigo_itinerario',10); // Código de identificação do itinerário
 
+            $table->unsignedBigInteger('id_onibus')->nullable(false); // Chave estrangeira (não referencaida)
+            $table->unsignedBigInteger('id_rota')->nullable(false);  // Chave estrangeira (não referencaida)
+
+            $table->foreign('id_onibus')->references('id_onibus')->on('onibus'); // Referenciando chave estrangeira
+            $table->foreign('id_rota')->references('id_rota')->on('rotas'); // Referenciando chave estrangeira
         });
     }
 

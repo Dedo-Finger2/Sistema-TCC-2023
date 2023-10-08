@@ -12,11 +12,20 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('empresas', function (Blueprint $table) {
-            $table->id('id_empresa');
-            $table->String('nome', 100)->nullable(false);
-            $table->String('email', 250)->nullable(false);
-            $table->String('cnpj', 20)->nullable(false);
-            $table->String('senha', 8)->nullable(false);
+                        /*
+            | ------------------------
+            | Tablea de Empresa
+            | ------------------------
+            | nesta tabela vamos estar guardando dados sobre as empresa que vão usar o sistema.
+            | essa tabela também é usada como referência das empresas dos próprios ônibus.
+            | as empresas serão como administradores no nosso sistema, são eles que vão acessar o Painel de Controle
+            */
+            $table->id('id_empresa'); // ID
+
+            $table->String('nome', 100)->nullable(false);  // Nome da empresa
+            $table->String('email', 250)->nullable(false); // E-mail da empresa
+            $table->String('cnpj', 20)->nullable(false);   // CNPJ da empresa
+            $table->String('senha', 8)->nullable(false);   // Senha da empresa
         });
     }
 
