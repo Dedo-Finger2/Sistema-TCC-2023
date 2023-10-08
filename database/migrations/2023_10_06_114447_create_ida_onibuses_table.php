@@ -12,8 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('ida_onibuses', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->id('id_ida');
+            $table->time('horario')->nullable(false);
+            $table->unsignedBigInteger('id_endereco');
+            $table->foreign('id_endereco')->references('id_endereco')->on('enderecos');
         });
     }
 
