@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('idas_onibuss', function (Blueprint $table) {
+        Schema::create('idas_onibus', function (Blueprint $table) {
             /*
             | ------------------------
             | Tablea de Idas dos ônibus (Destino)
