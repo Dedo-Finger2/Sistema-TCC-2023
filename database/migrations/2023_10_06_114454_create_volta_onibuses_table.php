@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('voltas_onibus', function (Blueprint $table) {
             /*
             | ------------------------
-            | Tablea de Voltas dos ônibus (Origem)
+            | Tabela de Voltas dos ônibus (Origem)
             | ------------------------
             | nesta tabela vamos estar armazenando as origens dos ônibus (Voltas).
             */

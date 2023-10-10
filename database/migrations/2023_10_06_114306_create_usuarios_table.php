@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('usuarios', function (Blueprint $table) {
             /*
             | ------------------------
-            | Tablea de Usuarios
+            | Tabela de Usuarios
             | ------------------------
             | nesta tabela vão estar os dados dos usuários que se cadastrarem no nosso sistema.
             */

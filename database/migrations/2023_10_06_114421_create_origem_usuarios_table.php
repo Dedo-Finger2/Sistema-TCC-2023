@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('origens_usuarios', function (Blueprint $table) {
             /*
             | ------------------------
-            | Tablea (associativa) de Origens dos usuarios
+            | Tabela (associativa) de Origens dos usuarios
             | ------------------------
             | nesta tabela vamos armazenar a origem do usuário ao fazer uma requisição
             */

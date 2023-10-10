@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('requisicoes', function (Blueprint $table) {
             /*
             | ------------------------
-            | Tablea de requisições
+            | Tabela de requisições
             | ------------------------
             | nesta tabela vamos estar guardando dados sobre os requisições que os usuários fizerem.
             */

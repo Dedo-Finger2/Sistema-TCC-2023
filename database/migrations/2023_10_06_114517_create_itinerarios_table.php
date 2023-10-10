@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('itinerarios', function (Blueprint $table) {
             /*
             | ------------------------
-            | Tablea de Itinerários
+            | Tabela de Itinerários
             | ------------------------
             | nesta tabela vamos estar armazenando informações sobre os itinerários.
             */
