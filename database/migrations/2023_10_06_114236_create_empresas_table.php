@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('empresas', function (Blueprint $table) {
                         /*
             | ------------------------
-            | Tablea de Empresa
+            | Tabela de Empresa
             | ------------------------
             | nesta tabela vamos estar guardando dados sobre as empresa que vão usar o sistema.
             | essa tabela também é usada como referência das empresas dos próprios ônibus.

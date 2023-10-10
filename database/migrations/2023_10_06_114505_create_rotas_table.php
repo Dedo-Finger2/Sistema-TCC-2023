@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('rotas', function (Blueprint $table) {
             /*
             | ------------------------
-            | Tablea de Rotas
+            | Tabela de Rotas
             | ------------------------
             | nesta tabela vamos estar armazenando as rotas feitas pelos ônibus.
             */

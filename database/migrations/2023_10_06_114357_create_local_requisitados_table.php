@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('locais_requisitados', function (Blueprint $table) {
             /*
             | ------------------------
-            | Tablea de locais Requisitados
+            | Tabela de locais Requisitados
             | ------------------------
             | nesta tabela vamos armazenar os locaisque os usuários requisitam enquanto usam nossa plataforma
             */

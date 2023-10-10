@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('feedbacks', function (Blueprint $table) {
             /*
             | ------------------------
-            | Tablea de Feedbacks
+            | Tabela de Feedbacks
             | ------------------------
             | nesta tabela vamos guardar os feedbacks que os usuários darem para as requisições que fizeram no nosso sistema.
             */
