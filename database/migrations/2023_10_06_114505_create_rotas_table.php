@@ -20,11 +20,11 @@ return new class extends Migration
             */
             $table->id('id_rota'); // ID
 
-            $table->unsignedBigInteger('id_volta_onibus')->nullable(true); // Chave estrangeira (não referenciada)
-            $table->unsignedBigInteger('id_ida_onibus')->nullable(false); // Chave estrangeira (não referenciada)
+            $table->unsignedBigInteger('id_ida_onibus')->nullable(true); // Chave estrangeira (não referenciada)
+            $table->unsignedBigInteger('id_volta_onibus')->nullable(false); // Chave estrangeira (não referenciada)
 
-            $table->foreign('id_volta_onibus')->references('id_volta_onibus')->on('voltas_onibus'); // Referenciando chave estrangeira
             $table->foreign('id_ida_onibus')->references('id_ida_onibus')->on('idas_onibus');      // Referenciando chave estrangeira
+            $table->foreign('id_volta_onibus')->references('id_volta_onibus')->on('voltas_onibus'); // Referenciando chave estrangeira
         });
     }
 
