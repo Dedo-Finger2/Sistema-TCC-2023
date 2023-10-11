@@ -11,11 +11,11 @@ class IdaOnibus extends Model
 
     public $table = 'idas_onibus';
 
+
     public $fillable = [
         'horario',
         'id_endereco',
     ];
 
     protected $timestamps = false;
-
 }

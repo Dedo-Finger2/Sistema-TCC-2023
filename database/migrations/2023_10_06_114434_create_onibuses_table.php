@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('onibus', function (Blueprint $table) {
             /*
             | ------------------------
-            | Tablea de Onibus
+            | Tabela de Onibus
             | ------------------------
             | nesta tabela vamos estar armazenando informações de alguns ônibus
             */

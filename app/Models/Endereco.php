@@ -16,5 +16,4 @@ class Endereco extends Model
     ];
 
     protected $timestamps = false;
-
 }

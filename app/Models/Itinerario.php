@@ -16,5 +16,4 @@ class Itinerario extends Model
         'id_onibus',
         'id_rota',
     ];
-
 }

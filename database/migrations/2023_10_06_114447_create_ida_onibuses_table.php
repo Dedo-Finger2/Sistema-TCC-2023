@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('idas_onibus', function (Blueprint $table) {
             /*
             | ------------------------
-            | Tablea de Idas dos ônibus (Destino)
+            | Tabela de Idas dos ônibus (Destino)
             | ------------------------
             | nesta tabela vamos estar armazenando os destinos dos ônibus (Idas).
             */

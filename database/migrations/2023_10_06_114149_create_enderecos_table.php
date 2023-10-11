@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('enderecos', function (Blueprint $table) {
             /*
             | ------------------------
-            | Tablea de Endereços
+            | Tabela de Endereços
             | ------------------------
             | nesta tabela vamos estar guardando dados sobre os endereços que temos.
             */
