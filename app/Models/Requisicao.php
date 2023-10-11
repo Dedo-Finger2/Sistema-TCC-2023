@@ -8,4 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Requisicao extends Model
 {
     use HasFactory;
+
+    protected $timestamps = false;
+
+    public $table = "requisicoes";
+
+    public $fillable = [
+        'id_usuario',
+        'id_feedback',
+        'data_hora',
+    ];
+
 }
