@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Empresa extends Model
 {
     use HasFactory;
+
+    public $fillable = [
+        'nome',
+        'email',
+        'cnpj',
+        'senha'
+    ];
+
+    protected $timestamps = false;
+
 }

@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Onibus extends Model
 {
     use HasFactory;
+
+    protected $timestamps = false;
+
+    public $table = "locais_requisitados";
+
+    public $fillable = [
+        'numeracao',
+        'id_empresa',
+    ];
+
 }
