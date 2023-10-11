@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Feedback extends Model
 {
     use HasFactory;
+
     // Configurando o model
 
     /**
@@ -40,4 +41,5 @@ class Feedback extends Model
         //
         return $this->hasMany(Usuario::class,"id_usuario","id_feedback");
     }
+
 }

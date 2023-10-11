@@ -14,5 +14,6 @@ class Endereco extends Model
         'bairro',
         'cidade',
     ];
+
     protected $timestamps = false;
 }
