@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class VoltaOnibus extends Model
 {
     use HasFactory;
+
+    public $table = "voltas_onibus";
+
+    protected $timestamps = false;
+
+    public $fillable = [
+        'horario',
+        'id_endereco',
+    ];
+
 }
