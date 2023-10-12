@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Endereco;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,8 +17,14 @@ class UsuarioFactory extends Factory
      */
     public function definition(): array
     {
+
+        $idsEndereco = Endereco::all()->pluck('id_endereco');
+
         return [
-            //
+            'nome' => $this->faker->name(),
+            'email' => $this->faker->email(),
+            'senha' => $this->faker->password(6, 8),
+            'id_endereco' => $this->faker->randomElement($idsEndereco),
         ];
     }
 }

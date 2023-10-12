@@ -28,8 +28,8 @@ class ItinerarioFactory extends Factory
         | Modelo::all() - Pega todas as linhas da tabela que o modelo representa
         | pluck('id') - Pega apenas o ID de todos os dados da tabela
         */
-        $idOnibus = Onibus::all()->pluck('id');
-        $idRotas = Rota::all()->pluck('id');
+        $idOnibus = Onibus::all()->pluck('id_onibus');
+        $idRotas = Rota::all()->pluck('id_rota');
 
         return [
             /*

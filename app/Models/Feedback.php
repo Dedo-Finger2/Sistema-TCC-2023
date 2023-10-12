@@ -12,6 +12,8 @@ class Feedback extends Model
 
     // Configurando o model
 
+    public $table = "feedbacks";
+
     /**
      * lista com os nomes das colunas na migration
      * OBS averiguar colunas na migration feedback
@@ -27,7 +29,7 @@ class Feedback extends Model
      * caso a migration não tenha a coluna create created_at ou update_at
      * coloque protected $timestamps = false;
      */
-    protected $timestamps = false;
+    public $timestamps = false;
 
     /**
      * relacionamento um para muitos deve ser feiro com esse método

@@ -9,7 +9,7 @@ class Requisicao extends Model
 {
     use HasFactory;
 
-    protected $timestamps = false;
+    public $timestamps = false;
 
     public $table = "requisicoes";
 

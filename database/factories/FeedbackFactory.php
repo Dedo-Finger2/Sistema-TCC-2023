@@ -27,7 +27,7 @@ class FeedbackFactory extends Factory
         | Modelo::all() - Pega todas as linhas da tabela que o modelo representa
         | pluck('id') - Pega apenas o ID de todos os dados da tabela
         */
-        $idUsuairos = Usuario::all()->pluck('id');
+        $idUsuairos = Usuario::all()->pluck('id_usuario');
 
         return [
             /*

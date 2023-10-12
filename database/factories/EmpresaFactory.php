@@ -32,7 +32,7 @@ class EmpresaFactory extends Factory
             'nome' => $this->faker->company(),
             'email' => $this->faker->companyEmail(),
             'cnpj' => $this->faker->companySuffix(),
-            'senha' => $this->faker->password()
+            'senha' => $this->faker->password(6,8)
         ];
     }
 }

@@ -11,7 +11,7 @@ class OrigemUsuario extends Model
 
     public $table = "origens_usuarios";
 
-    protected $timestamps = false;
+    public $timestamps = false;
 
     public $fillable = [
         'id_local',
