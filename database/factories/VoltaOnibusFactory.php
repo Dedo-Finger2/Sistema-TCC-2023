@@ -32,7 +32,7 @@ class VoltaOnibusFactory extends Factory
         | Endereco::pluck('id') - Obtém apenas os IDs de todos os registros da tabela 'enderecos'
         | toArray() - Converte a coleção de IDs em um array
         */
-        $idEnderecos = Endereco::pluck('id')->toArray();
+        $idEnderecos = Endereco::all()->pluck('id');
 
         return [
             /*

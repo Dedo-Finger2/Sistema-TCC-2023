@@ -45,7 +45,7 @@ class RotaFactory extends Factory
         | IdaOnibus::pluck('id') - Obtém apenas os IDs de todos os registros da tabela 'idas_onibus'
         | toArray() - Converte a coleção de IDs em um array
         */
-        $idIdasOnibus = IdaOnibus::pluck('id')->toArray();
+        $idIdasOnibus = IdaOnibus::all()->pluck('id');
 
         return [
             /*
