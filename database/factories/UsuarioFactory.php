@@ -2,18 +2,11 @@
 
 namespace Database\Factories;
 
-use App\Models\Usuario;
+use App\Models\Endereco;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class UsuarioFactory extends Factory
 {
-    /**
-     * The name of the factory's corresponding model.
-     *
-     * @var string
-     */
-    protected $model = Usuario::class;
-
     /**
      * Define the model's default state.
      *
@@ -21,7 +14,7 @@ class UsuarioFactory extends Factory
      */
     public function definition()
     {
-        $idEnderecos = Endereco::all()->pluck('id');
+        $idEnderecos = Endereco::all()->pluck('id_endereco');
 
         return [
             /*
@@ -37,7 +30,7 @@ class UsuarioFactory extends Factory
             */
             'nome' => $this->faker->name(),
             'email' => $this->faker->email(),
-            'senha' => $this->faker->password(),
+            'senha' => $this->faker->password(6, 8),
             'id_endereco' => $this->faker->randomElement($idEnderecos),
         ];
     }

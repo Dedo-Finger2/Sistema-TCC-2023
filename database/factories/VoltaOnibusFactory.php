@@ -2,19 +2,11 @@
 
 namespace Database\Factories;
 
-use App\Models\VoltaOnibus;
 use App\Models\Endereco;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class VoltaOnibusFactory extends Factory
 {
-    /**
-     * The name of the factory's corresponding model.
-     *
-     * @var string
-     */
-    protected $model = VoltaOnibus::class;
-
     /**
      * Define the model's default state.
      *
@@ -32,7 +24,7 @@ class VoltaOnibusFactory extends Factory
         | Endereco::pluck('id') - Obtém apenas os IDs de todos os registros da tabela 'enderecos'
         | toArray() - Converte a coleção de IDs em um array
         */
-        $idEnderecos = Endereco::all()->pluck('id');
+        $idEnderecos = Endereco::all()->pluck('id_endereco');
 
         return [
             /*
@@ -45,7 +37,7 @@ class VoltaOnibusFactory extends Factory
             | time() - Gera um valor de hora aleatório
             | randomElement() - Seleciona um elemento aleatório de um array passado como parâmetro
             */
-            'horario' => $this->faker->time(),
+            'horario' => $this->faker->time(format:"H:i"),
             'id_endereco' => $this->faker->randomElement($idEnderecos),
         ];
     }

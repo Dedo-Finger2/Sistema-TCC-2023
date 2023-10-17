@@ -12,6 +12,8 @@ class Feedback extends Model
 
     // Configurando o model
 
+    public $table = "feedbacks";
+
     /**
      * lista com os nomes das colunas na migration
      * OBS averiguar colunas na migration feedback
@@ -25,9 +27,9 @@ class Feedback extends Model
 
     /**
      * caso a migration não tenha a coluna create created_at ou update_at
-     * coloque protected $timestamps = false;
+     * coloque public $timestamps = false;
      */
-    protected $timestamps = false;
+    public $timestamps = false;
 
     /**
      * relacionamento um para muitos deve ser feiro com esse método
@@ -38,7 +40,6 @@ class Feedback extends Model
 
     public function usuarios(): HasMany
     {
-        //
         return $this->hasMany(Usuario::class,"id_usuario","id_feedback");
     }
 

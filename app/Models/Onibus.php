@@ -9,9 +9,9 @@ class Onibus extends Model
 {
     use HasFactory;
 
-    protected $timestamps = false;
+    public $timestamps = false;
 
-    public $table = "locais_requisitados";
+    public $table = "onibus";
 
     public $fillable = [
         'numeracao',

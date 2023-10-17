@@ -11,7 +11,7 @@ class VoltaOnibus extends Model
 
     public $table = "voltas_onibus";
 
-    protected $timestamps = false;
+    public $timestamps = false;
 
     public $fillable = [
         'horario',

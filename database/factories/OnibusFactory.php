@@ -2,19 +2,11 @@
 
 namespace Database\Factories;
 
-use App\Models\Onibus;
 use App\Models\Empresa;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class OnibusFactory extends Factory
 {
-    /**
-     * The name of the factory's corresponding model.
-     *
-     * @var string
-     */
-    protected $model = Onibus::class;
-
     /**
      * Define the model's default state.
      *
@@ -22,7 +14,7 @@ class OnibusFactory extends Factory
      */
     public function definition()
     {
-        $IdEmpresas = Empresa::all()->pluck('id');
+        $IdEmpresas = Empresa::all()->pluck('id_empresa');
 
         return [
             /*
@@ -35,8 +27,8 @@ class OnibusFactory extends Factory
             | numberBetween() - Gera um número aleatório entre os valores fornecidos
             | randomElement() - Gera um único dígito aleatório
             */
-            'numeracao' => $this->faker->numberBetween(1, 100),
-            'id_empresa' => $this->faker->randomElement($idEmpresas),
+            'numeracao' => $this->faker->numerify("####-##"),
+            'id_empresa' => $this->faker->randomElement($IdEmpresas),
         ];
     }
 }

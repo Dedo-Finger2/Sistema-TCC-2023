@@ -19,7 +19,7 @@ return new class extends Migration
             | nesta tabela vamos estar armazenando informações de alguns ônibus
             */
             $table->id('id_onibus'); // ID
-            $table->string('numeracao',5)->nullable(false); // Numeração do ônibus
+            $table->string('numeracao',10)->nullable(false); // Numeração do ônibus
 
             $table->unsignedBigInteger('id_empresa')->nullable(false); // Chave estrangeira (não referenciada)
 

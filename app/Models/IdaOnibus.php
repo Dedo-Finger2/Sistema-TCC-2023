@@ -17,5 +17,5 @@ class IdaOnibus extends Model
         'id_endereco',
     ];
 
-    protected $timestamps = false;
+    public $timestamps = false;
 }

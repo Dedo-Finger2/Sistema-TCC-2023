@@ -27,7 +27,7 @@ class LocalRequisitadoFactory extends Factory
         | Modelo::all() - Pega todas as linhas da tabela que o modelo representa
         | pluck('id') - Pega apenas o ID de todos os dados da tabela
         */
-        $idEnderecos = Endereco::all()->pluck('id');
+        $idEnderecos = Endereco::all()->pluck('id_endereco');
 
         return [
             /*

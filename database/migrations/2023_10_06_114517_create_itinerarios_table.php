@@ -19,7 +19,7 @@ return new class extends Migration
             | nesta tabela vamos estar armazenando informações sobre os itinerários.
             */
             $table->id('id_itinerario'); // ID
-            $table->string('codigo_itinerario',10); // Código de identificação do itinerário
+            $table->string('codigo_itinerario',30); // Código de identificação do itinerário
 
             $table->unsignedBigInteger('id_onibus')->nullable(false); // Chave estrangeira (não referencaida)
             $table->unsignedBigInteger('id_rota')->nullable(false);  // Chave estrangeira (não referencaida)

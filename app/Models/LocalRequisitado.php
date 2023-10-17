@@ -9,7 +9,7 @@ class LocalRequisitado extends Model
 {
     use HasFactory;
 
-    protected $timestamps = false;
+    public $timestamps = false;
 
     public $table = "locais_requisitados";
 

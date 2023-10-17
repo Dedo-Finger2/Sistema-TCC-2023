@@ -16,6 +16,6 @@ class Empresa extends Model
         'senha'
     ];
 
-    protected $timestamps = false;
+    public $timestamps = false;
 
 }

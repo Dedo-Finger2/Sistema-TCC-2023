@@ -27,7 +27,7 @@ class IdaOnibusFactory extends Factory
         | Modelo::all() - Pega todas as linhas da tabela que o modelo representa
         | pluck('id') - Pega apenas o ID de todos os dados da tabela
         */
-        $idEnderecos = Endereco::all()->pluck('id');
+        $idEnderecos = Endereco::all()->pluck('id_endereco');
 
         return [
             /*
@@ -40,7 +40,7 @@ class IdaOnibusFactory extends Factory
             | time() - Gera horários aleatórios
             | randomElement() - Pega um item aleatório de um array passado como parâmetro
             */
-            'horario' => $this->faker->time(),
+            'horario' => $this->faker->time(format:"H:i"),
             'id_endereco' => $this->faker->randomElement($idEnderecos),
         ];
     }

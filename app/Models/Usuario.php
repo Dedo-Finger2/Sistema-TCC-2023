@@ -10,7 +10,7 @@ class Usuario extends Model
 {
     use HasFactory;
 
-    protected $timestamps = false;
+    public $timestamps = false;
 
     public $fillable = [
         'id_endereco',
