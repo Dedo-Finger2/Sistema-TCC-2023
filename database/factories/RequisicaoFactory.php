@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Feedback;
+use App\Models\Usuario;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -27,8 +29,8 @@ class RequisicaoFactory extends Factory
         | Modelo::all() - Pega todas as linhas da tabela que o modelo representa
         | pluck('id') - Pega apenas o ID de todos os dados da tabela
         */
-        $idUsuarios = Usuario::all()->pluck('id');
-        $idFeedbacks = Feedback::all()->pluck('id');
+        $idUsuarios = Usuario::all()->pluck('id_usuario');
+        $idFeedbacks = Feedback::all()->pluck('id_feedback');
 
 
         return [
@@ -45,7 +47,7 @@ class RequisicaoFactory extends Factory
             */
             'id_usuario' => $this->faker->randomElement($idUsuarios),
             'id_feedback' => $this->faker->randomElement($idFeedbacks),
-            'data_hora' => $this->faker->date()
+            'data_hora' => $this->faker->dateTime()
         ];
     }
 }

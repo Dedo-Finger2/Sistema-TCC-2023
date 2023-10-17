@@ -23,6 +23,8 @@ class DatabaseSeeder extends Seeder
         \App\Models\Itinerario::factory(10)->create();
         \App\Models\Feedback::factory(10)->create();
         \App\Models\LocalRequisitado::factory(10)->create();
+        \App\Models\Requisicao::factory(10)->create();
+        \App\Models\OrigemUsuario::factory(10)->create();
 
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',

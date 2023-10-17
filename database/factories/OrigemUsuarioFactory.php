@@ -2,6 +2,10 @@
 
 namespace Database\Factories;
 
+use App\Models\Endereco;
+use App\Models\LocalRequisitado;
+use App\Models\Requisicao;
+use App\Models\Usuario;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -29,7 +33,10 @@ class OrigemUsuarioFactory extends Factory
         | Modelo::all() - Pega todas as linhas da tabela que o modelo representa
         | pluck('id') - Pega apenas o ID de todos os dados da tabela
         */
-        $idEnderecos = Endereco::all()->pluck('id');
+        $idEnderecos = Endereco::all()->pluck('id_endereco');
+        $idLocaisRequisitados = LocalRequisitado::all()->pluck('id_local_requisitado');
+        $idRequisicoes = Requisicao::all()->pluck('id_requisicao');
+        $idUsuarios = Usuario::all()->pluck('id_usuario');
 
         return [
             /*
@@ -43,8 +50,11 @@ class OrigemUsuarioFactory extends Factory
             | name() método que gera nomes aleatorios
             | randomElemnt(ids do Model especifico)
             */
-            'nome' => $this->fake->name(),
+            'nome' => $this->faker->name(),
             'id_endereco' => $this->faker->randomElement($idEnderecos),
+            'id_local_requisitado' => $this->faker->randomElement($idLocaisRequisitados),
+            'id_usuario' => $this->faker->randomElement($idUsuarios),
+            'id_requisicao' => $this->faker->randomElement($idRequisicoes),
 
         ];
     }

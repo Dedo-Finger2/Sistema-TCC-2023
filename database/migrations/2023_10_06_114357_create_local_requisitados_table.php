@@ -18,7 +18,7 @@ return new class extends Migration
             | ------------------------
             | nesta tabela vamos armazenar os locaisque os usuários requisitam enquanto usam nossa plataforma
             */
-            $table->id('id_local'); // ID
+            $table->id('id_local_requisitado'); // ID
 
             $table->string('nome', 150)->nullable(false); // Nome do local (endereço descrito pelo usuario)
 
