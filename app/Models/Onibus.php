@@ -18,4 +18,14 @@ class Onibus extends Model
         'id_empresa',
     ];
 
+    public function empresas()
+    {
+        return $this->hasMany(Empresa::class, 'id_empresa', 'id_onibus');
+    }
+
+    public function itinerario()
+    {
+        return $this->belongsTo(Itinerario::class, 'id_itinerario', 'id_onibus');
+    }
+
 }

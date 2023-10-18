@@ -18,4 +18,13 @@ class LocalRequisitado extends Model
         'id_endereco',
     ];
 
+    public function requisicoes()
+    {
+        return $this->belongsToMany(Requisicao::class,'OrigemUsuario', 'id_local_requisitado', 'id_requisicao');
+    }
+
+    public function enderecos()
+    {
+        return $this->hasMany(Endereco::class, 'id_endereco', 'id_local_requisitado');
+    }
 }
