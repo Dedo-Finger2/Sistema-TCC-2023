@@ -18,4 +18,15 @@ class IdaOnibus extends Model
     ];
 
     public $timestamps = false;
+
+    public function endereco()
+    {
+        return $this->hasMany(Endereco::class, "id_endereco", "id_ida_onibus");
+    }
+
+    public function rota()
+    {
+        return $this->belongsTo(Rota::class, 'id_ida_onibus');
+    }
+
 }

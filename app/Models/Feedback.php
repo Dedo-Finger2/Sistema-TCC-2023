@@ -40,7 +40,12 @@ class Feedback extends Model
 
     public function usuarios(): HasMany
     {
-        return $this->hasMany(Usuario::class,"id_usuario","id_feedback");
+        return $this->hasMany(Usuario::class,"id_usuario", "id_feedback");
+    }
+
+    public function requisicao()
+    {
+        return $this->belongsTo(Requisicao::class, "id_feedback");
     }
 
 }
