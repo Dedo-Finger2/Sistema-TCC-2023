@@ -21,4 +21,6 @@ class OrigemUsuario extends Model
         'nome'
     ];
 
+    
+
 }
