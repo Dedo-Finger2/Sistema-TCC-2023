@@ -17,5 +17,8 @@ class VoltaOnibus extends Model
         'horario',
         'id_endereco',
     ];
-
+    public function endereco(): HasMany
+    {
+        return $this->hasMany(Endereco::class, 'id_endereco', 'id_volta_onibus');
+    }
 }

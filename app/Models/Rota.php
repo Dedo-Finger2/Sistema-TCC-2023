@@ -16,4 +16,13 @@ class Rota extends Model
         'id_ida_onibus',
     ];
 
+    public function idaOnibus(): HasOne
+    {
+        return $this->hasOne(IdaOnibus::class, 'id_ida_onibus', 'id_endereco');
+    }
+
+    public function voltaOnibus(): HasOne
+    {
+        return $this->hasOne(VoltaOnibus::class, 'id_volta_onibus', 'id_endereco');
+    }
 }
