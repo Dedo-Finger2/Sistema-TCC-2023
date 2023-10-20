@@ -10,6 +10,8 @@ class Usuario extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'id_usuario';
+
     public $timestamps = false;
 
     public $fillable = [
@@ -19,7 +21,7 @@ class Usuario extends Model
         'senha',
     ];
 
-    public function endereco(): HasMany
+    public function enderecos(): HasMany
     {
         return $this->hasMany(Endereco::class, 'id_endereco', 'id_usuario');
     }

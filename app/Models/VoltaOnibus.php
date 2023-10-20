@@ -9,6 +9,8 @@ class VoltaOnibus extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'id_volta_onibus';
+
     public $table = "voltas_onibus";
 
     public $timestamps = false;

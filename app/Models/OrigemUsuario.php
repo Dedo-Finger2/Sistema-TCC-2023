@@ -9,6 +9,8 @@ class OrigemUsuario extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'id_origem_usuario';
+
     public $table = "origens_usuarios";
 
     public $timestamps = false;
@@ -21,6 +23,6 @@ class OrigemUsuario extends Model
         'nome'
     ];
 
-    
+
 
 }

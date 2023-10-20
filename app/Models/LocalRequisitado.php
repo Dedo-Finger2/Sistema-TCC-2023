@@ -9,6 +9,8 @@ class LocalRequisitado extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'id_local_requisitado';
+
     public $timestamps = false;
 
     public $table = "locais_requisitados";
@@ -20,7 +22,7 @@ class LocalRequisitado extends Model
 
     public function requisicoes()
     {
-        return $this->belongsToMany(Requisicao::class,'OrigemUsuario', 'id_local_requisitado', 'id_requisicao');
+        return $this->belongsToMany(Requisicao::class,'origens_usuarios', 'id_local_requisitado', 'id_requisicao');
     }
 
     public function enderecos()

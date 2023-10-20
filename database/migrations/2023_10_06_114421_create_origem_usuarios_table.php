@@ -18,6 +18,7 @@ return new class extends Migration
             | ------------------------
             | nesta tabela vamos armazenar a origem do usuário ao fazer uma requisição
             */
+            $table->id('id_origem_usuario');
             $table->unsignedBigInteger('id_local_requisitado')->nullable(false);       // Chave estrangeira (não referenciada)
             $table->unsignedBigInteger('id_requisicao')->nullable(false); // Chave estrangeira (não referenciada)
             $table->unsignedBigInteger('id_usuario')->nullable(false);   // Chave estrangeira (não referenciada)

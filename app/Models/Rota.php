@@ -9,6 +9,8 @@ class Rota extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'id_rota';
+
     public $timestamps = false;
 
     public $fillable = [

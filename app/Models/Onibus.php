@@ -9,6 +9,8 @@ class Onibus extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'id_onibus';
+
     public $timestamps = false;
 
     public $table = "onibus";
@@ -18,14 +20,14 @@ class Onibus extends Model
         'id_empresa',
     ];
 
-    public function empresas()
+    public function empresa()
     {
         return $this->hasMany(Empresa::class, 'id_empresa', 'id_onibus');
     }
 
     public function itinerario()
     {
-        return $this->belongsTo(Itinerario::class, 'id_itinerario', 'id_onibus');
+        return $this->belongsTo(Itinerario::class, 'id_itinerario');
     }
 
 }

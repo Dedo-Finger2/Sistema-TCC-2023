@@ -9,6 +9,8 @@ class Itinerario extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'id_itinerario';
+
     public $timestamps = false;
 
     public $fillable = [
@@ -22,7 +24,7 @@ class Itinerario extends Model
         return $this->hasMany(Onibus::class, 'id_onibus', 'id_itinerario');
     }
 
-    public function rotas()
+    public function rota()
     {
         return $this->hasMany(Rota::class, 'id_rota', 'id_itinerario');
     }

@@ -37,7 +37,6 @@ class Feedback extends Model
      * OBS: na model deve ser colocado o método belongTo
      *
      */
-
     public function usuarios(): HasMany
     {
         return $this->hasMany(Usuario::class,"id_usuario", "id_feedback");

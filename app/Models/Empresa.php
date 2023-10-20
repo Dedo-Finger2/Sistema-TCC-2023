@@ -10,6 +10,8 @@ class Empresa extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'id_empresa';
+
     public $fillable = [
         'nome',
         'email',

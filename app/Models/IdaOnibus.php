@@ -9,6 +9,8 @@ class IdaOnibus extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'id_ida_onibus';
+
     public $table = 'idas_onibus';
 
 
