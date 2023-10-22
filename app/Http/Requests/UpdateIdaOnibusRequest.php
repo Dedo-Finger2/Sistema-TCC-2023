@@ -28,7 +28,14 @@ class UpdateIdaOnibusRequest extends FormRequest
         | Validacoes para permitir a atualizacao dos dados na tabela de IdaOnibus
         */
         return [
-            //
+            'horairo' => [
+                'required',
+                'date_format:H:i'
+            ],
+            'id_endereco' => [
+                'required',
+                'exists:enderecos,id_endereco'
+            ],
         ];
     }
 }

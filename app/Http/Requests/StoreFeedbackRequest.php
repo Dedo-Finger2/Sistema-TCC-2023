@@ -28,7 +28,22 @@ class StoreFeedbackRequest extends FormRequest
         | Validacoes para permitir a insercao dos dados na tabela de Feedback
         */
         return [
-            //
+            'id_usuario' => [
+                'exists:usuarios,id_usuario',
+                'required',
+            ],
+            'comentario' => [
+                'min:3',
+                'max:255',
+            ],
+            'data' => [
+                'required',
+                'date'
+            ],
+            'feedback' => [
+                'required',
+                'boolean',
+            ],
         ];
     }
 }

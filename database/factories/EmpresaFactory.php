@@ -31,8 +31,8 @@ class EmpresaFactory extends Factory
             */
             'nome' => $this->faker->company(),
             'email' => $this->faker->companyEmail(),
-            'cnpj' => $this->faker->numerify("######"),
-            'senha' => $this->faker->password(6, 8)
+            'cnpj' => $this->faker->numerify("##.###.###/####-##"),
+            'senha' => $this->faker->password(8, 16)
         ];
     }
 }

@@ -28,7 +28,14 @@ class StoreLocalRequisitadoRequest extends FormRequest
         | Validacoes para permitir a insercao dos dados na tabela de LocalRequisitado
         */
         return [
-            //
+            'nome' => [
+                'required',
+                'min:3',
+                'max:100',
+            ],
+            'id_endereco' => [
+                'exists:enderecos,id_endereco',
+            ],
         ];
     }
 }

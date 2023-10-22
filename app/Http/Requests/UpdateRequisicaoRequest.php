@@ -28,7 +28,18 @@ class UpdateRequisicaoRequest extends FormRequest
         | Validacoes para permitir a atualizacao dos dados na tabela de Requisicao
         */
         return [
-            //
+            'id_usuario' => [
+                'required',
+                'exists:usuarios,id_usuario',
+            ],
+            'id_feedback' => [
+                'exists:feedbacks,id_feedback',
+            ],
+            'data_hora' => [
+                'required',
+                'date',
+                'date_format:Y-m-d H:i',
+            ],
         ];
     }
 }

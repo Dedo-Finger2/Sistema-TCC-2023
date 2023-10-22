@@ -28,7 +28,24 @@ class StoreUsuarioRequest extends FormRequest
         | Validacoes para permitir a insercao dos dados na tabela de Usuario
         */
         return [
-            //
+            'id_endereco' => [
+                'required',
+                'exists:enderecos,id_endereco',
+            ],
+            'nome' => [
+                'required',
+                'min:3',
+                'max:50',
+            ],
+            'email' => [
+                'required',
+                'email',
+            ],
+            'senha' => [
+                'required',
+                'min:8',
+                'max:16',
+            ],
         ];
     }
 }

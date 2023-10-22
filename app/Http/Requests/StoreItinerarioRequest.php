@@ -28,7 +28,20 @@ class StoreItinerarioRequest extends FormRequest
         | Validacoes para permitir a insercao dos dados na tabela de Itinerario
         */
         return [
-            //
+            'codigo_itinerario' => [
+                'required',
+                'unique:itinerarios,codigo_itinerario',
+                'min:8',
+                'max:50',
+            ],
+            'id_onibus' => [
+                'required',
+                'exists:onibus,id_onibus',
+            ],
+            'id_rota' => [
+                'required',
+                'exists:rotas,id_rota',
+            ],
         ];
     }
 }

@@ -28,7 +28,13 @@ class StoreRotaRequest extends FormRequest
         | Validacoes para permitir a insercao dos dados na tabela de Rota
         */
         return [
-            //
+            'id_ida_onibus' => [
+                'exists:idas_onibus,id_ida_onibus',
+            ],
+            'id_volta_onibus' => [
+                'required',
+                'exists:voltas_onibus,id_volta_onibus',
+            ],
         ];
     }
 }

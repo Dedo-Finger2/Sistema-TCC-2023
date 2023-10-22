@@ -28,7 +28,26 @@ class StoreEmpresaRequest extends FormRequest
         | Validacoes para permitir a insercao dos dados na tabela de Empresa
         */
         return [
-            //
+            'nome' => [
+                'required',
+                'min:3',
+                'max:45',
+            ],
+            'email' => [
+                'required',
+                'email',
+            ],
+            'cnpj' => [
+                'required',
+                'min:18',
+                'max:18',
+                'unique:empresas,cnpj',
+            ],
+            'senha' => [
+                'required',
+                'min:8',
+                'max:16',
+            ],
         ];
     }
 }

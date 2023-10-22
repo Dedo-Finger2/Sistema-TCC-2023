@@ -28,7 +28,26 @@ class UpdateOrigemUsuarioRequest extends FormRequest
         | Validacoes para permitir a atualizacao dos dados na tabela de OrigemUsuario
         */
         return [
-            //
+            'nome' => [
+                'required',
+                'min:3',
+                'max:100',
+            ],
+            'id_local_requisitado' => [
+                'required',
+                'exists:locais_requisitados,id_local_requisitado',
+            ],
+            'id_requisicao' => [
+                'required',
+                'exists:requisicoes,id_requisicao',
+            ],
+            'id_usuario' => [
+                'required',
+                'exists:usuarios,id_usuario',
+            ],
+            'id_endereco' => [
+                'exists:enderecos,id_endereco',
+            ],
         ];
     }
 }

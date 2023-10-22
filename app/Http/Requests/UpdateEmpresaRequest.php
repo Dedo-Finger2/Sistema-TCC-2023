@@ -28,7 +28,26 @@ class UpdateEmpresaRequest extends FormRequest
         | Validacoes para permitir a atualizacao dos dados na tabela de Empresa
         */
         return [
-            //
+            'nome' => [
+                'required',
+                'min:3',
+                'max:45',
+            ],
+            'email' => [
+                'required',
+                'email',
+            ],
+            'cnpj' => [
+                'required',
+                'min:18',
+                'max:18',
+                'unique:empresas,cnpj,'.$this->empresa->id_empresa,
+            ],
+            'senha' => [
+                'required',
+                'min:8',
+                'max:16',
+            ],
         ];
     }
 }

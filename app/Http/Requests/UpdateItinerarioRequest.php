@@ -28,7 +28,20 @@ class UpdateItinerarioRequest extends FormRequest
         | Validacoes para permitir a atualizacao dos dados na tabela de Itinerario
         */
         return [
-            //
+            'codigo_itinerario' => [
+                'required',
+                'unique:itinerarios,codigo_itinerario,'.$this->itinerario->id_itinerario,
+                'min:8',
+                'max:50',
+            ],
+            'id_onibus' => [
+                'required',
+                'exists:onibus,id_onibus',
+            ],
+            'id_rota' => [
+                'required',
+                'exists:rotas,id_rota',
+            ],
         ];
     }
 }

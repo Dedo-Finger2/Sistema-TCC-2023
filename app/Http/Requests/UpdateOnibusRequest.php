@@ -28,7 +28,15 @@ class UpdateOnibusRequest extends FormRequest
         | Validacoes para permitir a atualizacao dos dados na tabela de Onibus
         */
         return [
-            //
+            'numeracao' => [
+                'required',
+                'min:3', // TODO: Mudar isso daqui depois
+                'max:10', // TODO: Mudar isso daqui também depois
+                'unique:onibus,numeracao,'.$this->onibus->id_onibus,
+            ],
+            'id_empresa' => [
+                'exists:empresas,id_empresa'
+            ],
         ];
     }
 }

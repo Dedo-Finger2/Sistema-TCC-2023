@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('empresas', function (Blueprint $table) {
-                        /*
+            /*
             | ------------------------
             | Tabela de Empresa
             | ------------------------
@@ -24,8 +24,8 @@ return new class extends Migration
 
             $table->String('nome', 100)->nullable(false);  // Nome da empresa
             $table->String('email', 250)->nullable(false); // E-mail da empresa
-            $table->String('cnpj', 20)->nullable(false);   // CNPJ da empresa
-            $table->String('senha', 8)->nullable(false);   // Senha da empresa
+            $table->String('cnpj', 18)->nullable(false)->unique();   // CNPJ da empresa
+            $table->String('senha', 16)->nullable(false);   // Senha da empresa
         });
     }
 

@@ -20,11 +20,11 @@ return new class extends Migration
             */
             $table->id('id_usuario');   // ID
 
-            $table->unsignedBigInteger('id_endereco');  // Chave estrangeira (não referenciada)
+            $table->unsignedBigInteger('id_endereco')->nullable(false);  // Chave estrangeira (não referenciada)
 
             $table->string('nome', 100)->nullable(false);   // Nome do usuário
             $table->string('email', 255)->nullable(false);  // Email do usuário
-            $table->string('senha', 8)->nullable(false);    // Senha do usuário
+            $table->string('senha', 16)->nullable(false);    // Senha do usuário
 
             $table->foreign('id_endereco')->references('id_endereco')->on('enderecos'); // Referenciando a chave estrangeira
         });

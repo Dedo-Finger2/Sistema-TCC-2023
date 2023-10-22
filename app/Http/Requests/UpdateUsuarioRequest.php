@@ -28,7 +28,24 @@ class UpdateUsuarioRequest extends FormRequest
         | Validacoes para permitir a atualizacao dos dados na tabela de Usuario
         */
         return [
-            //
+            'id_endereco' => [
+                'required',
+                'exists:enderecos,id_endereco',
+            ],
+            'nome' => [
+                'required',
+                'min:3',
+                'max:50',
+            ],
+            'email' => [
+                'required',
+                'email',
+            ],
+            'senha' => [
+                'required',
+                'min:8',
+                'max:16',
+            ],
         ];
     }
 }

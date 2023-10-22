@@ -28,7 +28,14 @@ class StoreVoltaOnibusRequest extends FormRequest
         | Validacoes para permitir a insercao dos dados na tabela de VoltaOnibus
         */
         return [
-            //
+            'horairo' => [
+                'required',
+                'date_format:H:i'
+            ],
+            'id_endereco' => [
+                'required',
+                'exists:enderecos,id_endereco'
+            ],
         ];
     }
 }

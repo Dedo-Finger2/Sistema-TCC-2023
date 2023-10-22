@@ -28,7 +28,15 @@ class StoreOnibusRequest extends FormRequest
         | Validacoes para permitir a insercao dos dados na tabela de Onibus
         */
         return [
-            //
+            'numeracao' => [
+                'required',
+                'min:3', // TODO: Mudar isso daqui depois
+                'max:10', // TODO: Mudar isso daqui também depois
+                'unique:onibus,numeracao',
+            ],
+            'id_empresa' => [
+                'exists:empresas,id_empresa',
+            ],
         ];
     }
 }

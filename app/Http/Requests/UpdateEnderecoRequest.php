@@ -28,7 +28,18 @@ class UpdateEnderecoRequest extends FormRequest
         | Validacoes para permitir a atualizacao dos dados na tabela de Endereco
         */
         return [
-            //
+            'logradouro' => [
+                'required',
+                'min:3',
+            ],
+            'bairro' => [
+                'required',
+                'min:3',
+            ],
+            'cidade' => [
+                'required',,
+                'min:3'
+            ],
         ];
     }
 }
