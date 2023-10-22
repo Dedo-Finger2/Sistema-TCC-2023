@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Usuario;
-use Illuminate\Http\Request;
+use App\Http\Requests\StoreUsuarioRequest;
+use App\Http\Requests\UpdateUsuarioRequest;
 
 class UsuarioController extends Controller
 {
@@ -26,7 +27,7 @@ class UsuarioController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreUsuarioRequest $request)
     {
         //
     }
@@ -50,7 +51,7 @@ class UsuarioController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Usuario $usuario)
+    public function update(UpdateUsuarioRequest $request, Usuario $usuario)
     {
         //
     }

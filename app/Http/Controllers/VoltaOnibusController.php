@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\VoltaOnibus;
-use Illuminate\Http\Request;
+use App\Http\Requests\StoreVoltaOnibusRequest;
+use App\Http\Requests\UpdateVoltaOnibusRequest;
 
 class VoltaOnibusController extends Controller
 {
@@ -26,7 +27,7 @@ class VoltaOnibusController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreVoltaOnibusRequest $request)
     {
         //
     }
@@ -50,7 +51,7 @@ class VoltaOnibusController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, VoltaOnibus $voltaOnibus)
+    public function update(UpdateVoltaOnibusRequest $request, VoltaOnibus $voltaOnibus)
     {
         //
     }

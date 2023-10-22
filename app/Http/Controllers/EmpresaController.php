@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Empresa;
-use Illuminate\Http\Request;
+use App\Http\Requests\StoreEmpresaRequest;
+use App\Http\Requests\UpdateEmpresaRequest;
 
 class EmpresaController extends Controller
 {
@@ -26,7 +27,7 @@ class EmpresaController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreEmpresaRequest $request)
     {
         //
     }
@@ -50,7 +51,7 @@ class EmpresaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Empresa $empresa)
+    public function update(UpdateEmpresaRequest $request, Empresa $empresa)
     {
         //
     }

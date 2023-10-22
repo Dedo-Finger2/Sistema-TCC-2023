@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\LocalRequisitado;
-use Illuminate\Http\Request;
+use App\Http\Requests\StoreLocalRequisitadoRequest;
+use App\Http\Requests\UpdateLocalRequisitadoRequest;
 
 class LocalRequisitadoController extends Controller
 {
@@ -26,7 +27,7 @@ class LocalRequisitadoController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreLocalRequisitadoRequest $request)
     {
         //
     }
@@ -50,7 +51,7 @@ class LocalRequisitadoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, LocalRequisitado $localRequisitado)
+    public function update(UpdateLocalRequisitadoRequest $request, LocalRequisitado $localRequisitado)
     {
         //
     }

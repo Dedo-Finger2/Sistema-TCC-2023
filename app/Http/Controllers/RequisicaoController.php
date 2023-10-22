@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Requisicao;
-use Illuminate\Http\Request;
+use App\Http\Requests\StoreRequisicaoRequest;
+use App\Http\Requests\UpdateRequisicaoRequest;
 
 class RequisicaoController extends Controller
 {
@@ -26,7 +27,7 @@ class RequisicaoController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreRequisicaoRequest $request)
     {
         //
     }
@@ -50,7 +51,7 @@ class RequisicaoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Requisicao $requisicao)
+    public function update(UpdateRequisicaoRequest $request, Requisicao $requisicao)
     {
         //
     }

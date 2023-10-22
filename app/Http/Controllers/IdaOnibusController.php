@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\IdaOnibus;
-use Illuminate\Http\Request;
+use App\Http\Requests\StoreIdaOnibusRequest;
+use App\Http\Requests\UpdateIdaOnibusRequest;
 
 class IdaOnibusController extends Controller
 {
@@ -26,7 +27,7 @@ class IdaOnibusController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreIdaOnibusRequest $request)
     {
         //
     }
@@ -50,7 +51,7 @@ class IdaOnibusController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, IdaOnibus $idaOnibus)
+    public function update(UpdateIdaOnibusRequest $request, IdaOnibus $idaOnibus)
     {
         //
     }

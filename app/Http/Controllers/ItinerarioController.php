@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Itinerario;
-use Illuminate\Http\Request;
+use App\Http\Requests\StoreItinerarioRequest;
+use App\Http\Requests\UpdateItinerarioRequest;
 
 class ItinerarioController extends Controller
 {
@@ -26,7 +27,7 @@ class ItinerarioController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreItinerarioRequest $request)
     {
         //
     }
@@ -50,7 +51,7 @@ class ItinerarioController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Itinerario $itinerario)
+    public function update(UpdateItinerarioRequest $request, Itinerario $itinerario)
     {
         //
     }

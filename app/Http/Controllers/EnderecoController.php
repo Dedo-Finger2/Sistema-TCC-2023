@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Endereco;
-use Illuminate\Http\Request;
+use App\Http\Requests\StoreEnderecoRequest;
+use App\Http\Requests\UpdateEnderecoRequest;
 
 class EnderecoController extends Controller
 {
@@ -26,7 +27,7 @@ class EnderecoController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreEnderecoRequest $request)
     {
         //
     }
@@ -50,7 +51,7 @@ class EnderecoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Endereco $endereco)
+    public function update(UpdateEnderecoRequest $request, Endereco $endereco)
     {
         //
     }

@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Rota;
-use Illuminate\Http\Request;
+use App\Http\Requests\StoreRotaRequest;
+use App\Http\Requests\UpdateRotaRequest;
 
 class RotaController extends Controller
 {
@@ -26,7 +27,7 @@ class RotaController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreRotaRequest $request)
     {
         //
     }
@@ -50,7 +51,7 @@ class RotaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Rota $rota)
+    public function update(UpdateRotaRequest $request, Rota $rota)
     {
         //
     }

@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\OrigemUsuario;
-use Illuminate\Http\Request;
+use App\Http\Requests\StoreOrigemUsuarioRequest;
+use App\Http\Requests\UpdateOrigemUsuarioRequest;
 
 class OrigemUsuarioController extends Controller
 {
@@ -26,7 +27,7 @@ class OrigemUsuarioController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreOrigemUsuarioRequest $request)
     {
         //
     }
@@ -50,7 +51,7 @@ class OrigemUsuarioController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, OrigemUsuario $origemUsuario)
+    public function update(UpdateOrigemUsuarioRequest $request, OrigemUsuario $origemUsuario)
     {
         //
     }
