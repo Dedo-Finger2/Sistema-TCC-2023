@@ -1,1 +1,1 @@
-<a href="#">Login</a> - <a href="#">Cadastro</a> - <a href="#">Busca</a> - <a href="#">Rotas</a> - <a href="#">Feedback</a> - <a href="#">Painel de controle</a>
+<a href="/login">Login</a> - <a href="/cadastro">Cadastro</a> - <a href="/busca">Busca</a> - <a href="/rotas">Rotas</a> - <a href="/feedback">Feedback</a> - <a href="/admin">Painel de controle</a>
