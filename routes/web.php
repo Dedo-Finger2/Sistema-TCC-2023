@@ -18,7 +18,30 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/users', [TestingController::class, 'getUsers']);
+Route::get('/login', function () {
+    return view('login');
+});
+
+Route::get('/cadastro', function () {
+    return view('Usuario.cadastro');
+});
+
+Route::get('/rotas', function () {
+    return view('Usuario.rotas');
+});
+
+Route::get('/feedback', function () {
+    return view('Usuario.feedback');
+});
+
+Route::get('/busca', function () {
+    return view('Usuario.busca');
+});
+
+Route::get('/admin', function () {
+    return view('Empresa.painelControle');
+});
+
 
 /*
 |--------------------------------------------------------------------------
