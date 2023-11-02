@@ -5,55 +5,45 @@
 {{-- Sessão onde vai ser colocado todo o conteúdo do body desta página --}}
 @section('content')
 
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Tela de Cadastro de Usuário</title>
-</head>
-<body>
-  <h1>Tela de Cadastro de Usuário</h1>
+    <h1>Tela de Cadastro de Usuário</h1>
 
-  <form>
-    <label for="nome">Nome completo:</label>
-    <input type="text" id="nome" name="nome" required><br>
+    {{-- Colocar mensagem à esquerda do formulário seguindo o layout no Figma --}}
 
-    <label for="email">Endereço de e-mail:</label>
-    <input type="email" id="email" name="email" required><br>
+    <form action="#" method="POST" name="#">
+        <label for="nome">Nome completo:</label>
+        <input type="text" id="nome" name="nome"><br>
 
-    <label for="senha">Senha:</label>
-    <input type="password" id="senha" name="senha" required><br>
+        <label for="email">Endereço de e-mail:</label>
+        <input type="email" id="email" name="email"><br>
 
-    <label for="confirmar-senha">Confirmar senha:</label>
-    <input type="password" id="confirmar-senha" name="confirmar-senha" required><br>
+        <label for="senha">Senha:</label>
+        <input type="password" id="senha" name="senha"><br>
 
-    <label for="data-nascimento">Data de nascimento:</label>
-    <input type="date" id="data-nascimento" name="data-nascimento" required><br>
+        {{-- Substituir esses selects pelos inputs do Select2 --}}
+        <label for="bairro">Bairro:</label>
+        <select name="bairro" id="bairro">
+            <option value="1">Bairro 1</option>
+            <option value="2">Bairro 2</option>
+            <option value="3">Bairro 3</option>
+        </select><br>
 
-    <label for="genero">Gênero:</label>
-    <select id="genero" name="genero">
-      <option value="masculino">Masculino</option>
-      <option value="feminino">Feminino</option>
-      <option value="outro">Outro</option>
-    </select><br>
+        <label for="logradouro">Logradouro:</label>
+        <select name="logradouro" id="logradouro">
+            <option value="1">Logradouro 1</option>
+            <option value="2">Logradouro 2</option>
+            <option value="3">Logradouro 3</option>
+        </select><br>
 
-    <label for="telefone">Telefone:</label>
-    <input type="tel" id="telefone" name="telefone"><br>
+        <label for="cidade">Cidade:</label>
+        <select name="cidade" id="cidade">
+            <option value="1">Cidade 1</option>
+            <option value="2">Cidade 2</option>
+            <option value="3">Cidade 3</option>
+        </select><br>
 
-    <label for="pais">País:</label>
-    <select id="pais" name="pais">
-      <option value="brasil">Brasil</option>
-      <option value="estados-unidos">Estados Unidos</option>
-      <!-- Adicione mais opções de países aqui -->
-    </select><br>
+        <input type="submit" value="Cadastrar">
+    </form>
 
-    <input type="checkbox" id="termos" name="termos" required>
-    <label for="termos">Aceito os Termos e Condições</label><br>
-
-    <input type="submit" value="Cadastrar">
-  </form>
-
-  <p>Já tem uma conta? <a href="pagina-de-login.html">Faça login aqui</a>.</p>
-</body>
-</html>
+    <p>Já tem uma conta? <a href="/login">Faça login aqui</a>.</p>
 
 @endsection

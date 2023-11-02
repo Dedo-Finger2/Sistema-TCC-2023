@@ -5,4 +5,23 @@
 {{-- Sessão onde vai ser colocado todo o conteúdo do body desta página --}}
 @section('content')
 
+    <h1>Feedback</h1>
+
+    <form action="#" method="POST">
+        <label for="nome">Nome</label>
+        <input type="nome" id="nome" name="nome"><br>
+
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email"><br>
+
+        <label for="mensagem-feedback"></label>
+        <textarea name="mensagem" id="mensagem-feedback" cols="30" rows="10">
+
+        </textarea><br>
+
+        <input type="submit" value="Enviar">
+    </form>
+
+    @include('Componentes.footer')
+
 @endsection
