@@ -24,7 +24,7 @@ return new class extends Migration
             $table->unsignedBigInteger('id_usuario')->nullable(false);   // Chave estrangeira (não referenciada)
             $table->unsignedBigInteger('id_endereco')->nullable(true);  // Chave estrangeira (não referenciada)
 
-            $table->string('nome', 100)->nullable(false); // Nome da origem (endereço escolhido/escrito pelo usuário)
+            $table->string('nome', 150)->nullable(false); // Nome da origem (endereço escolhido/escrito pelo usuário)
 
             $table->foreign('id_local_requisitado')->references('id_local_requisitado')->on('locais_requisitados');    // Referenciando chave estrangeira
             $table->foreign('id_requisicao')->references('id_requisicao')->on('requisicoes'); // Referenciando chave estrangeira
