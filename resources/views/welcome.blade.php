@@ -7,6 +7,6 @@
     <title>Teste</title>
 </head>
 <body>
-
+    <h1>Welcome to blade</h1>
 </body>
 </html>
