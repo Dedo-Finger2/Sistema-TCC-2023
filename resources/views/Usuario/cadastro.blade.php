@@ -9,7 +9,8 @@
 
     {{-- Colocar mensagem à esquerda do formulário seguindo o layout no Figma --}}
 
-    <form action="#" method="POST" name="#">
+    <form action="{{ route('registerUser') }}" method="POST" name="#">
+        @csrf
         <label for="nome">Nome completo:</label>
         <input type="text" id="nome" name="nome"><br>
 
@@ -20,25 +21,13 @@
         <input type="password" id="senha" name="senha"><br>
 
         {{-- Substituir esses selects pelos inputs do Select2 --}}
-        <label for="bairro">Bairro:</label>
-        <select name="bairro" id="bairro">
-            <option value="1">Bairro 1</option>
-            <option value="2">Bairro 2</option>
-            <option value="3">Bairro 3</option>
         </select><br>
 
         <label for="logradouro">Logradouro:</label>
-        <select name="logradouro" id="logradouro">
-            <option value="1">Logradouro 1</option>
-            <option value="2">Logradouro 2</option>
-            <option value="3">Logradouro 3</option>
-        </select><br>
-
-        <label for="cidade">Cidade:</label>
-        <select name="cidade" id="cidade">
-            <option value="1">Cidade 1</option>
-            <option value="2">Cidade 2</option>
-            <option value="3">Cidade 3</option>
+        <select name="id_endereco" id="logradouro" class="select-single">
+            @foreach ($enderecos as $endereco)
+                <option value="{{ $endereco->id_endereco }}">{{ $endereco->logradouro }}</option>
+            @endforeach
         </select><br>
 
         <input type="submit" value="Cadastrar">

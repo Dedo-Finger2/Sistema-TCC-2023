@@ -9,8 +9,11 @@
 
     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam enim dolore libero asperiores odit exercitationem esse necessitatibus provident error omnis, facilis deleniti ratione voluptas nihil blanditiis quia amet tenetur vero.</p>
 
-    <input type="checkbox" name="aceito"> Concordar com o roubo de dados.<br>
+    <form action="{{ route('aviso') }}" method="post">
+        @csrf
+        <input type="checkbox" name="termos"> Concordar com o roubo de dados.<br>
 
-    <input type="submit" value="Proceguir">
+        <input type="submit" value="Proceguir">
+    </form>
 
 @endsection

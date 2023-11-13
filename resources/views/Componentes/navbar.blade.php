@@ -4,19 +4,19 @@
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
           <li class="nav-item">
-            <a class="nav-link text-white" href="/login">Login</a>
+            <a class="nav-link text-white" href="{{ route('login') }}">Login</a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link text-white" href="/cadastro">Cadastro</a>
+            <a class="nav-link text-white" href="{{ route('create') }}">Cadastro</a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link text-white" href="/aviso">Aviso</a>
+            <a class="nav-link text-white" href="{{ route('aviso') }}">Aviso</a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link text-white" href="/busca">Busca</a>
+            <a class="nav-link text-white" href="{{ route('busca') }}">Busca</a>
           </li>
 
           <li class="nav-item">

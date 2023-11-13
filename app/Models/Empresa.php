@@ -21,9 +21,8 @@ class Empresa extends Model
 
     public $timestamps = false;
 
-    public function onibus(): BelongsTo
+    public function onibus()
     {
-        return $this->belongsTo(Onibus::class, 'id_empresa');
+        return $this->hasMany(Onibus::class, 'id_empresa');
     }
-
 }

@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\TestingController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TestingController;
+use App\Http\Controllers\AutenticacaoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -58,3 +59,20 @@ Route::get('/admin', function () {
 |
 */
 // Route::get('/', [Controller::class, 'metodo'])->name('controller.metodo')->middleware('auth');
+
+/*
+| ---------------------------
+| Rotas finais
+| ---------------------------
+*/
+Route::get('/cadastro', [AutenticacaoController::class,'createUser'])->name('create');
+Route::post('/cadastro', [AutenticacaoController::class,'registerUser'])->name('registerUser');
+Route::get('/aviso', [AutenticacaoController::class,'aviso'])->name('aviso');
+Route::get('/login', [AutenticacaoController::class,'login'])->name('login');
+Route::post('/login', [AutenticacaoController::class,'storeLogin'])->name('storeLogin');
+Route::post('/logout', [AutenticacaoController::class,'logout'])->name('logout');
+
+// Rotas
+Route::get('/buscar', [BuscaController::class,'index'])->name('busca');
+Route::post('/buscar', [BuscaController::class,'search'])->name('busca.buscar');
+Route::get('/rotas', [BuscaController::class, 'rotas'])->name('rotas');
