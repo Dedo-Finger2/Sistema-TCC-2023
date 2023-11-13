@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BuscaController;
 use App\Http\Controllers\TestingController;
 use App\Http\Controllers\AutenticacaoController;
 
@@ -73,6 +74,6 @@ Route::post('/login', [AutenticacaoController::class,'storeLogin'])->name('store
 Route::post('/logout', [AutenticacaoController::class,'logout'])->name('logout');
 
 // Rotas
-Route::get('/buscar', [BuscaController::class,'index'])->name('busca');
+Route::get('/busca', [BuscaController::class,'index'])->name('busca');
 Route::post('/buscar', [BuscaController::class,'search'])->name('busca.buscar');
 Route::get('/rotas', [BuscaController::class, 'rotas'])->name('rotas');
