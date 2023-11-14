@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg bg-success bg-opacity-75">
+<nav class="navbar navbar-expand-lg bg-success bg-opacity-75 ">
     <div class="container-fluid">
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
