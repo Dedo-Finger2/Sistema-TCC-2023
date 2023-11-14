@@ -23,18 +23,13 @@ class Requisicao extends Model
         'data_hora',
     ];
 
-    public function origemUsuario(): BelongsTo
+    public function usuario()
     {
-        return $this->belongsTo(OrigemUsuario::class, 'id_requisicao');
+        return $this->belongsTo(Usuario::class, 'id_usuario');
     }
 
-    public function usuario(): HasMany
+    public function feedback()
     {
-        return $this->hasMany(Usuario::class, 'id_usuario', 'id_requisicao');
-    }
-
-    public function feedback(): HasMany
-    {
-        return $this->hasMany(Feedback::class, 'id_feedback', 'id_requisicao');
+        return $this->belongsTo(Feedback::class, 'id_feedback');
     }
 }

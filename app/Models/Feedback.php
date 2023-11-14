@@ -14,6 +14,8 @@ class Feedback extends Model
 
     public $table = "feedbacks";
 
+    public $timestamps = false;
+
     /**
      * lista com os nomes das colunas na migration
      * OBS averiguar colunas na migration feedback
@@ -25,26 +27,14 @@ class Feedback extends Model
         'id_usuario',
     ];
 
-    /**
-     * caso a migration não tenha a coluna create created_at ou update_at
-     * coloque public $timestamps = false;
-     */
-    public $timestamps = false;
-
-    /**
-     * relacionamento um para muitos deve ser feiro com esse método
-     * @return hasMany
-     * OBS: na model deve ser colocado o método belongTo
-     *
-     */
-    public function usuarios(): HasMany
+    public function usuario()
     {
-        return $this->hasMany(Usuario::class,"id_usuario", "id_feedback");
+        return $this->belongsTo(Usuario::class, 'id_usuario');
     }
 
     public function requisicao()
     {
-        return $this->belongsTo(Requisicao::class, "id_feedback");
+        return $this->hasOne(Requisicao::class, 'id_feedback');
     }
 
 }
