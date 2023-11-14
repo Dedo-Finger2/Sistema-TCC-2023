@@ -25,9 +25,10 @@
 
         <label for="bairro">Bairro:</label>
         <select name="id_endereco" id="bairro" class="select-single">
-            @foreach ($enderecos as $endereco)
-                <option value="{{ $endereco->id_endereco }}">{{ $endereco->bairro }}</option>
-            @endforeach
+            <option value="id_endereco">Bairro1</option>
+            <option value="id_endereco">Bairro2</option>
+            <option value="id_endereco">Bairro3</option>
+            <option value="id_endereco">Bairro4</option>
         </select><br>
 
         <input type="submit" value="Cadastrar">

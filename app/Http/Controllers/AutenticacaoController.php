@@ -9,9 +9,7 @@ class AutenticacaoController extends Controller
 {
     public function createUser(): \Illuminate\Contracts\View\View
     {
-        $enderecos = Endereco::all();
-
-        return view("Usuario.cadastro", compact("enderecos"));
+        return view("Usuario.cadastro");
     }
 
     public function aviso()

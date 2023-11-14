@@ -12,6 +12,7 @@ class BuscaController extends Controller
     {
         $origensOnibus = VoltaOnibus::all();
         $destinosOnibus = IdaOnibus::all();
+
         return view('Usuario.busca', compact('origensOnibus', 'destinosOnibus'));
     }
 }
