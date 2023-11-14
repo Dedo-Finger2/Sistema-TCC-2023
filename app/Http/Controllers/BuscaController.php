@@ -15,4 +15,19 @@ class BuscaController extends Controller
 
         return view('Usuario.busca', compact('origensOnibus', 'destinosOnibus'));
     }
+
+    public function search(Request $request): array
+    {
+        return []; // Remover
+    }
+
+    public function rotas(array $rotas)
+    {
+        return view ('Usuario.rotas');
+    }
+
+    public function getItinerario(Request $request)
+    {
+        # código...
+    }
 }
