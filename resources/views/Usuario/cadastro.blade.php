@@ -23,10 +23,10 @@
         {{-- Substituir esses selects pelos inputs do Select2 --}}
         </select><br>
 
-        <label for="logradouro">Logradouro:</label>
-        <select name="id_endereco" id="logradouro" class="select-single">
+        <label for="bairro">Bairro:</label>
+        <select name="id_endereco" id="bairro" class="select-single">
             @foreach ($enderecos as $endereco)
-                <option value="{{ $endereco->id_endereco }}">{{ $endereco->logradouro }}</option>
+                <option value="{{ $endereco->id_endereco }}">{{ $endereco->bairro }}</option>
             @endforeach
         </select><br>
 

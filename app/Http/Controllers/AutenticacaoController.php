@@ -21,7 +21,7 @@ class AutenticacaoController extends Controller
 
     public function registerUser(Request $request)
     {
-
+        var_dump($request->all());
     }
 
     public function login(Request $request): \Illuminate\Contracts\View\View
