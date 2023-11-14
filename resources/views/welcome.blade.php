@@ -7,6 +7,15 @@
     <title>Teste</title>
 </head>
 <body>
+    @extends('layout') {{-- Buscando o layout padrão e aplicando nesta página --}}
 
+@section('title', 'welcome - Welcome to blade') {{-- Inserindo o título desta página --}}
+
+{{-- Sessão onde vai ser colocado todo o conteúdo do body desta página --}}
+@section('content')
+
+    <h1>Welcome to blade</h1>
+
+@endsection
 </body>
 </html>

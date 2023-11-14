@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Empresa extends Model
 {
     use HasFactory;
-
     protected $primaryKey = 'id_empresa';
 
     public $fillable = [
@@ -21,9 +20,8 @@ class Empresa extends Model
 
     public $timestamps = false;
 
-    public function onibus(): BelongsTo
+    public function onibus()
     {
-        return $this->belongsTo(Onibus::class, 'id_empresa');
+        return $this->hasMany(Onibus::class, 'id_empresa');
     }
-
 }

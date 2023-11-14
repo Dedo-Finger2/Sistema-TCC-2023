@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class VoltaOnibus extends Model
 {
@@ -19,8 +20,15 @@ class VoltaOnibus extends Model
         'horario',
         'id_endereco',
     ];
-    public function endereco(): HasMany
+
+    public function endereco()
     {
-        return $this->hasMany(Endereco::class, 'id_endereco', 'id_volta_onibus');
+        return $this->belongsTo(Endereco::class, 'id_endereco');
     }
+
+    public function rota()
+    {
+        return $this->hasOne(Rota::class, 'id_ida_onibus');
+    }
+
 }
