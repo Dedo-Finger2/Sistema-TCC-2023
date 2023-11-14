@@ -14,17 +14,14 @@ class AutenticacaoController extends Controller
         return view("Usuario.cadastro", compact("enderecos"));
     }
 
-    public function aviso(Request $request)
+    public function aviso()
     {
-        var_dump($request->all());
         return view('Usuario.aviso');
     }
 
     public function registerUser(Request $request)
     {
-        // var_dump($request->all());
 
-        return $this->aviso($request);
     }
 
     public function login(Request $request): \Illuminate\Contracts\View\View
