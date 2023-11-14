@@ -29,6 +29,15 @@
         @yield('content')
 
         @include('Componentes.footer')
-
+        {{-- Script que faz o Select2 funcionar --}}
+        <script>
+            $(document).ready(function() {
+                // Tag que vai ativar o select2
+                $('.select-single').select2({
+                    // ativando funcionalidade de tags que permite o usuário digitar novos valores na busca de valores do input/select
+                    tags: true,
+                });
+            });
+        </script>
     </body>
 </html>
