@@ -8,13 +8,13 @@
 
 
         <!-- Fonte do google -->
-        <link rel="stylesheet" href="">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
 
         <!-- Bootstrap -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
         <!-- CSS da aplicação -->
-        <link rel="stylesheet" href="/css/">
+        <link rel="stylesheet" href="../css/app.css">
 
         <!-- javascript da aplicação -->
         <script src="/js/"></script>
@@ -28,13 +28,7 @@
         @include('Componentes.navbar')
         @yield('content')
 
-        <script>
-            // In your Javascript (external .js resource or <script> tag)
-            $(document).ready(function() {
-                $('.select-single').select2({
-                    tags: true,
-                });
-            });
-        </script>
+        @include('Componentes.footer')
+
     </body>
 </html>
