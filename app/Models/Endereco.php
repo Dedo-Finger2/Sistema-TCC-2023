@@ -19,29 +19,19 @@ class Endereco extends Model
 
     public $timestamps = false;
 
-    public function usuario()
+    public function usuarios()
     {
-        return $this->belongsTo(Usuario::class, 'id_endereco');
-    }
-
-    public function origemUsuario()
-    {
-        return $this->belongsTo(OrigemUsuario::class, 'id_endereco');
-    }
-
-    public function localRequisitado()
-    {
-        return $this->belongsTo(LocalRequisitado::class, 'id_endereco');
+        return $this->hasMany(Usuario::class, 'id_endereco');
     }
 
     public function idaOnibus()
     {
-        return $this->belongsTo(IdaOnibus::class, 'id_endereco');
+        return $this->hasMany(IdaOnibus::class, 'id_endereco');
     }
 
     public function voltaOnibus()
     {
-        return $this->belongsTo(VoltaOnibus::class, 'id_endereco');
+        return $this->hasMany(VoltaOnibus::class, 'id_endereco');
     }
 
 }

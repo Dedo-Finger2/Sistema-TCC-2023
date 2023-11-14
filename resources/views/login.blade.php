@@ -9,12 +9,20 @@
 
     {{-- Colocar mensagem à esquerda do formulário seguindo o layout no Figma --}}
 
-    <form action="#" method="POST" name="login">
+    @if (session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
+
+
+    <form action="{{ route('storeLogin') }}" method="POST" name="login">
+        @csrf
         <label for="email">E-mail:</label>
         <input type="email" id="email" name="email"><br>
 
         <label for="senha">Senha:</label>
-        <input type="password" id="senha" name="senha"><br>
+        <input type="password" id="senha" name="password"><br>
 
         <input type="submit" value="Login">
     </form>

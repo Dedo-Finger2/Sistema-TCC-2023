@@ -22,12 +22,12 @@ class Onibus extends Model
 
     public function empresa()
     {
-        return $this->hasMany(Empresa::class, 'id_empresa', 'id_onibus');
+        return $this->belongsTo(Empresa::class, 'id_empresa');
     }
 
-    public function itinerario()
+    public function rotas()
     {
-        return $this->belongsTo(Itinerario::class, 'id_itinerario');
+        return $this->belongsToMany(Rota::class, 'rotas_onibus', 'id_onibus', 'id_rota');
     }
 
 }
