@@ -10,13 +10,11 @@
     {{-- Usar laravel para listar com variávies aqui --}}
     <ul>
         <li>[Horário] Origem --> [Horário] Destino - <Button>Visualizar completo</Button></li>
+        @foreach ($rotasEncontradas as $rota)
+            <li>[{{ $rota->voltaOnibus->horario }}] {{ $rota->voltaOnibus->endereco->bairro }} --> [{{ $rota->idaOnibus->horario }}] {{ $rota->idaOnibus->endereco->bairro }} - <Button>Visualizar completo</Button></li>{{-- Erro nesta linha --}}
+        @endforeach
     </ul>
 
-    <!-- TODO: Fazer o horário funcionar -->
-    @foreach ($rotasEncontradas as $rota)
-
-        <li>[Horário] {{ $rota->voltaOnibus->endereco->bairro }} --> [Horário] {{ $rota->idaOnibus->endereco->bairro }} - <Button>Visualizar completo</Button></li>{{-- Erro nesta linha --}}
-    @endforeach
 
     @include('Componentes.footer')
 
