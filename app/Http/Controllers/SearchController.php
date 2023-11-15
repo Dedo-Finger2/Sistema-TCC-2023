@@ -131,6 +131,7 @@ class SearchController extends Controller
     public function rotas(Request $request): \Illuminate\Contracts\View\View
     {
         $rotasEncontradas = $request->session()->get('rotasEncontradas');
+        $rotasEncontradas = Rota::paginate(10, $rotasEncontradas);
 
         # Retornar a view das rotas com as rotas recebidas no parâmetro
         return view ('Usuario.rotas', compact('rotasEncontradas'));
