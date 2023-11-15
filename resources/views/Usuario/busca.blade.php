@@ -7,6 +7,11 @@
 
     <h1>Busca de rotas</h1>
 
+    @if (session('error'))
+        <div><h2>{{ session('error') }}</h2></div>
+        <a href="{{ route('feedback.index') }}">Quero dar meu feedback.</a>
+    @endif
+
     <form action="{{ route('search.buscar') }}" method="POST">
         @csrf
 
