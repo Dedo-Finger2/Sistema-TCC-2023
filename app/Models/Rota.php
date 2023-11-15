@@ -20,12 +20,12 @@ class Rota extends Model
 
     public function idaOnibus()
     {
-        return $this->hasOne(IdaOnibus::class, 'id_ida_onibus', 'id_endereco');
+        return $this->belongsTo(IdaOnibus::class, 'id_ida_onibus');
     }
 
     public function voltaOnibus()
     {
-        return $this->hasOne(VoltaOnibus::class, 'id_volta_onibus', 'id_endereco');
+        return $this->belongsTo(VoltaOnibus::class, 'id_volta_onibus');
     }
 
     public function endereco()

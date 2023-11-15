@@ -31,6 +31,10 @@
             <a class="nav-link text-white" href="{{ route('admin.index') }}">Painel de controle</a>
           </li>
 
+          <li class="nav-item">
+            <a class="nav-link text-white" href="{{ route('auth.logout') }}">Sair</a>
+          </li>
+
         </ul>
       </div>
     </div>

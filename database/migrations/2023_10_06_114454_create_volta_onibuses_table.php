@@ -19,7 +19,7 @@ return new class extends Migration
             | nesta tabela vamos estar armazenando as origens dos ônibus (Voltas).
             */
             $table->id('id_volta_onibus'); // ID
-            $table->time('horario', 5)->nullable(false); // Horário da volta
+            $table->time('horario')->nullable(false); // Horário da volta
 
             $table->unsignedBigInteger('id_endereco')->nullable(false); // Chave estrangeira (não referenciada)
 

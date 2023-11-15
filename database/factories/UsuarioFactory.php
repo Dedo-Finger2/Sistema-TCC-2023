@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Endereco;
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class UsuarioFactory extends Factory
@@ -29,9 +30,10 @@ class UsuarioFactory extends Factory
             | senha() - Gera uma senha criptografada aleatória
             */
             'nome' => $this->faker->name(),
-            'email' => $this->faker->email(),
+            'email' => $this->faker->safeEmail(),
             'senha' => $this->faker->password(6, 8),
             'id_endereco' => $this->faker->randomElement($idEnderecos),
+            '_token' => Str::random(16),
         ];
     }
 }

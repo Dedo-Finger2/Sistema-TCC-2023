@@ -40,7 +40,7 @@ class IdaOnibusFactory extends Factory
             | time() - Gera horários aleatórios
             | randomElement() - Pega um item aleatório de um array passado como parâmetro
             */
-            'horario' => $this->faker->time(format:"H:i"),
+            'horario' => $this->faker->time(format:"H:i:s"),
             'id_endereco' => $this->faker->randomElement($idEnderecos),
         ];
     }

@@ -66,12 +66,14 @@ Route::get('/admin', function () {
 | Rotas finais
 | ---------------------------
 */
+
+// TODO: Adicionar o middleware de auth nas rotas
 Route::get('/cadastro', [AuthController::class,'create'])->name('auth.register');
 Route::post('/cadastro', [AuthController::class,'store'])->name('auth.storeRegister');
 Route::get('/aviso', [AuthController::class,'alert'])->name('auth.alert');
 Route::get('/login', [AuthController::class,'login'])->name('auth.login');
 Route::post('/login', [AuthController::class,'storeLogin'])->name('auth.storeLogin');
-Route::post('/logout', [AuthController::class,'logout'])->name('auth.logout');
+Route::get('/logout', [AuthController::class,'logout'])->name('auth.logout');
 
 // Rotas
 Route::get('/busca', [SearchController::class,'index'])->name('search.index');

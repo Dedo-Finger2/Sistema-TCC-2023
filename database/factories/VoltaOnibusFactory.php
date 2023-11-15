@@ -37,7 +37,7 @@ class VoltaOnibusFactory extends Factory
             | time() - Gera um valor de hora aleatório
             | randomElement() - Seleciona um elemento aleatório de um array passado como parâmetro
             */
-            'horario' => $this->faker->time(format:"H:i"),
+            'horario' => $this->faker->time(format:"H:i:s"),
             'id_endereco' => $this->faker->randomElement($idEnderecos),
         ];
     }
