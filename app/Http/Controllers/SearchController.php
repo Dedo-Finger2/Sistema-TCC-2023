@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Rota;
 use App\Models\IdaOnibus;
+use App\Models\Requisicao;
 use App\Models\VoltaOnibus;
 use Illuminate\Http\Request;
+use App\Models\OrigemUsuario;
+use App\Models\LocalRequisitado;
 use Illuminate\Support\Facades\DB;
 
 class SearchController extends Controller
@@ -26,35 +30,58 @@ class SearchController extends Controller
         $origemRequisitada = $request->all()['origemRequisitado'];
         $destinoRequisitado = $request->all()['destinoRequisitado'];
         # Fazer uma busca no banco de dados usando os IDs recebidos
-        $rotasEncontradas = DB::table('rotas')
-            ->where('id_volta_onibus', $origemRequisitada)
+        $rotasEncontradas = Rota::where('id_volta_onibus', $origemRequisitada)
             ->where('id_ida_onibus', $destinoRequisitado)
+            ->with('idaOnibus')
             ->get();
         # Se retornou alguma rota
         if (count($rotasEncontradas) != 0) {
             # Cadastrar uma nova requisição com "retorno_requisicao" sendo true
+            $requisicao = new Requisicao;
+            $requisicao->id_usuario = 1;
+            $requisicao->data_hora = date('Y-m-d H:i');
+            $requisicao->retorno_requisicao = true;
+            $requisicao->save();
 
             # Cadastrar um novo registro em OrigemUsuario cadastrando o ID da origem
+            $origemUsuario = new OrigemUsuario;
+            $origemUsuario->id_usuario = 1;
+            $origemUsuario->id_local_requisitado = $destinoRequisitado;
+            $origemUsuario->id_requisicao = $requisicao->id_requisicao;
+            $origemUsuario->id_endereco = $origemRequisitada;
+            $origemUsuario->nome = null;
+            $origemUsuario->save();
+
             # Cadastrar um novo registro em LocalRequisitado cadastrando o ID do destino
+            $localRequisitado = new LocalRequisitado;
+            $localRequisitado->id_endereco = $destinoRequisitado;
+            $localRequisitado->nome = null;
+            $localRequisitado->save();
+
             # Retornar a view de rotas com o array de rotas que foram retornadas
+            return redirect()->route('search.rotas')->with('rotasEncontradas', $rotasEncontradas);
         }
-        # Se não retornou nada
-            # Cadastrar uma nova requisição com "retorno_requisicao" sendo false
-            # Cadastrar um novo registro em OrigemUsuario
-                # Cadastrar o nome da origem digitada pelo usuário caso ela não exista no banco
-                # Cadastrar o ID da origem selecionada caso ela exista no banco
-            # Cadastrar um novo registro em LocalRequisitado cadastrando o ID do destino
-                # Cadastrar o nome do destino digitado pelo usuário caso ele não exista no banco
-                # Cadastrar o ID do destino selecionado caso ele exista no banco
-            # Redirecionar o usuário para tela de busca com uma mensagem de feedback
-        var_dump([$origemRequisitada, $destinoRequisitado]);
-        var_dump($rotasEncontradas);
+        else {
+            var_dump([$origemRequisitada, $destinoRequisitado]);
+            var_dump($rotasEncontradas);
+            # Se não retornou nada
+                # Cadastrar uma nova requisição com "retorno_requisicao" sendo false
+                # Cadastrar um novo registro em OrigemUsuario
+                    # Cadastrar o nome da origem digitada pelo usuário caso ela não exista no banco
+                    # Cadastrar o ID da origem selecionada caso ela exista no banco
+                # Cadastrar um novo registro em LocalRequisitado cadastrando o ID do destino
+                    # Cadastrar o nome do destino digitado pelo usuário caso ele não exista no banco
+                    # Cadastrar o ID do destino selecionado caso ele exista no banco
+                # Redirecionar o usuário para tela de busca com uma mensagem de feedback
+        }
     }
 
-    public function rotas(array $rotas = []): \Illuminate\Contracts\View\View
+    public function rotas(Request $request): \Illuminate\Contracts\View\View
     {
+        $rotasEncontradas = $request->session()->get('rotasEncontradas');
+
         # Retornar a view das rotas com as rotas recebidas no parâmetro
-        return view ('Usuario.rotas');
+        return view ('Usuario.rotas', compact('rotasEncontradas'));
     }
 
     public function getItinerario(Request $request)

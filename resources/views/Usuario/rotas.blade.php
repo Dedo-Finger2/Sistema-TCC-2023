@@ -12,6 +12,12 @@
         <li>[Horário] Origem --> [Horário] Destino - <Button>Visualizar completo</Button></li>
     </ul>
 
+    <!-- TODO: Fazer o horário funcionar -->
+    @foreach ($rotasEncontradas as $rota)
+
+        <li>[Horário] {{ $rota->voltaOnibus->endereco->bairro }} --> [Horário] {{ $rota->idaOnibus->endereco->bairro }} - <Button>Visualizar completo</Button></li>{{-- Erro nesta linha --}}
+    @endforeach
+
     @include('Componentes.footer')
 
 @endsection

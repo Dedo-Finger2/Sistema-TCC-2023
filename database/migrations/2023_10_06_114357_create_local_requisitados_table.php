@@ -20,7 +20,7 @@ return new class extends Migration
             */
             $table->id('id_local_requisitado'); // ID
 
-            $table->string('nome', 150)->nullable(false); // Nome do local (endereço descrito pelo usuario)
+            $table->string('nome', 150)->nullable(true); // Nome do local (endereço descrito pelo usuario)
 
             $table->unsignedBigInteger('id_endereco')->nullable(true); // Chave estrangeira (não referenciada)
 
