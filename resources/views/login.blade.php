@@ -16,7 +16,7 @@
     @endif
 
 
-    <form action="{{ route('storeLogin') }}" method="POST" name="login">
+    <form action="{{ route('auth.storeLogin') }}" method="POST" name="login">
         @csrf
         <label for="email">E-mail:</label>
         <input type="email" id="email" name="email"><br>
@@ -27,6 +27,6 @@
         <input type="submit" value="Login">
     </form>
 
-    <p>Não tem uma conta? <a href="/cadastro">Cadastre-se aqui</a>.</p>
+    <p>Não tem uma conta? <a href="{{ route('auth.register') }}">Cadastre-se aqui</a>.</p>
 
 @endsection

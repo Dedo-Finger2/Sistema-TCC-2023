@@ -6,7 +6,7 @@ use App\Models\IdaOnibus;
 use App\Models\VoltaOnibus;
 use Illuminate\Http\Request;
 
-class BuscaController extends Controller
+class SearchController extends Controller
 {
     public function index()
     {
@@ -16,12 +16,12 @@ class BuscaController extends Controller
         return view('Usuario.busca', compact('origensOnibus', 'destinosOnibus'));
     }
 
-    public function search(Request $request): array
+    public function search(Request $request) // array
     {
-        return []; // Remover
+        var_dump($request->all());
     }
 
-    public function rotas(array $rotas)
+    public function rotas(array $rotas = []): \Illuminate\Contracts\View\View
     {
         return view ('Usuario.rotas');
     }
@@ -29,5 +29,15 @@ class BuscaController extends Controller
     public function getItinerario(Request $request)
     {
         # código...
+    }
+
+    public function feedback(): \Illuminate\Contracts\View\View
+    {
+        return view('Usuario.feedback');
+    }
+
+    public function storeFeedback(Request $request)
+    {
+        var_dump($request->all());
     }
 }

@@ -9,7 +9,7 @@
 
     {{-- Colocar mensagem à esquerda do formulário seguindo o layout no Figma --}}
 
-    <form action="{{ route('registerUser') }}" method="POST" name="#">
+    <form action="{{ route('auth.storeRegister') }}" method="POST" name="#">
         @csrf
         <label for="nome">Nome completo:</label>
         <input type="text" id="nome" name="nome"><br>
@@ -34,6 +34,6 @@
         <input type="submit" value="Cadastrar">
     </form>
 
-    <p>Já tem uma conta? <a href="/login">Faça login aqui</a>.</p>
+    <p>Já tem uma conta? <a href="{{ route('auth.login') }}">Faça login aqui</a>.</p>
 
 @endsection

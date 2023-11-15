@@ -5,19 +5,19 @@ namespace App\Http\Controllers;
 use App\Models\Endereco;
 use Illuminate\Http\Request;
 
-class AutenticacaoController extends Controller
+class AuthController extends Controller
 {
-    public function createUser(): \Illuminate\Contracts\View\View
+    public function create(): \Illuminate\Contracts\View\View
     {
         return view("Usuario.cadastro");
     }
 
-    public function aviso()
+    public function alert(): \Illuminate\Contracts\View\View
     {
         return view('Usuario.aviso');
     }
 
-    public function registerUser(Request $request)
+    public function store(Request $request)
     {
         var_dump($request->all());
     }
@@ -29,7 +29,7 @@ class AutenticacaoController extends Controller
 
     public function storeLogin(Request $request)
     {
-
+        var_dump($request->all());
     }
 
     public function logout()

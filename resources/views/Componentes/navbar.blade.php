@@ -4,31 +4,31 @@
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
           <li class="nav-item">
-            <a class="nav-link text-white" href="{{ route('login') }}">Login</a>
+            <a class="nav-link text-white" href="{{ route('auth.login') }}">Login</a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link text-white" href="{{ route('create') }}">Cadastro</a>
+            <a class="nav-link text-white" href="{{ route('auth.storeRegister') }}">Cadastro</a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link text-white" href="{{ route('aviso') }}">Aviso</a>
+            <a class="nav-link text-white" href="{{ route('auth.alert') }}">Aviso</a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link text-white" href="{{ route('busca') }}">Busca</a>
+            <a class="nav-link text-white" href="{{ route('search.index') }}">Busca</a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link text-white" href="/rotas">Rotas</a>
+            <a class="nav-link text-white" href="{{ route('search.rotas') }}">Rotas</a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link text-white" href="/feedback">Feedback</a>
+            <a class="nav-link text-white" href="{{ route('feedback.index') }}">Feedback</a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link text-white" href="/admin">Painel de controle</a>
+            <a class="nav-link text-white" href="{{ route('admin.index') }}">Painel de controle</a>
           </li>
 
         </ul>

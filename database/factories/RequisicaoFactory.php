@@ -47,7 +47,8 @@ class RequisicaoFactory extends Factory
             */
             'id_usuario' => $this->faker->randomElement($idUsuarios),
             'id_feedback' => $this->faker->randomElement($idFeedbacks),
-            'data_hora' => $this->faker->dateTime()
+            'data_hora' => $this->faker->dateTime(),
+            'retorno_requisicao' => $this->faker->boolean()
         ];
     }
 }

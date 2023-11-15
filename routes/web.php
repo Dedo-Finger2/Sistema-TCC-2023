@@ -1,9 +1,9 @@
 <?php
 
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DataController;
+use App\Http\Controllers\SearchController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\BuscaController;
-use App\Http\Controllers\TestingController;
-use App\Http\Controllers\AutenticacaoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -66,14 +66,19 @@ Route::get('/admin', function () {
 | Rotas finais
 | ---------------------------
 */
-Route::get('/cadastro', [AutenticacaoController::class,'createUser'])->name('create');
-Route::post('/cadastro', [AutenticacaoController::class,'registerUser'])->name('registerUser');
-Route::get('/aviso', [AutenticacaoController::class,'aviso'])->name('aviso');
-Route::get('/login', [AutenticacaoController::class,'login'])->name('login');
-Route::post('/login', [AutenticacaoController::class,'storeLogin'])->name('storeLogin');
-Route::post('/logout', [AutenticacaoController::class,'logout'])->name('logout');
+Route::get('/cadastro', [AuthController::class,'create'])->name('auth.register');
+Route::post('/cadastro', [AuthController::class,'store'])->name('auth.storeRegister');
+Route::get('/aviso', [AuthController::class,'alert'])->name('auth.alert');
+Route::get('/login', [AuthController::class,'login'])->name('auth.login');
+Route::post('/login', [AuthController::class,'storeLogin'])->name('auth.storeLogin');
+Route::post('/logout', [AuthController::class,'logout'])->name('auth.logout');
 
 // Rotas
-Route::get('/busca', [BuscaController::class,'index'])->name('busca');
-Route::post('/buscar', [BuscaController::class,'search'])->name('busca.buscar');
-Route::get('/rotas', [BuscaController::class, 'rotas'])->name('rotas');
+Route::get('/busca', [SearchController::class,'index'])->name('search.index');
+Route::post('/busca', [SearchController::class,'search'])->name('search.buscar');
+Route::get('/rotas', [SearchController::class, 'rotas'])->name('search.rotas');
+Route::get('/feedback', [SearchController::class, 'feedback'])->name('feedback.index');
+Route::post('/feedback', [SearchController::class, 'storeFeedback'])->name('feedback.store');
+
+// Admin
+Route::get('/admin', [DataController::class, 'index'])->name('admin.index');

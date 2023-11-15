@@ -7,7 +7,8 @@
 
     <h1>Feedback</h1>
 
-    <form action="#" method="POST">
+    <form action="{{ route('feedback.store') }}" method="POST">
+        @csrf
         <label for="nome">Nome</label>
         <input type="nome" id="nome" name="nome"><br>
 
@@ -15,9 +16,7 @@
         <input type="email" id="email" name="email"><br>
 
         <label for="mensagem-feedback"></label>
-        <textarea name="mensagem" id="mensagem-feedback" cols="30" rows="10">
-
-        </textarea><br>
+        <textarea name="mensagem" id="mensagem-feedback" cols="30" rows="10"></textarea><br>
 
         <input type="submit" value="Enviar">
     </form>

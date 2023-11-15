@@ -4,5 +4,5 @@
 
 {{-- Sessão onde vai ser colocado todo o conteúdo do body desta página --}}
 @section('content')
-
+    <h1>Painel Controle</h1>
 @endsection
