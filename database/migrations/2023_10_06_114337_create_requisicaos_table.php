@@ -25,7 +25,7 @@ return new class extends Migration
             $table->unsignedBigInteger('id_feedback')->nullable(true); // Chave estrangeira (não referenciada)
 
             $table->dateTime('data_hora')->nullable(false); // Data e hora em que a requisição foi feita
-            $table->boolean('retorno_requisicao');
+            $table->boolean('retorno_requisicao')->nullable(false);
 
             // id_usuario referencia id_usuario da tabela usuarios
             $table->foreign('id_usuario')->references('id_usuario')->on('usuarios');     // Referenciando a chave estrangeira
