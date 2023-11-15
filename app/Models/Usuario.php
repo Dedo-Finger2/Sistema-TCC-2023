@@ -3,14 +3,13 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Usuario extends Model
+class Usuario extends Authenticatable
 {
     use HasFactory;
 
-    protected $primaryKey = 'id_usuario';
+    public $primaryKey = 'id_usuario';
 
     public $timestamps = false;
 
@@ -19,9 +18,10 @@ class Usuario extends Model
         'nome',
         'email',
         'senha',
+        '_token',
     ];
 
-    public function enderecos(): HasMany
+    public function enderecos()
     {
         return $this->hasMany(Endereco::class, 'id_endereco', 'id_usuario');
     }

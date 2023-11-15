@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\IdaOnibus;
 use App\Models\VoltaOnibus;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SearchController extends Controller
 {
@@ -22,12 +23,21 @@ class SearchController extends Controller
     public function search(Request $request)
     {
         # Pegar os dados vindos da tela de busca (2 ID endereço, um pra origem e outro pra destino)
+        $origemRequisitada = $request->all()['origemRequisitado'];
+        $destinoRequisitado = $request->all()['destinoRequisitado'];
         # Fazer uma busca no banco de dados usando os IDs recebidos
+        $rotasEncontradas = DB::table('rotas')
+            ->where('id_volta_onibus', $origemRequisitada)
+            ->where('id_ida_onibus', $destinoRequisitado)
+            ->get();
         # Se retornou alguma rota
+        if (count($rotasEncontradas) != 0) {
             # Cadastrar uma nova requisição com "retorno_requisicao" sendo true
+
             # Cadastrar um novo registro em OrigemUsuario cadastrando o ID da origem
             # Cadastrar um novo registro em LocalRequisitado cadastrando o ID do destino
             # Retornar a view de rotas com o array de rotas que foram retornadas
+        }
         # Se não retornou nada
             # Cadastrar uma nova requisição com "retorno_requisicao" sendo false
             # Cadastrar um novo registro em OrigemUsuario
@@ -37,7 +47,8 @@ class SearchController extends Controller
                 # Cadastrar o nome do destino digitado pelo usuário caso ele não exista no banco
                 # Cadastrar o ID do destino selecionado caso ele exista no banco
             # Redirecionar o usuário para tela de busca com uma mensagem de feedback
-        var_dump($request->all());
+        var_dump([$origemRequisitada, $destinoRequisitado]);
+        var_dump($rotasEncontradas);
     }
 
     public function rotas(array $rotas = []): \Illuminate\Contracts\View\View

@@ -4,8 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Requisicao extends Model
 {
@@ -21,6 +19,7 @@ class Requisicao extends Model
         'id_usuario',
         'id_feedback',
         'data_hora',
+        'retorno_requisicao',
     ];
 
     public function usuario()

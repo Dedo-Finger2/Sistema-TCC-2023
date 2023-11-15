@@ -71,10 +71,10 @@ Route::post('/cadastro', [AuthController::class,'store'])->name('auth.storeRegis
 Route::get('/aviso', [AuthController::class,'alert'])->name('auth.alert');
 Route::get('/login', [AuthController::class,'login'])->name('auth.login');
 Route::post('/login', [AuthController::class,'storeLogin'])->name('auth.storeLogin');
-Route::post('/logout', [AuthController::class,'logout'])->name('auth.logout');
+Route::get('/logout', [AuthController::class,'logout'])->name('auth.logout');
 
 // Rotas
-Route::get('/busca', [SearchController::class,'index'])->name('search.index');
+Route::get('/busca', [SearchController::class,'index'])->name('search.index')->middleware('auth');
 Route::post('/busca', [SearchController::class,'search'])->name('search.buscar');
 Route::get('/rotas', [SearchController::class, 'rotas'])->name('search.rotas');
 Route::get('/feedback', [SearchController::class, 'feedback'])->name('feedback.index');
