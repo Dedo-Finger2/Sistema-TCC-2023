@@ -26,6 +26,9 @@
                     @foreach ($rotasEncontradas as $rota)
                         <div class="col">
                             <div class="card shadow-sm">
+                                <div class="card-header">
+                                    <h1>{{ $rota->id_rota }}</h1>
+                                </div>
                                 <div class="card-body">
                                     <p class="card-title mb-2 fs-5">{{ $rota->voltaOnibus->horario }} - {{ $rota->idaOnibus->horario }}</p>
                                     <h4 class="card-text">{{ $rota->voltaOnibus->endereco->bairro }} - {{ $rota->idaOnibus->endereco->bairro }}</h4>

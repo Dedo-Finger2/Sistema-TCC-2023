@@ -13,18 +13,18 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // \App\Models\User::factory(10)->create();
-        \App\Models\Endereco::factory(50)->create();
-        \App\Models\Usuario::factory(50)->create();
-        \App\Models\Empresa::factory(50)->create();
-        \App\Models\Onibus::factory(50)->create();
-        \App\Models\VoltaOnibus::factory(25)->create();
-        \App\Models\IdaOnibus::factory(25)->create();
-        \App\Models\Rota::factory(50)->create();
-        \App\Models\Itinerario::factory(50)->create();
-        \App\Models\Feedback::factory(50)->create();
-        \App\Models\LocalRequisitado::factory(50)->create();
-        \App\Models\Requisicao::factory(50)->create();
-        \App\Models\OrigemUsuario::factory(50)->create();
+        \App\Models\Endereco::factory(5)->create();
+        \App\Models\Usuario::factory(5)->create();
+        \App\Models\Empresa::factory(5)->create();
+        \App\Models\Onibus::factory(5)->create();
+        \App\Models\VoltaOnibus::factory(5)->create();
+        \App\Models\IdaOnibus::factory(5)->create();
+        \App\Models\Rota::factory(25)->create();
+        \App\Models\Itinerario::factory(5)->create();
+        \App\Models\Feedback::factory(5)->create();
+        \App\Models\LocalRequisitado::factory(5)->create();
+        \App\Models\Requisicao::factory(5)->create();
+        \App\Models\OrigemUsuario::factory(5)->create();
 
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',
