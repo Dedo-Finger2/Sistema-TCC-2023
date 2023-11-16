@@ -9,7 +9,8 @@ use App\Models\VoltaOnibus;
 use Illuminate\Http\Request;
 use App\Models\OrigemUsuario;
 use App\Models\LocalRequisitado;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Pagination\Paginator;
 
 class SearchController extends Controller
 {
@@ -26,112 +27,12 @@ class SearchController extends Controller
 
     public function search(Request $request)
     {
-        # Pegar os dados vindos da tela de busca (2 ID endereço, um pra origem e outro pra destino)
-        $origemRequisitada = $request->all()['origemRequisitado'];
-        $destinoRequisitado = $request->all()['destinoRequisitado'];
 
-        # Fazer uma busca no banco de dados usando os IDs recebidos
-        $rotasEncontradas = Rota::where('id_volta_onibus', $origemRequisitada)
-            ->where('id_ida_onibus', $destinoRequisitado)
-            ->with('idaOnibus')
-            ->get();
-
-        # Cadastrar uma nova requisição com "retorno_requisicao" sendo true
-        $requisicao = new Requisicao;
-        $requisicao->id_usuario = 1; // TODO: Mudar isso depois para o id do usuário que está logado no sistema
-        $requisicao->data_hora = date('Y-m-d H:i');
-
-        # Cadastrar um novo registro em OrigemUsuario cadastrando o ID da origem
-        $origemUsuario = new OrigemUsuario;
-        $origemUsuario->id_usuario = 1; // TODO: Mudar isso depois para o id do usuário que está logado no sistema
-
-        # Cadastrar um novo registro em LocalRequisitado cadastrando o ID do destino
-        $localRequisitado = new LocalRequisitado;
-
-        # Se retornou alguma rota
-        if (count($rotasEncontradas) != 0) {
-
-            $requisicao->retorno_requisicao = true;
-            $requisicao->save();
-
-            $origemUsuario->id_endereco = $origemRequisitada;
-            $origemUsuario->id_requisicao = $requisicao->id_requisicao;
-            $origemUsuario->id_local_requisitado = $destinoRequisitado;
-            $origemUsuario->nome = null;
-            $origemUsuario->save();
-
-            $localRequisitado->id_endereco = $destinoRequisitado;
-            $localRequisitado->nome = null;
-            $localRequisitado->save();
-
-            # Retornar a view de rotas com o array de rotas que foram retornadas
-            return redirect()->route('search.rotas')->with('rotasEncontradas', $rotasEncontradas);
-        }
-        else {
-            # Se não retornou nada
-                # Cadastrar uma nova requisição com "retorno_requisicao" sendo false
-                $requisicao->retorno_requisicao = false;
-                $requisicao->save();
-
-                if (!ctype_digit($destinoRequisitado) && !ctype_digit($origemRequisitada)) {
-                    $localRequisitado->nome = $destinoRequisitado;
-                    $localRequisitado->id_endereco = null;
-                    $localRequisitado->save();
-
-                    $origemUsuario->nome = $origemRequisitada;
-                    $origemUsuario->id_requisicao = $requisicao->id_requisicao;
-                    $origemUsuario->id_endereco = null;
-                    $origemUsuario->id_local_requisitado = $localRequisitado->id_local_requisitado;
-                    $origemUsuario->save();
-                }
-
-                # Cadastrar um novo registro em OrigemUsuario
-                else if (!ctype_digit($origemRequisitada)) {
-                    $localRequisitado->id_endereco = $destinoRequisitado;
-                    $localRequisitado->nome = null;
-                    $localRequisitado->save();
-
-                    $origemUsuario->nome = $origemRequisitada;
-                    $origemUsuario->id_requisicao = $requisicao->id_requisicao;
-                    $origemUsuario->id_endereco = null;
-                    $origemUsuario->id_local_requisitado = $localRequisitado->id_local_requisitado;
-                    $origemUsuario->save();
-
-                }
-
-                else if (!ctype_digit($destinoRequisitado)) {
-                    $localRequisitado->nome = $destinoRequisitado;
-                    $localRequisitado->id_endereco = null;
-                    $localRequisitado->save();
-
-                    $origemUsuario->nome = null;
-                    $origemUsuario->id_requisicao = $requisicao->id_requisicao;
-                    $origemUsuario->id_endereco = $origemRequisitada;
-                    $origemUsuario->id_local_requisitado = $localRequisitado->id_local_requisitado;
-                    $origemUsuario->save();
-                }
-
-                else if (count($rotasEncontradas) <= 0) {
-                    $localRequisitado->nome = null;
-                    $localRequisitado->id_endereco = $destinoRequisitado;
-                    $localRequisitado->save();
-
-                    $origemUsuario->nome = null;
-                    $origemUsuario->id_requisicao = $requisicao->id_requisicao;
-                    $origemUsuario->id_endereco = $origemRequisitada;
-                    $origemUsuario->id_local_requisitado = $localRequisitado->id_local_requisitado;
-                    $origemUsuario->save();
-
-                }
-
-                return redirect()->route('search.index')->with('error', 'Nenhuma rota foi encontrada, sentimos muito.');
-        }
     }
 
     public function rotas(Request $request): \Illuminate\Contracts\View\View
     {
         $rotasEncontradas = $request->session()->get('rotasEncontradas');
-        $rotasEncontradas = Rota::paginate(10, $rotasEncontradas);
 
         # Retornar a view das rotas com as rotas recebidas no parâmetro
         return view ('Usuario.rotas', compact('rotasEncontradas'));
