@@ -4,27 +4,31 @@
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
           <li class="nav-item">
-            <a class="nav-link text-white" href="{{ route('auth.login') }}">Login</a>
+            <a class="nav-link text-white" href="{{ route('user.login') }}">Login Usuario</a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link text-white" href="{{ route('auth.storeRegister') }}">Cadastro</a>
+            <a class="nav-link text-white" href="{{ route('user.create') }}">Cadastro Usuario</a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link text-white" href="{{ route('auth.alert') }}">Aviso</a>
+            <a class="nav-link text-white" href="{{ route('company.login') }}">Login Empresa</a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link text-white" href="{{ route('search.index') }}">Busca</a>
+            <a class="nav-link text-white" href="{{ route('user.alert') }}">Aviso</a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link text-white" href="{{ route('search.rotas') }}">Rotas</a>
+            <a class="nav-link text-white" href="{{ route('route.index') }}">Busca</a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link text-white" href="{{ route('feedback.index') }}">Feedback</a>
+            <a class="nav-link text-white" href="{{ route('route.rotas') }}">Rotas</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link text-white" href="{{ route('feedback.create') }}">Feedback</a>
           </li>
 
           <li class="nav-item">
@@ -32,7 +36,7 @@
           </li>
 
           <li class="nav-item">
-            <a class="nav-link text-white" href="{{ route('auth.logout') }}">Sair</a>
+            <a class="nav-link text-white" href="{{ route('user.logout') }}">Sair</a>
           </li>
 
         </ul>

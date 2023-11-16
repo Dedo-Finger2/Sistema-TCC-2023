@@ -11,7 +11,7 @@
         <a href="{{ route('feedback.index') }}">Quero dar meu feedback.</a>
     @endif
 
-    <form action="{{ route('search.buscar') }}" method="POST">
+    <form action="{{ route('route.search') }}" method="POST">
         @csrf
 
         <label for="destino">Destino:</label>

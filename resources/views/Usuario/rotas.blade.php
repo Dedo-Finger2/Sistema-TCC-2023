@@ -45,7 +45,7 @@
         </div>
     </main>
 
-    <a href="{{ route('feedback.index') }}">Quero dar meu feedback.</a>
+    <a href="{{ route('feedback.create') }}">Quero dar meu feedback.</a>
 
     @include('Componentes.footer')
 

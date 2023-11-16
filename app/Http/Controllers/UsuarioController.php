@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Endereco;
 use App\Models\Usuario;
+use App\Models\Endereco;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Traits\AutenticacaoTrait;
 
-class AuthController extends Controller
+class UsuarioController extends Controller
 {
+    use AutenticacaoTrait;
 
     public function create(): \Illuminate\Contracts\View\View
     {
@@ -53,44 +54,5 @@ class AuthController extends Controller
             # Retornar para o cadastro com uma mensagem de feedback
         var_dump($request->all());
         return redirect()->route('auth.alert')->with('sucess', 'Usuario cadastrado com sucesso');
-    }
-
-    public function login(Request $request): \Illuminate\Contracts\View\View
-    {
-        # Retornar a tela de login de usuários
-        return view("login");
-    }
-
-    public function storeLogin(Request $request)
-    {
-        # Pegar os dados vindos do formulário de login
-        # Validar os dados
-        # Se forem válidos
-            # Validar se houve uma tentativa de validação
-                # Criar uma nova sessão pro usuário cadastrado
-                # Redirecionar ele de forma "intended" para a tela de busca de rotas
-        # Se não forem válidos
-            # Retornar para o login com uma mensagem de feedback
-
-        $credentials = $request->only('email', 'senha');
-
-        if (Auth::authenticate($credentials)) {
-
-            #cria uma sessão de login
-            $request->session()->regenerate();
-
-            return redirect()->route('auth.alert');
-
-        }else {
-            return back()->with('error', 'Email ou senha incorretas');
-        }
-    }
-
-    public function logout(Request $request)
-    {
-        # Des-autenticar o usuário
-        # Invalidar a sessão dele
-        # Criar outro token para o navegador do usuário
-        # Redirecionar o usuário para a tela de login
     }
 }

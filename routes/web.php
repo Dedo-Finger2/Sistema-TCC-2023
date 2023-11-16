@@ -2,7 +2,11 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DataController;
+use App\Http\Controllers\EmpresaController;
+use App\Http\Controllers\FeedbackController;
+use App\Http\Controllers\RotaController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\UsuarioController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -72,19 +76,28 @@ Route::get('/rotasTeste', function () {
 */
 
 // TODO: Adicionar o middleware de auth nas rotas
-Route::get('/cadastro', [AuthController::class,'create'])->name('auth.register');
-Route::post('/cadastro', [AuthController::class,'store'])->name('auth.storeRegister');
-Route::get('/aviso', [AuthController::class,'alert'])->name('auth.alert');
-Route::get('/login', [AuthController::class,'login'])->name('auth.login');
-Route::post('/login', [AuthController::class,'storeLogin'])->name('auth.storeLogin');
-Route::get('/logout', [AuthController::class,'logout'])->name('auth.logout');
+Route::get('/cadastro', [UsuarioController::class,'create'])->name('user.create');
+Route::post('/cadastro', [UsuarioController::class,'store'])->name('user.store');
+Route::get('/aviso', [UsuarioController::class,'alert'])->name('user.alert');
+
+// Auth User
+Route::get('/login', [UsuarioController::class,'login'])->name('user.login');
+Route::post('/login', [UsuarioController::class,'auth'])->name('user.auth');
+Route::get('/logout', [UsuarioController::class,'logout'])->name('user.logout');
+
+// Auth Company
+Route::get('/loginEmpresa', [EmpresaController::class,'login'])->name('company.login');
+Route::post('/loginEmpresa', [EmpresaController::class,'auth'])->name('company.auth');
+Route::get('/logoutEmpresa', [EmpresaController::class,'logout'])->name('company.logout');
 
 // Rotas
-Route::get('/busca', [SearchController::class,'index'])->name('search.index');
-Route::post('/busca', [SearchController::class,'search'])->name('search.buscar');
-Route::get('/rotas', [SearchController::class, 'rotas'])->name('search.rotas');
-Route::get('/feedback', [SearchController::class, 'feedback'])->name('feedback.index');
-Route::post('/feedback', [SearchController::class, 'storeFeedback'])->name('feedback.store');
+Route::get('/busca', [RotaController::class,'showSearchForm'])->name('route.index');
+Route::post('/busca', [RotaController::class,'searchRoutes'])->name('route.search');
+Route::get('/rotas', [RotaController::class, 'showRoutes'])->name('route.rotas');
+
+// Feedback
+Route::get('/feedback', [FeedbackController::class, 'create'])->name('feedback.create');
+Route::post('/feedback', [FeedbackController::class, 'store'])->name('feedback.store');
 
 // Admin
 Route::get('/admin', [DataController::class, 'index'])->name('admin.index');

@@ -5,7 +5,7 @@
 {{-- Sessão onde vai ser colocado todo o conteúdo do body desta página --}}
 @section('content')
 
-    <h1>Tela de Login de Usuário</h1>
+    <h1>Tela de Login de Empresa</h1>
 
     {{-- Colocar mensagem à esquerda do formulário seguindo o layout no Figma --}}
 
@@ -16,7 +16,7 @@
     @endif
 
 
-    <form action="{{ route('auth.storeLogin') }}" method="POST" name="login">
+    <form action="{{ route('company.auth') }}" method="POST" name="login">
         @csrf
         <label for="email">E-mail:</label>
         <input type="email" id="email" name="email"><br>
@@ -26,7 +26,5 @@
 
         <input type="submit" value="Login">
     </form>
-
-    <p>Não tem uma conta? <a href="{{ route('auth.register') }}">Cadastre-se aqui</a>.</p>
 
 @endsection
