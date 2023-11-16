@@ -22,7 +22,7 @@
         <input type="email" id="email" name="email"><br>
 
         <label for="senha">Senha:</label>
-        <input type="password" id="senha" name="password"><br>
+        <input type="password" id="senha" name="senha"><br>
 
         <input type="submit" value="Login">
     </form>

@@ -52,7 +52,7 @@ class AuthController extends Controller
         # Se não forem válidos
             # Retornar para o cadastro com uma mensagem de feedback
         var_dump($request->all());
-        return redirect()->route('auth.alert')->with('success', 'Usuario cadaastrado com sucesso');
+        return redirect()->route('auth.alert')->with('sucess', 'Usuario cadastrado com sucesso');
     }
 
     public function login(Request $request): \Illuminate\Contracts\View\View
@@ -71,6 +71,19 @@ class AuthController extends Controller
                 # Redirecionar ele de forma "intended" para a tela de busca de rotas
         # Se não forem válidos
             # Retornar para o login com uma mensagem de feedback
+
+        $credentials = $request->only('email', 'senha');
+
+        if (Auth::authenticate($credentials)) {
+
+            #cria uma sessão de login
+            $request->session()->regenerate();
+
+            return redirect()->route('auth.alert');
+
+        }else {
+            return back()->with('error', 'Email ou senha incorretas');
+        }
     }
 
     public function logout(Request $request)
