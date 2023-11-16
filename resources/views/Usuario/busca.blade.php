@@ -28,7 +28,7 @@
             @endforeach
         </select><br>
 
-
-
+        <input type="submit" value="Buscar">
+    </form>
         @include('Componentes.footer')
     @endsection

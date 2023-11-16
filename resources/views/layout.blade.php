@@ -15,6 +15,7 @@
 
         <!-- CSS da aplicação -->
         <link rel="stylesheet" href="../css/app.css">
+        <link rel="stylesheet" href="../css/base.css">
 
         <!-- javascript da aplicação -->
         <script src="/js/"></script>

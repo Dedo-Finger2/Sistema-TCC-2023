@@ -4,12 +4,11 @@
 
 {{-- Sessão onde vai ser colocado todo o conteúdo do body desta página --}}
 @section('content')
-
     <main class="mb-5">
         <section class="py-2 text-center container">
             <div class="row py-lg-5">
                 <div class="col-lg-6 col-md-8 mx-auto">
-                    <h1 class="fw-light">Listagem de Rotas</h1>
+                    <h1 class="fw-bold text-success">Listagem de Rotas</h1>
                     <p class="lead text-body-secondary">Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat
                         ducimus qui, expedita esse illum magni. Ut aperiam unde officia molestiae, minus beatae quia
                         recusandae ullam repudiandae! Aut impedit blanditiis perspiciatis corrupti vero voluptatibus
