@@ -12,18 +12,6 @@
         height: 50%;
     }
 
-    .card {
-        width: 50%;
-        display: flex;
-        margin-top: 10%;
-        /* Adicione outras propriedades de estilo conforme necessário para o seu layout */
-    }
-
-
-    .mb-3{
-        margin-left: 5%;
-    }
-
     .form-select{
         width: 50%;
     }

@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 use App\Models\OrigemUsuario;
 use App\Models\LocalRequisitado;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class SearchController extends Controller
 {
@@ -26,54 +28,46 @@ class SearchController extends Controller
 
     public function search(Request $request)
     {
-        # Pegar os dados vindos da tela de busca (2 ID endereço, um pra origem e outro pra destino)
-        $origemRequisitada = $request->all()['origemRequisitado'];
-        $destinoRequisitado = $request->all()['destinoRequisitado'];
-        # Fazer uma busca no banco de dados usando os IDs recebidos
-        $rotasEncontradas = Rota::where('id_volta_onibus', $origemRequisitada)
-            ->where('id_ida_onibus', $destinoRequisitado)
-            ->with('idaOnibus')
+        # Coletar o ID da origem requisitada pelo usuário
+        $origemRequisitada = $request->origemRequisitado;
+        # Coletar o ID do destino requisitado pelo usuário
+        $destinoRequisitado = $request->destinoRequisitado;
+
+        # Ativar permissão de usar o group by em colunas que não usam funções como SUM e COUNT
+        DB::statement("SET sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))");
+
+        # Coletar os IDs das voltasOnibus que possuem o endereço de origem requisitado pelo usuário
+        $voltasOnibus = VoltaOnibus::where('id_endereco', $origemRequisitada)
+        ->get()
+        ->pluck('id_volta_onibus');
+
+        # Coletar os IDs das idasOnibus que possuem o endereço de destino requisitado pelo usuário
+        $idasOnibus = IdaOnibus::where('id_endereco', $destinoRequisitado)
+            ->get()
+            ->pluck('id_ida_onibus');
+
+        # Coletar as rotas que possuem algum ID de volta e ida Onibus coletada acima
+        # Agrupar a query pela volta e ida onibus para eliminar duplicadas
+        $rotasEncontradas = Rota::whereIn('id_volta_onibus', $voltasOnibus)
+            ->whereIn('id_ida_onibus', $idasOnibus)
+            ->groupBy('id_volta_onibus')
+            ->groupBy('id_ida_onibus')
             ->get();
-        # Se retornou alguma rota
-        if (count($rotasEncontradas) != 0) {
-            # Cadastrar uma nova requisição com "retorno_requisicao" sendo true
-            $requisicao = new Requisicao;
-            $requisicao->id_usuario = 1;
-            $requisicao->data_hora = date('Y-m-d H:i');
-            $requisicao->retorno_requisicao = true;
-            $requisicao->save();
 
-            # Cadastrar um novo registro em OrigemUsuario cadastrando o ID da origem
-            $origemUsuario = new OrigemUsuario;
-            $origemUsuario->id_usuario = 1;
-            $origemUsuario->id_local_requisitado = $destinoRequisitado;
-            $origemUsuario->id_requisicao = $requisicao->id_requisicao;
-            $origemUsuario->id_endereco = $origemRequisitada;
-            $origemUsuario->nome = null;
-            $origemUsuario->save();
+        # Cadastrar nova requisição
+        # Cadastrar nova origem usuario
+        # Cadastrar novo local requisitado
 
-            # Cadastrar um novo registro em LocalRequisitado cadastrando o ID do destino
-            $localRequisitado = new LocalRequisitado;
-            $localRequisitado->id_endereco = $destinoRequisitado;
-            $localRequisitado->nome = null;
-            $localRequisitado->save();
+        // echo "Origem: $origemRequisitada";
+        // var_dump($voltasOnibus);
+        // echo "<br>Destino: $destinoRequisitado";
+        // var_dump($idasOnibus);
 
-            # Retornar a view de rotas com o array de rotas que foram retornadas
-            return redirect()->route('search.rotas')->with('rotasEncontradas', $rotasEncontradas);
-        }
-        else {
-            var_dump([$origemRequisitada, $destinoRequisitado]);
-            var_dump($rotasEncontradas);
-            # Se não retornou nada
-                # Cadastrar uma nova requisição com "retorno_requisicao" sendo false
-                # Cadastrar um novo registro em OrigemUsuario
-                    # Cadastrar o nome da origem digitada pelo usuário caso ela não exista no banco
-                    # Cadastrar o ID da origem selecionada caso ela exista no banco
-                # Cadastrar um novo registro em LocalRequisitado cadastrando o ID do destino
-                    # Cadastrar o nome do destino digitado pelo usuário caso ele não exista no banco
-                    # Cadastrar o ID do destino selecionado caso ele exista no banco
-                # Redirecionar o usuário para tela de busca com uma mensagem de feedback
-        }
+        // foreach ($rotasEncontradas as $rota) {
+        //     echo $rota->id_rota . "<br>";
+        // }
+        // exit();
+        return redirect()->route('search.rotas')->with('rotasEncontradas', $rotasEncontradas);
     }
 
     public function rotas(Request $request): \Illuminate\Contracts\View\View

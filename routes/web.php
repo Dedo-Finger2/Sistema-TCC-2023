@@ -20,33 +20,37 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/login', function () {
-    return view('login');
+Route::get('/rotasTeste', function () {
+    return view('Usuario.telas finais.rotas');
 });
 
-Route::get('/aviso', function () {
-    return view('Usuario.aviso');
-});
+// Route::get('/login', function () {
+//     return view('login');
+// });
 
-Route::get('/cadastro', function () {
-    return view('Usuario.cadastro');
-});
+// Route::get('/aviso', function () {
+//     return view('Usuario.aviso');
+// });
 
-Route::get('/rotas', function () {
-    return view('Usuario.rotas');
-});
+// Route::get('/cadastro', function () {
+//     return view('Usuario.cadastro');
+// });
 
-Route::get('/feedback', function () {
-    return view('Usuario.feedback');
-});
+// Route::get('/rotas', function () {
+//     return view('Usuario.rotas');
+// });
 
-Route::get('/busca', function () {
-    return view('Usuario.busca');
-});
+// Route::get('/feedback', function () {
+//     return view('Usuario.feedback');
+// });
 
-Route::get('/admin', function () {
-    return view('Empresa.painelControle');
-});
+// Route::get('/busca', function () {
+//     return view('Usuario.busca');
+// });
+
+// Route::get('/admin', function () {
+//     return view('Empresa.painelControle');
+// });
 
 
 /*
