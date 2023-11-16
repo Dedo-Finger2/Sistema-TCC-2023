@@ -9,10 +9,13 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
+
     public function create(): \Illuminate\Contracts\View\View
     {
-        # Retornar a tela de cadastro de usuários
-        return view("Usuario.cadastro");
+        # Retornar a tela de cadastro de usuários com os bairros disponiveis no banco
+        $bairros = Endereco::all();
+
+        return view('Usuario.cadastro', compact('bairros'));
     }
 
     public function alert(): \Illuminate\Contracts\View\View
@@ -30,9 +33,26 @@ class AuthController extends Controller
             # Cadastrar novo usuário no banco
             # Logar o usuário com autenticação auth()->login($obj)
             # Enviar usuário para a tela de busca de rotas com uma mensagem de feedback
+
+        $validatedData = $request->validate([
+            'nome' => 'required',
+            'email' => 'required|email',
+            'senha' => 'required',
+            'id_endereco' => 'required'
+        ]);
+
+        $usuario = new Usuario;
+
+        $usuario->nome = $validatedData['nome'];
+        $usuario->email = $validatedData['email'];
+        $usuario->senha = $validatedData['senha'];
+        $usuario->id_endereco = $validatedData['id_endereco'];
+
+        $usuario->save();
         # Se não forem válidos
             # Retornar para o cadastro com uma mensagem de feedback
         var_dump($request->all());
+        return redirect()->route('auth.alert')->with('sucess', 'Usuario cadastrado com sucesso');
     }
 
     public function login(Request $request): \Illuminate\Contracts\View\View
@@ -51,6 +71,19 @@ class AuthController extends Controller
                 # Redirecionar ele de forma "intended" para a tela de busca de rotas
         # Se não forem válidos
             # Retornar para o login com uma mensagem de feedback
+
+        $credentials = $request->only('email', 'senha');
+
+        if (Auth::authenticate($credentials)) {
+
+            #cria uma sessão de login
+            $request->session()->regenerate();
+
+            return redirect()->route('auth.alert');
+
+        }else {
+            return back()->with('error', 'Email ou senha incorretas');
+        }
     }
 
     public function logout(Request $request)
