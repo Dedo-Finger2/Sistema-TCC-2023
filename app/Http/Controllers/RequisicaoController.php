@@ -9,6 +9,6 @@ class RequisicaoController extends Controller implements ICriacaoParalela
 {
     public function parallelStore(array $data)
     {
-        # Code ...
+        
     }
 }

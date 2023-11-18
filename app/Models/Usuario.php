@@ -9,15 +9,16 @@ class Usuario extends Authenticatable
 {
     use HasFactory;
 
-    public $primaryKey = 'id_usuario';
-
     public $timestamps = false;
 
-    public $fillable = [
+    protected $fillable = [
         'id_endereco',
         'nome',
         'email',
         'senha',
+    ];
+
+    protected $hidden = [
         '_token',
     ];
 

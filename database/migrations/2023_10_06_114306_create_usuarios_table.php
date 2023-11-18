@@ -26,7 +26,7 @@ return new class extends Migration
             $table->string('email', 255)->nullable(false)->unique();  // Email do usuário
             $table->string('senha')->nullable(false);             // Senha do usuário
             $table->rememberToken();
-            $table->string('_token');
+            $table->string('_token')->nullable();
 
             $table->foreign('id_endereco')->references('id_endereco')->on('enderecos'); // Referenciando a chave estrangeira
         });
