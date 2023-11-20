@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="resources/img/Logo-TCC.jpeg" alt="Exemplo imagem" style="width: 200px;">
+    <img src="resources/imgs/logo_tcc.jpeg" alt="Exemplo imagem" style="width: 200px;">
 </p>
 
 <h1 align="center">Melhoria na gestão de transporte público</h1>
