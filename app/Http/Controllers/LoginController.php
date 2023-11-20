@@ -21,7 +21,7 @@ class LoginController extends Controller
 
         if (Auth::guard('web')->attempt($data)) {
             $request->session()->regenerate();
-            return redirect()->intended(route("users.index"));
+            return redirect()->intended(route("routes.searchRoutes"));
         } elseif (Auth::guard('admin')->attempt($data)) {
             $request->session()->regenerate();
             return redirect()->intended(route("companies.dashboard"));
