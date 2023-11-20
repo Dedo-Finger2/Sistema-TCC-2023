@@ -4,37 +4,26 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Feedback extends Model
 {
     use HasFactory;
 
-    // Configurando o model
-
-    public $table = "feedbacks";
-
-    public $timestamps = false;
-
-    /**
-     * lista com os nomes das colunas na migration
-     * OBS averiguar colunas na migration feedback
-     */
-    public $fillable = [
+    protected $fillable = [
         'comentario',
         'data',
         'feedback',
-        'id_usuario',
+        'user_id',
     ];
 
-    public function usuario()
+    public function user()
     {
-        return $this->belongsTo(Usuario::class, 'id_usuario');
+        return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function requisicao()
+    public function request()
     {
-        return $this->hasOne(Requisicao::class, 'id_feedback');
+        return $this->hasOne(Request::class, 'feedback_id');
     }
 
 }

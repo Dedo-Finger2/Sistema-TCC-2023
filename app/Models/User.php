@@ -12,18 +12,16 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    // mudar o nome da tabela
-    protected $table = "usuarios";
-
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'nome',
         'email',
         'password',
+        'address_id',
     ];
 
     /**
@@ -45,4 +43,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function address()
+    {
+        return $this->hasMany(Address::class, 'address_id', 'id');
+    }
 }

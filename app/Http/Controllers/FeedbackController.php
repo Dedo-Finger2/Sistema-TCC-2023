@@ -5,11 +5,12 @@ namespace App\Http\Controllers;
 use App\Interfaces\ICriacaoParalela;
 use Illuminate\Http\Request;
 
+
 class FeedbackController extends Controller implements ICriacaoParalela
 {
     public function create()
     {
-        return view("Usuario.feedback");
+        return view("User.feedback");
     }
 
     public function store(Request $request)

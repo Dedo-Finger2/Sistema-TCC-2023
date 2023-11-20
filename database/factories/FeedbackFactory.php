@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Models\Usuario;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -27,7 +27,7 @@ class FeedbackFactory extends Factory
         | Modelo::all() - Pega todas as linhas da tabela que o modelo representa
         | pluck('id') - Pega apenas o ID de todos os dados da tabela
         */
-        $idUsuairos = Usuario::all()->pluck('id_usuario');
+        $idUsuairos = User::all()->pluck("id");
 
         return [
             /*
@@ -45,7 +45,7 @@ class FeedbackFactory extends Factory
             'comentario' => $this->faker->paragraph(1),
             'data' => $this->faker->date(),
             'feedback' => $this->faker->boolean(50),
-            'id_usuario' => $this->faker->randomElement($idUsuairos),
+            'user_id' => $this->faker->randomElement($idUsuairos),
         ];
     }
 }
