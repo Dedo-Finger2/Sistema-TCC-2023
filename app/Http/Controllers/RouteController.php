@@ -10,7 +10,13 @@ use Illuminate\Support\Facades\DB;
 
 class RouteController extends Controller
 {
-    public function showSearchForm()
+
+    /**
+     * Método responsável por mostrar a tela de busca de rotas.
+     *
+     * @return \Illuminate\Contracts\View\View
+     */
+    public function showSearchForm(): \Illuminate\Contracts\View\View
     {
         $busOutbounds = BusOutbound::with('address')->get();
         $busInbounds = BusInbound::with('address')->get();
@@ -18,7 +24,15 @@ class RouteController extends Controller
         return view('User.search', compact('busOutbounds', 'busInbounds'));
     }
 
-    public function searchRoutes(Request $request)
+
+    /**
+     * Método responsável por buscar as rotas no banco com base nos dados da requisição
+     * do usuário.
+     *
+     * @param Request $request - Objeto do tipo Request que contém todas as informações que você precisa.
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function searchRoutes(Request $request): \Illuminate\Http\RedirectResponse
     {
         # Coletar o ID da origem requisitada pelo usuário
         $requestedBusOutbound = intval($request->busOutbound);
@@ -58,7 +72,14 @@ class RouteController extends Controller
         return redirect()->route('routes.showRoutes')->with('routesFound', $routesFound);
     }
 
-    public function showRoutes(Request $request)
+
+    /**
+     * Método responsável por mostrar as rotas que foram encontradas com o método acima.
+     *
+     * @param Request $request - Objeto do tipo Request que contém todas as informações que você precisa.
+     * @return \Illuminate\Contracts\View\View
+     */
+    public function showRoutes(Request $request): \Illuminate\Contracts\View\View
     {
         $routesFound = $request->session()->get('routesFound');
 
@@ -66,6 +87,14 @@ class RouteController extends Controller
         return view('User.routes', compact('routesFound'));
     }
 
+
+    /**
+     * Método responsável por mostrar os detalhes das rotas ao clicar nelas. Mostrando assim o itinerário
+     * que aquela rota compoem.
+     *
+     * @param Request $request - Objeto do tipo Request que contém todas as informações que você precisa.
+     * @return void
+     */
     public function viewRouteDetails(Request $request)
     {
         # ...

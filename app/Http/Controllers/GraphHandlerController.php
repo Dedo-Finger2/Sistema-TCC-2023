@@ -6,7 +6,13 @@ use Illuminate\Http\Request;
 
 class GraphHandlerController extends Controller
 {
-    public function index()
+
+    /**
+     * Método responsável por retornar a tela de Dashboard das empresas.
+     *
+     * @return \Illuminate\Contracts\View\View
+     */
+    public function index(): \Illuminate\Contracts\View\View
     {
         return view("Empresa.painelControle");
     }

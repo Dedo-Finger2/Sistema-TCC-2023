@@ -35,14 +35,28 @@ class UserController extends Controller
         return view("User.index", compact("users", "feedbacks", "addresses", "companies", "itineraries", "busOutbounds", "routes", "requestedLocations", "buses", "busInbounds", "requests"));
     }
 
-    public function create(Request $request)
+
+    /**
+     * Método responsável por mostrar a tela de cadastro de novos usuários.
+     *
+     * @param Request $request - Objeto do tipo Request que contém todas as informações que você precisa.
+     * @return \Illuminate\Contracts\View\View
+     */
+    public function create(Request $request): \Illuminate\Contracts\View\View
     {
         $addresses = Address::all();
 
         return view("User.create", compact('addresses'));
     }
 
-    public function store(Request $request)
+
+    /**
+     * Método responsável por persistir os dados do formulário de cadastro do banco de dados.
+     *
+     * @param Request $request - Objeto do tipo Request que contém todas as informações que você precisa.
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function store(Request $request): \Illuminate\Http\RedirectResponse
     {
         $user = $request->all();
         $user['password'] = bcrypt($request->password);
@@ -53,7 +67,14 @@ class UserController extends Controller
         return redirect()->route('routes.showSearchForm');
     }
 
-    public function alert()
+
+    /**
+     * Método responsável por mostrar a tela de alerta para o usuário antes
+     * dele poder ir para a tela de busca de rotas.
+     *
+     * @return \Illuminate\Contracts\View\View
+     */
+    public function alert(): \Illuminate\Contracts\View\View
     {
         return view('User.alert');
     }
