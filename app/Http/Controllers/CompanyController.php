@@ -42,7 +42,7 @@ class CompanyController extends Controller
      * @param Request $request - Objeto do tipo Request que contém todas as informações que você precisa.
      * @return void
      */
-    public function store(Request $request): void
+    public function store(Request $request)
     {
         $company = $request->all();
         $company['password'] = bcrypt($request->password);
