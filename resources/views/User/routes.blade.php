@@ -6,6 +6,7 @@
 @section('content')
 
     <main class="mb-5">
+
         <section class="py-2 text-center container">
             <div class="row py-lg-5">
                 <div class="col-lg-6 col-md-8 mx-auto">
@@ -19,23 +20,32 @@
             </div>
             <hr>
         </section>
-
-        <div class="modal fade modal-dialog modal-dialog-centere" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h1 class="modal-title fs-2 text-center" id="exampleModalLabel">Itinerário</h1>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        @if (session('warn'))
+            <div class="alert alert-warning container w-25 text-center" role="alert">
+                <div>
+                    <h2 class="text-center alert-heading">Aviso!</h2>
                 </div>
-                <div class="modal-body">
-                    Dados aqui...
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Fechar</button>
-                </div>
-              </div>
+                <p>{{ session('warn') }}</p>
+                <a href="{{ route('feedback.create') }}">Quero dar meu feedback!</a>
             </div>
-          </div>
+        @endif
+        <div class="modal fade modal-dialog modal-dialog-centere" id="exampleModal" tabindex="-1"
+            aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-2 text-center" id="exampleModalLabel">Itinerário</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Dados aqui...
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Fechar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <div class="album py-5 bg-body-tertiary">
             <div class="container">
@@ -54,8 +64,8 @@
                                             {{ $route->busOutbound->address->bairro }}</h4>
                                         <br>
                                         <div class="d-flex justify-content-between align-items-center">
-                                            <button type="button" class="btn btn-outline-success w-100" data-bs-toggle="modal"
-                                                data-bs-target="#exampleModal">View</button>
+                                            <button type="button" class="btn btn-outline-success w-100"
+                                                data-bs-toggle="modal" data-bs-target="#exampleModal">View</button>
                                         </div>
                                     </div>
                                 </div>
@@ -63,7 +73,8 @@
                         @endforeach
                     @else
                         <div class="container">
-                            <p class="fs-2 text-center">Nenhuma rota encontrada. Busque uma clicando neste <a href="{{ route('routes.showSearchForm') }}">link</a></p>
+                            <p class="fs-2 text-center">Nenhuma rota encontrada. Busque uma clicando neste <a
+                                    href="{{ route('routes.showSearchForm') }}">link</a></p>
                         </div>
                     @endif
                 </div>
