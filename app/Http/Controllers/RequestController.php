@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
 use Illuminate\Http\Request;
+use App\Models\Request as RequestModel;
 use App\Interfaces\ICriacaoParalela;
 
 class RequestController extends Controller implements ICriacaoParalela
@@ -14,10 +16,27 @@ class RequestController extends Controller implements ICriacaoParalela
      *
      * @param array $data - Dados que virão de outros métodos que vão precisar fazer a criação de uma nova instância
      *                      desse modelo no banco de dados.
-     * @return void
      */
-    public function parallelStore(array $data)
+    public static function parallelStore(array $data)
     {
-        # code...
+        $userId     = $data['user_id'    ] ?? null;
+        $feedbackId = $data['feedback_id'] ?? null;
+        $dataHora   = $data['data_hora'  ] ?? null;
+        $retorno    = $data['retorno'    ] ?? null;
+
+        $request = new RequestModel;
+
+        $request->user_id            = $userId    ;
+        $request->feedback_id        = $feedbackId;
+        $request->data_hora          = $dataHora  ;
+        $request->retorno_requisicao = $retorno   ;
+
+        try {
+            $request->save();
+
+            return $request;
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
     }
 }
