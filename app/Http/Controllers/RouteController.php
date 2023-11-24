@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\BusInbound;
 use App\Models\BusOutbound;
 use App\Models\Route;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -34,42 +35,97 @@ class RouteController extends Controller
      */
     public function searchRoutes(Request $request): \Illuminate\Http\RedirectResponse
     {
-        # Coletar o ID da origem requisitada pelo usuário
+        # Coletar o ID do endereço da origem requisitada pelo usuário
         $requestedBusOutbound = intval($request->busOutbound);
-        # Coletar o ID do destino requisitado pelo usuário
+        # Coletar o ID do endereço do destino requisitado pelo usuário
         $requestedBusInbound = intval($request->busInbound);
 
-        # Ativar permissão de usar o group by em colunas que não usam funções como SUM e COUNT
-        DB::statement("SET sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))");
+        // * Coletar os IDs das idasOnibus (destino) que possuem o endereço de destino requisitado pelo usuário
+        $busOutbounds = $this->getOutbounds($requestedBusOutbound);
 
-        # Coletar os IDs das voltasOnibus que possuem o endereço de origem requisitado pelo usuário
-        $busInbounds = BusInbound::where('address_id', $requestedBusInbound)
-            ->get()
-            ->pluck('id');
+        # Se não achar um destino, então nem precisa fazer a busca
+        if (!$busOutbounds) {
+            return redirect()->back()->with('error', 'Nenhuma rota foi encontrada com o destino requisitado. Sua requisição foi registrada para futuras melhorias no transporte público.');
+        }
 
-        # Coletar os IDs das idasOnibus que possuem o endereço de destino requisitado pelo usuário
-        $busOutbounds = BusOutbound::where('address_id', $requestedBusOutbound)
-            ->get()
-            ->pluck('id');
+        # Coletar os IDs das voltasOnibus (origem) que possuem o endereço de origem requisitado pelo usuário
+        $busInbounds = $this->getInbounds($requestedBusInbound);
+
+        # Se não há origem, buscar sem usar origem e retornar um aviso na tela de resultados
+        if (!$busInbounds && count($this->serachWithoutOrigin($busOutbounds)) > 0) {
+            $routesFound = $this->serachWithoutOrigin($busOutbounds);
+
+            return redirect()->route('routes.showRoutes')->with('routesFound', $routesFound)->with('warn', 'Não foi encontrado rotas que partem da sua origem.');
+        }
 
         # Coletar as rotas que possuem algum ID de volta e ida Onibus coletada acima
         # Agrupar a query pela volta e ida onibus para eliminar duplicadas
+        $routesFound = $this->serachWithOrigin($busInbounds, $busOutbounds);
+
+        # Se ao menos uma rota, então retorne ela para a tela de resultados. Senão, retorne um erro na tela de busca para o usuário
+        if ($routesFound) return redirect()->route('routes.showRoutes')->with('routesFound', $routesFound);
+        else return redirect()->back()->with('error', 'Não foram encontradas rotas. Sua requisição foi armazenada para futuras melhoras na gestão de transporte público.');
+    }
+
+
+    private function serachWithOrigin($busInbounds, $busOutbounds)
+    {
+        # Ativar permissão de usar o group by em colunas que não usam funções como SUM e COUNT
+        DB::statement("SET sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))");
+
         $routesFound = Route::whereIn('bus_inbound_id', $busInbounds)
-            ->whereIn('bus_outbound_id', $busOutbounds)
-            ->groupBy('bus_inbound_id')
-            ->groupBy('bus_outbound_id')
-            ->get();
+        ->whereIn('bus_outbound_id', $busOutbounds)
+        ->groupBy('bus_inbound_id')
+        ->groupBy('bus_outbound_id')
+        ->get();
 
-        // echo "Origem: $requestedBusInbound";
-        // var_dump($busInbounds);
-        // echo "<br>Destino: $requestedBusOutbound";
-        // var_dump($busOutbounds);
+        if (count($routesFound) > 0) return $routesFound;
+        else return false;
+    }
 
-        // foreach ($routesFound as $route) {
-        //     echo $route->id . "<br>";
-        // }
-        // exit();
-        return redirect()->route('routes.showRoutes')->with('routesFound', $routesFound);
+    private function serachWithoutOrigin($busOutbounds)
+    {
+        # Ativar permissão de usar o group by em colunas que não usam funções como SUM e COUNT
+        DB::statement("SET sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))");
+
+        $routesFound = Route::whereIn('bus_outbound_id', $busOutbounds)
+        ->groupBy('bus_outbound_id')
+        ->get();
+
+        if (count($routesFound) > 0) return $routesFound;
+        else return false;
+    }
+
+
+    private function getOutbounds(int $requested_address_id): \Illuminate\Support\Collection|bool
+    {
+        $foundOutbounds = BusOutbound::where('address_id', $requested_address_id)
+        ->get()
+        ->pluck('id');
+
+        if (count($foundOutbounds) > 0) return $foundOutbounds;
+        else return false;
+    }
+
+
+    private function getInbounds(int $requested_address_id): \Illuminate\Support\Collection|bool
+    {
+        $foundInbounds = BusInbound::where('address_id', $requested_address_id)
+        ->get()
+        ->pluck('id');
+
+        if (count($foundInbounds) > 0) return $foundInbounds;
+        else return false;
+    }
+
+    /**
+     * TODO: Implementar
+     *
+     * @return void
+     */
+    private function registerFullRequest()
+    {
+
     }
 
 
