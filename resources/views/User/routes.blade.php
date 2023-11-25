@@ -38,7 +38,8 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        Dados aqui...
+                        Id rota: <input type="text" disabled id="id-route"><br>
+                        Id bus outbound: <input type="text" disabled id="bus-outbound-id">
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Fechar</button>
@@ -65,7 +66,8 @@
                                         <br>
                                         <div class="d-flex justify-content-between align-items-center">
                                             <button type="button" class="btn btn-outline-success w-100"
-                                                data-bs-toggle="modal" data-bs-target="#exampleModal">View</button>
+                                                data-bs-toggle="modal" id="view-button" data-bs-target="#exampleModal"
+                                                value="{{ $route->id }}">View</button>
                                         </div>
                                     </div>
                                 </div>
@@ -89,9 +91,27 @@
         const myModal = document.getElementById('myModal')
         const myInput = document.getElementById('myInput')
 
-        myModal.addEventListener('shown.bs.modal', () => {
-            myInput.focus()
-        })
+        $(document).on('click', '#view-button', function () {
+            var id = $(this).val();
+            // alert(teste);
+
+            $.ajax({
+                type: "GET",
+                url: "/routes/" + id,
+                data: "data",
+                dataType: "",
+                success: function(response) {
+                    // console.log(response.route.id);
+                    $("#id-route").val(response.route.id);
+                    $("#bus-outbound-id").val(response.route.bus_outbound_id);
+                }
+            });
+
+        });
+
+        // myModal.addEventListener('shown.bs.modal', () => {
+        //     myInput.focus(),
+        // })
     </script>
 
 @endsection

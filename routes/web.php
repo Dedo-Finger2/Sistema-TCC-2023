@@ -51,3 +51,4 @@ Route::get('/dashboard2',[GraphHandlerController::class, 'index'])->name('compan
 Route::get('/search', [RouteController::class,'showSearchForm'])->name('routes.showSearchForm')->middleware('sharedAuth');
 Route::post('/search', [RouteController::class,'searchRoutes'])->name('routes.searchRoutes')->middleware('sharedAuth');
 Route::get('/routes', [RouteController::class,'showRoutes'])->name('routes.showRoutes')->middleware('sharedAuth');
+Route::get('/routes/{id}', [RouteController::class,'viewRouteDetails'])->name('routes.view')->middleware('sharedAuth');

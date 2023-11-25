@@ -482,10 +482,14 @@ class RouteController extends Controller
      * que aquela rota compoem.
      * TODO: Não está implementado ainda
      * @param Request $request - Objeto do tipo Request que contém todas as informações que você precisa.
-     * @return void
      */
-    public function viewRouteDetails(Request $request)
+    public function viewRouteDetails(int $id)
     {
-        # ...
+        $route = Route::find($id);
+
+        return response()->json([
+            'status' => 200,
+            'route' => $route,
+        ]);
     }
 }
