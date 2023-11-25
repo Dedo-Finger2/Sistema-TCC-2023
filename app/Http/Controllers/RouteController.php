@@ -40,12 +40,14 @@ class RouteController extends Controller
         # Coletar o ID do endereço do destino requisitado pelo usuário
         $requestedBusInbound = intval($request->busInbound);
 
-        // * Coletar os IDs das idasOnibus (destino) que possuem o endereço de destino requisitado pelo usuário
+        // Coletar os IDs das idasOnibus (destino) que possuem o endereço de destino requisitado pelo usuário
         $busOutbounds = $this->getOutbounds($requestedBusOutbound);
 
         # Se não achar um destino, então nem precisa fazer a busca
         if (!$busOutbounds) {
-            return redirect()->back()->with('error', 'Nenhuma rota foi encontrada com o destino requisitado. Sua requisição foi registrada para futuras melhorias no transporte público.');
+            return redirect()
+                ->back()
+                ->with('error', 'Nenhuma rota foi encontrada com o destino requisitado. Sua requisição foi registrada para futuras melhorias no transporte público.');
         }
 
         # Coletar os IDs das voltasOnibus (origem) que possuem o endereço de origem requisitado pelo usuário
@@ -55,7 +57,10 @@ class RouteController extends Controller
         if (!$busInbounds && count($this->serachWithoutOrigin($busOutbounds)) > 0) {
             $routesFound = $this->serachWithoutOrigin($busOutbounds);
 
-            return redirect()->route('routes.showRoutes')->with('routesFound', $routesFound)->with('warn', 'Não foi encontrado rotas que partem da sua origem.');
+            return redirect()
+                ->route('routes.showRoutes')
+                ->with('routesFound', $routesFound)
+                ->with('warn', 'Não foi encontrado rotas que partem da sua origem.');
         }
 
         # Coletar as rotas que possuem algum ID de volta e ida Onibus coletada acima
@@ -63,8 +68,16 @@ class RouteController extends Controller
         $routesFound = $this->serachWithOrigin($busInbounds, $busOutbounds);
 
         # Se ao menos uma rota, então retorne ela para a tela de resultados. Senão, retorne um erro na tela de busca para o usuário
-        if ($routesFound) return redirect()->route('routes.showRoutes')->with('routesFound', $routesFound);
-        else return redirect()->back()->with('error', 'Não foram encontradas rotas. Sua requisição foi armazenada para futuras melhoras na gestão de transporte público.');
+        if ($routesFound) {
+            $this->registerFullRequest();
+
+            return redirect()
+                ->route('routes.showRoutes')
+                ->with('routesFound', $routesFound);
+        }
+        else return redirect()
+                ->back()
+                ->with('error', 'Não foram encontradas rotas. Sua requisição foi armazenada para futuras melhoras na gestão de transporte público.');
     }
 
 
@@ -125,7 +138,67 @@ class RouteController extends Controller
      */
     private function registerFullRequest()
     {
+        date_default_timezone_set('America/Sao_Paulo');
 
+        # Registrar uma nova requisição
+        $newRequest = RequestController::parallelStore(
+            [
+                'user_id'     => auth()->id(),
+                'feedback_id' => null,
+                'data_hora'   => date('Y-m-d H:i:s'),
+                'retorno'     => true,
+            ]
+        );
+
+        session()->put('request_id', $newRequest->getAttributeValue('id'));
+
+        # Registrar um novo local requisitado
+        # Registrar uma nova origem requistiada
+    }
+
+    private function registerNoOriginRequest()
+    {
+        # Registrar uma nova requisição
+        $newRequest = RequestController::parallelStore(
+            [
+                'user_id'     => auth()->id(),
+                'feedback_id' => null,
+                'data_hora'   => date('Y-m-d H:i:s'),
+                'retorno'     => true,
+            ]
+        );
+        # Registrar um novo local requisitado
+        # Registrar uma nova origem requistiada
+    }
+
+    private function registerNoDestinyRequest()
+    {
+        # Registrar uma nova requisição
+        $newRequest = RequestController::parallelStore(
+            [
+                'user_id'     => auth()->id(),
+                'feedback_id' => null,
+                'data_hora'   => date('Y-m-d H:i:s'),
+                'retorno'     => false,
+            ]
+        );
+        # Registrar um novo local requisitado
+        # Registrar uma nova origem requistiada
+    }
+
+    private function registerNoRouteRequest()
+    {
+        # Registrar uma nova requisição
+        $newRequest = RequestController::parallelStore(
+            [
+                'user_id'     => auth()->id(),
+                'feedback_id' => null,
+                'data_hora'   => date('Y-m-d H:i:s'),
+                'retorno'     => false,
+            ]
+        );
+        # Registrar um novo local requisitado
+        # Registrar uma nova origem requistiada
     }
 
 

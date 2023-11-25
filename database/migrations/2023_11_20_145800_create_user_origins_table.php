@@ -21,7 +21,7 @@ return new class extends Migration {
             $table->foreignId('requested_location_id')->constrained('requested_locations');
             $table->foreignId('request_id')->constrained('requests');
             $table->foreignId('user_id')->constrained('users');
-            $table->foreignId('address_id')->constrained('addresses');
+            $table->foreignId('address_id')->constrained('addresses')->nullable(true);
             $table->string('nome', 150)->nullable(true);
             $table->timestamps();
         });
