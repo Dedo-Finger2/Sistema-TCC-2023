@@ -19,7 +19,7 @@ return new class extends Migration {
         Schema::create('requests', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users');
-            $table->foreignId('feedback_id')->nullable()->constrained('feedback');
+            $table->foreignId('feedback_id')->nullable(true)->constrained('feedback');
             $table->dateTime('data_hora')->nullable(false);
             $table->boolean('retorno_requisicao')->nullable(false);
             $table->timestamps();
