@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\BusInbound;
 use App\Models\BusOutbound;
+use App\Models\RequestedLocation;
 use App\Models\Route;
+use App\Models\UserOrigin;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -36,15 +38,17 @@ class RouteController extends Controller
     public function searchRoutes(Request $request): \Illuminate\Http\RedirectResponse
     {
         # Coletar o ID do endereço da origem requisitada pelo usuário
-        $requestedBusOutbound = intval($request->busOutbound);
+        $requestedBusOutbound = $this->returnIntOrString($request->busOutbound);
         # Coletar o ID do endereço do destino requisitado pelo usuário
-        $requestedBusInbound = intval($request->busInbound);
+        $requestedBusInbound = $this->returnIntOrString($request->busInbound);
 
         // Coletar os IDs das idasOnibus (destino) que possuem o endereço de destino requisitado pelo usuário
         $busOutbounds = $this->getOutbounds($requestedBusOutbound);
 
         # Se não achar um destino, então nem precisa fazer a busca
         if (!$busOutbounds) {
+            $this->registerNoDestinyRequest();
+
             return redirect()
                 ->back()
                 ->with('error', 'Nenhuma rota foi encontrada com o destino requisitado. Sua requisição foi registrada para futuras melhorias no transporte público.');
@@ -56,6 +60,8 @@ class RouteController extends Controller
         # Se não há origem, buscar sem usar origem e retornar um aviso na tela de resultados
         if (!$busInbounds && count($this->serachWithoutOrigin($busOutbounds)) > 0) {
             $routesFound = $this->serachWithoutOrigin($busOutbounds);
+
+            $this->registerNoOriginRequest($requestedBusOutbound, $requestedBusInbound);
 
             return redirect()
                 ->route('routes.showRoutes')
@@ -69,15 +75,19 @@ class RouteController extends Controller
 
         # Se ao menos uma rota, então retorne ela para a tela de resultados. Senão, retorne um erro na tela de busca para o usuário
         if ($routesFound) {
-            $this->registerFullRequest();
+            $this->registerFullRequest($requestedBusOutbound, $requestedBusInbound);
 
             return redirect()
                 ->route('routes.showRoutes')
                 ->with('routesFound', $routesFound);
         }
-        else return redirect()
+        else {
+            $this->registerNoRouteRequest();
+
+            return redirect()
                 ->back()
                 ->with('error', 'Não foram encontradas rotas. Sua requisição foi armazenada para futuras melhoras na gestão de transporte público.');
+        }
     }
 
 
@@ -110,8 +120,10 @@ class RouteController extends Controller
     }
 
 
-    private function getOutbounds(int $requested_address_id): \Illuminate\Support\Collection|bool
+    private function getOutbounds(int|string $requested_address_id)
     {
+        if (!is_numeric($requested_address_id)) return null;
+
         $foundOutbounds = BusOutbound::where('address_id', $requested_address_id)
         ->get()
         ->pluck('id');
@@ -121,8 +133,10 @@ class RouteController extends Controller
     }
 
 
-    private function getInbounds(int $requested_address_id): \Illuminate\Support\Collection|bool
+    private function getInbounds(int|string $requested_address_id)
     {
+        if (!is_numeric($requested_address_id)) return null;
+
         $foundInbounds = BusInbound::where('address_id', $requested_address_id)
         ->get()
         ->pluck('id');
@@ -132,11 +146,10 @@ class RouteController extends Controller
     }
 
     /**
-     * TODO: Implementar
      *
      * @return void
      */
-    private function registerFullRequest()
+    private function registerFullRequest(int $outbound_id, int $inbound_id)
     {
         date_default_timezone_set('America/Sao_Paulo');
 
@@ -153,10 +166,30 @@ class RouteController extends Controller
         session()->put('request_id', $newRequest->getAttributeValue('id'));
 
         # Registrar um novo local requisitado
+        $requestedLocationName = RequestedLocation::where('id', $outbound_id)->first()->getAttributeValue('nome');
+        $newRequestedLocation = RequestedLocationController::parallelStore(
+            [
+                'nome' => $requestedLocationName,
+                'address_id' => $outbound_id,
+            ]
+        );
+
         # Registrar uma nova origem requistiada
+        $userOriginName = UserOrigin::where('id', $inbound_id)->first()->getAttributeValue('nome');
+        UserOriginController::parallelStore(
+            [
+                'nome' => $userOriginName,
+                'address_id' => $inbound_id,
+                'requested_location_id' => $newRequestedLocation->getAttributeValue('id'),
+                'user_id' => auth()->id(),
+                'request_id' => $newRequest->id,
+            ]
+        );
+
     }
 
-    private function registerNoOriginRequest()
+    // TODO: NÃO ESTÁ CADASTRANDO A ORIGEM, O NOME DO DESTINO ESTÁ VINDO ERRADO MAS ESTÁ CADASTRANDO
+    private function registerNoOriginRequest(int|string $outbound_id, int|string $inbound_id)
     {
         # Registrar uma nova requisição
         $newRequest = RequestController::parallelStore(
@@ -167,8 +200,28 @@ class RouteController extends Controller
                 'retorno'     => true,
             ]
         );
+
+        session()->put('request_id', $newRequest->getAttributeValue('id'));
+
         # Registrar um novo local requisitado
+        $requestedLocationName = RequestedLocation::where('id', $outbound_id)->first()->getAttributeValue('nome');
+        $newRequestedLocation = RequestedLocationController::parallelStore(
+            [
+                'nome' => $requestedLocationName,
+                'address_id' => $outbound_id,
+            ]
+        );
+
         # Registrar uma nova origem requistiada
+        $newUserOrigin = UserOriginController::parallelStore(
+            [
+                'nome' => $inbound_id,
+                'address_id' => null,
+                'requested_location_id' => $newRequestedLocation->getAttributeValue('id'),
+                'user_id' => auth()->id(),
+                'request_id' => $newRequest->getAttributeValue('id'),
+            ]
+        );
     }
 
     private function registerNoDestinyRequest()
@@ -182,6 +235,9 @@ class RouteController extends Controller
                 'retorno'     => false,
             ]
         );
+
+        session()->put('request_id', $newRequest->getAttributeValue('id'));
+
         # Registrar um novo local requisitado
         # Registrar uma nova origem requistiada
     }
@@ -201,6 +257,13 @@ class RouteController extends Controller
         # Registrar uma nova origem requistiada
     }
 
+
+    private function returnIntOrString(mixed $data)
+    {
+        if ( is_null   ($data)) return null         ;
+        if ( is_numeric($data)) return intval($data);
+        if (!is_numeric($data)) return $data        ;
+    }
 
     /**
      * Método responsável por mostrar as rotas que foram encontradas com o método acima.
