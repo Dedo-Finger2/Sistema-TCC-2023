@@ -472,6 +472,7 @@ class RouteController extends Controller
         # Pegando as rotas da sessão que foram enviadas pelos métodos acima
         $routesFound = $request->session()->get('routesFound');
 
+
         # Retornar a view das rotas com as rotas recebidas no parâmetro
         return view('User.routes', compact('routesFound'));
     }
@@ -480,7 +481,7 @@ class RouteController extends Controller
     /**
      * Método responsável por mostrar os detalhes das rotas ao clicar nelas. Mostrando assim o itinerário
      * que aquela rota compoem.
-     * TODO: Não está implementado ainda
+     * TODO: Falta fazer
      * @param Request $request - Objeto do tipo Request que contém todas as informações que você precisa.
      */
     public function viewRouteDetails(int $id)
