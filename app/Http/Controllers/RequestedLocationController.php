@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
 use Illuminate\Http\Request;
+use App\Models\RequestedLocation;
 use App\Interfaces\ICriacaoParalela;
 
 class RequestedLocationController extends Controller implements ICriacaoParalela
@@ -14,10 +16,23 @@ class RequestedLocationController extends Controller implements ICriacaoParalela
      *
      * @param array $data - Dados que virão de outros métodos que vão precisar fazer a criação de uma nova instância
      *                      desse modelo no banco de dados.
-     * @return void
      */
-    public function parallelStore(array $data)
+    public static function parallelStore(array $data)
     {
-        # code...
+        $nome      = $data['nome'       ] ?? null;
+        $addressId = $data['address_id' ] ?? null;
+
+        $requestedLocation = new RequestedLocation;
+
+        $requestedLocation->nome       = $nome      ;
+        $requestedLocation->address_id = $addressId ;
+
+        try {
+            $requestedLocation->save();
+
+            return $requestedLocation;
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
     }
 }
