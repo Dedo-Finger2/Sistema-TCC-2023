@@ -9,22 +9,13 @@
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css">
 <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.bootstrap5.min.css">
 
-
-<!-- TABELA JS -->
-<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-<script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
-<script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
-<script src="https://cdn.datatables.net/responsive/2.5.0/js/responsive.bootstrap5.min.js"></script>
-<script src="/../../js/table.js"></script>
-
 @section('content')
     <h1>Painel Controle</h1>
 
     <!-- Div Container -->
     <div class="container">
         <!-- TABLE HTML -->
-        <table id="example" class="table table-striped nowrap" style="width:100%">
+        <table id="tabelas" class="table table-striped nowrap" style="width:100%">
             <thead>
                 <tr>
                     <th>First name</th>
@@ -669,4 +660,18 @@
             </tbody>
         </table>
     </div>
+
+        <!-- TABELA JS -->
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.5.0/js/responsive.bootstrap5.min.js"></script>
+
+    <script>
+        new DataTable('#tabelas', {
+        responsive: true
+    });
+    </script>
+
 @endsection
