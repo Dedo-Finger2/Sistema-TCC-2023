@@ -46,9 +46,14 @@ Route::get('/registerCompany', [CompanyController::class, 'create'])->name('comp
 Route::post('/registerCompany', [CompanyController::class, 'store'])->name('companies.store')->middleware('admin');
 
 
+<<<<<<< HEAD
 Route::get('/dashboard2',[GraphHandlerController::class, 'index'])->name('companies.dashboard2');
 
+=======
+Route::get('/dashboard2', [GraphHandlerController::class, 'index'])->name('companies.dashboard2');
+>>>>>>> dbb434ec8dac292007379947f905dcafc72f44b5
 // Routes
-Route::get('/search', [RouteController::class,'showSearchForm'])->name('routes.showSearchForm')->middleware('sharedAuth');
-Route::post('/search', [RouteController::class,'searchRoutes'])->name('routes.searchRoutes')->middleware('sharedAuth');
-Route::get('/routes', [RouteController::class,'showRoutes'])->name('routes.showRoutes')->middleware('sharedAuth');
+Route::get('/search', [RouteController::class, 'showSearchForm'])->name('routes.showSearchForm')->middleware('sharedAuth');
+Route::post('/search', [RouteController::class, 'searchRoutes'])->name('routes.searchRoutes')->middleware('sharedAuth');
+Route::get('/routes', [RouteController::class, 'showRoutes'])->name('routes.showRoutes')->middleware('sharedAuth');
+Route::get('/itinerary/{id}', [RouteController::class, 'viewRouteDetails'])->name('routes.view')->middleware('sharedAuth');

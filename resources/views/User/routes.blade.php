@@ -38,7 +38,8 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        Dados aqui...
+                        Id rota: <p id="id-route"></p>
+                        Id bus outbound: <p id="bus-outbound-id"></p>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Fechar</button>
@@ -65,7 +66,8 @@
                                         <br>
                                         <div class="d-flex justify-content-between align-items-center">
                                             <button type="button" class="btn btn-outline-success w-100"
-                                                data-bs-toggle="modal" data-bs-target="#exampleModal">View</button>
+                                                data-bs-toggle="modal" id="view-button" data-bs-target="#exampleModal"
+                                                value="{{ $route->id }}">View</button>
                                         </div>
                                     </div>
                                 </div>
@@ -89,9 +91,25 @@
         const myModal = document.getElementById('myModal')
         const myInput = document.getElementById('myInput')
 
-        myModal.addEventListener('shown.bs.modal', () => {
-            myInput.focus()
-        })
+        $(document).on('click', '#view-button', function () {
+            var id = $(this).val();
+            // alert(teste);
+
+            $.ajax({
+                type: "GET",
+                url: "/itinerary/" + id,
+                success: function(response) {
+                    console.log(response.itinerary);
+                    $("#id-itinerary").text(response.itinerary.id);
+                    $("#bus-outbound-id").text(response.itinerary.bus_outbound_id);
+                }
+            });
+
+        });
+
+        // myModal.addEventListener('shown.bs.modal', () => {
+        //     myInput.focus(),
+        // })
     </script>
 
 @endsection

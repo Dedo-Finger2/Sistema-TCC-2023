@@ -28,8 +28,8 @@ class ItineraryFactory extends Factory
         | Modelo::all() - Pega todas as linhas da tabela que o modelo representa
         | pluck('id') - Pega apenas o ID de todos os dados da tabela
         */
-        $idOnibus = Bus::all()->pluck('id');
-        $idRotas = Route::all()->pluck('id');
+        // $idOnibus = Bus::all()->pluck('id');
+        // $idRotas = Route::all()->pluck('id');
 
         return [
             /*
@@ -43,8 +43,8 @@ class ItineraryFactory extends Factory
             | randomElement() - Pega um item aleatório de um array passado como parâmetro
             */
             'codigo' => $this->faker->numerify("0###-" . $this->faker->streetName()),
-            'bus_id' => $this->faker->randomElement($idOnibus),
-            'route_id' => $this->faker->randomElement($idRotas),
+            // 'bus_id' => $this->faker->randomElement($idOnibus),
+            // 'route_id' => $this->faker->randomElement($idRotas),
         ];
     }
 }

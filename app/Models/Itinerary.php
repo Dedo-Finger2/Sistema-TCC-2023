@@ -11,17 +11,10 @@ class Itinerary extends Model
 
     protected $fillable = [
         'codigo',
-        'bus_id',
-        'route_id',
     ];
-
-    public function buses()
-    {
-        return $this->hasMany(Bus::class, 'id');
-    }
 
     public function routes()
     {
-        return $this->hasMany(Route::class, 'id');
+        return $this->belongsToMany(ItineraryHasRoute::class, 'itinerary_has_routes', 'id' . 'id');
     }
 }

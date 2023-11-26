@@ -30,15 +30,15 @@ class UserOriginController extends Controller implements ICriacaoParalela
         $userOrigin->requested_location_id = $requestedLocationId ;
         $userOrigin->address_id            = $addressId           ;
         $userOrigin->user_id               = $userId              ;
-        $userOrigin->requestId             = $requestId           ;
+        $userOrigin->request_id            = $requestId           ;
         $userOrigin->nome                  = $nome                ;
 
         try {
             $userOrigin->save();
-            dd($userOrigin);
             return $userOrigin;
         } catch (Exception $e) {
             echo $e->getMessage();
+            die();
         }
     }
 }
