@@ -21,11 +21,12 @@ class DatabaseSeeder extends Seeder
         \App\Models\BusOutbound::factory(50)->create();
         \App\Models\BusInbound::factory(50)->create();
         \App\Models\Route::factory(200)->create();
-        \App\Models\Bus::factory(5)->create();
+        // \App\Models\Bus::factory(5)->create();
         \App\Models\Itinerary::factory(50)->create();
         \App\Models\RequestedLocation::factory(10)->create();
         \App\Models\Request::factory(10)->create();
         \App\Models\UserOrigin::factory(10)->create();
+        \App\Models\ItineraryHasRoute::factory(300)->create();
 
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',

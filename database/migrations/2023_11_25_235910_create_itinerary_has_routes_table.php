@@ -10,15 +10,10 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        /*
-        | ------------------------
-        | Tabela de Itinerários
-        | ------------------------
-        | nesta tabela vamos estar armazenando informações sobre os itinerários.
-        */
-        Schema::create('itineraries', function (Blueprint $table) {
+        Schema::create('itinerary_has_routes', function (Blueprint $table) {
             $table->id();
-            $table->string('codigo', 50)->unique()->nullable(false);
+            $table->foreignId('route_id')->constrained('routes');
+            $table->foreignId('itinerary_id')->constrained('itineraries');
             $table->timestamps();
         });
     }
@@ -28,6 +23,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('itineraries');
+        Schema::dropIfExists('itinerary_has_routes');
     }
 };

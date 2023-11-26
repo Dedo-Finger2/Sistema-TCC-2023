@@ -38,8 +38,8 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        Id rota: <input type="text" disabled id="id-route"><br>
-                        Id bus outbound: <input type="text" disabled id="bus-outbound-id">
+                        Id rota: <p id="id-route"></p>
+                        Id bus outbound: <p id="bus-outbound-id"></p>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Fechar</button>
@@ -97,13 +97,11 @@
 
             $.ajax({
                 type: "GET",
-                url: "/routes/" + id,
-                data: "data",
-                dataType: "",
+                url: "/itinerary/" + id,
                 success: function(response) {
-                    // console.log(response.route.id);
-                    $("#id-route").val(response.route.id);
-                    $("#bus-outbound-id").val(response.route.bus_outbound_id);
+                    console.log(response.itinerary);
+                    $("#id-itinerary").text(response.itinerary.id);
+                    $("#bus-outbound-id").text(response.itinerary.bus_outbound_id);
                 }
             });
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\BusInbound;
 use App\Models\BusOutbound;
+use App\Models\Itinerary;
 use App\Models\RequestedLocation;
 use App\Models\Route;
 use App\Models\UserOrigin;
@@ -44,14 +45,14 @@ class RouteController extends Controller
         # Coletar o ID do endereço da origem requisitada pelo usuário
         $requestedBusOutbound = $this->returnIntOrString($request->busOutbound);
         # Coletar o ID do endereço do destino requisitado pelo usuário
-        $requestedBusInbound  = $this->returnIntOrString($request->busInbound);
+        $requestedBusInbound = $this->returnIntOrString($request->busInbound);
 
         // * IDA_ONIBUS & VOLTA_ONIBUS * \\
 
         # Coletar os IDs das idasOnibus (destino) que possuem o endereço de destino requisitado pelo usuário
         $busOutbounds = $this->getOutbounds($requestedBusOutbound);
         # Coletar os IDs das voltasOnibus (origem) que possuem o endereço de origem requisitado pelo usuário
-        $busInbounds  = $this->getInbounds($requestedBusInbound);
+        $busInbounds = $this->getInbounds($requestedBusInbound);
 
         // * CENÁRIOS * \\
 
@@ -99,7 +100,7 @@ class RouteController extends Controller
             return redirect()
                 ->route('routes.showRoutes')
                 ->with('routesFound', $routesFound);
-        }else {
+        } else {
             # Registra toda uma nova requisição (Requisição[0], Origem_Requisitada[null] e Local_Requisitado[null])
             $this->registerNoRouteRequest($requestedBusOutbound, $requestedBusInbound);
 
@@ -124,13 +125,15 @@ class RouteController extends Controller
         DB::statement("SET sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))");
 
         $routesFound = Route::whereIn('bus_inbound_id', $busInbounds)
-        ->whereIn('bus_outbound_id', $busOutbounds)
-        ->groupBy('bus_inbound_id')
-        ->groupBy('bus_outbound_id')
-        ->get();
+            ->whereIn('bus_outbound_id', $busOutbounds)
+            ->groupBy('bus_inbound_id')
+            ->groupBy('bus_outbound_id')
+            ->get();
 
-        if (count($routesFound) > 0) return $routesFound;
-        else                         return false;
+        if (count($routesFound) > 0)
+            return $routesFound;
+        else
+            return false;
     }
 
 
@@ -147,11 +150,13 @@ class RouteController extends Controller
         DB::statement("SET sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))");
 
         $routesFound = Route::whereIn('bus_outbound_id', $busOutbounds)
-        ->groupBy('bus_outbound_id')
-        ->get();
+            ->groupBy('bus_outbound_id')
+            ->get();
 
-        if (count($routesFound) > 0) return $routesFound;
-        else                         return false;
+        if (count($routesFound) > 0)
+            return $routesFound;
+        else
+            return false;
     }
 
 
@@ -163,14 +168,17 @@ class RouteController extends Controller
      */
     private function getOutbounds(int|string $requested_address_id)
     {
-        if (!is_numeric($requested_address_id)) return null;
+        if (!is_numeric($requested_address_id))
+            return null;
 
         $foundOutbounds = BusOutbound::where('address_id', $requested_address_id)
-        ->get()
-        ->pluck('id');
+            ->get()
+            ->pluck('id');
 
-        if (count($foundOutbounds) > 0) return $foundOutbounds;
-        else return false;
+        if (count($foundOutbounds) > 0)
+            return $foundOutbounds;
+        else
+            return false;
     }
 
 
@@ -182,14 +190,17 @@ class RouteController extends Controller
      */
     private function getInbounds(int|string $requested_address_id)
     {
-        if (!is_numeric($requested_address_id)) return null;
+        if (!is_numeric($requested_address_id))
+            return null;
 
         $foundInbounds = BusInbound::where('address_id', $requested_address_id)
-        ->get()
-        ->pluck('id');
+            ->get()
+            ->pluck('id');
 
-        if (count($foundInbounds) > 0) return $foundInbounds;
-        else return false;
+        if (count($foundInbounds) > 0)
+            return $foundInbounds;
+        else
+            return false;
     }
 
 
@@ -210,10 +221,10 @@ class RouteController extends Controller
         # Registrar uma nova requisição com base no cenário atual
         $newRequest = RequestController::parallelStore(
             [
-                'user_id'     => auth()->id(),
+                'user_id' => auth()->id(),
                 'feedback_id' => null,
-                'data_hora'   => date('Y-m-d H:i:s'),
-                'retorno'     => true,
+                'data_hora' => date('Y-m-d H:i:s'),
+                'retorno' => true,
             ]
         );
 
@@ -262,10 +273,10 @@ class RouteController extends Controller
         # Registrar uma nova requisição com base no cenário atual
         $newRequest = RequestController::parallelStore(
             [
-                'user_id'     => auth()->id(),
+                'user_id' => auth()->id(),
                 'feedback_id' => null,
-                'data_hora'   => date('Y-m-d H:i:s'),
-                'retorno'     => true,
+                'data_hora' => date('Y-m-d H:i:s'),
+                'retorno' => true,
             ]
         );
 
@@ -312,10 +323,10 @@ class RouteController extends Controller
         # Registrar uma nova requisição com base no cenário atual
         $newRequest = RequestController::parallelStore(
             [
-                'user_id'     => auth()->id(),
+                'user_id' => auth()->id(),
                 'feedback_id' => null,
-                'data_hora'   => date('Y-m-d H:i:s'),
-                'retorno'     => false,
+                'data_hora' => date('Y-m-d H:i:s'),
+                'retorno' => false,
             ]
         );
 
@@ -362,10 +373,10 @@ class RouteController extends Controller
         # Registrar uma nova requisição com base no cenário atual
         $newRequest = RequestController::parallelStore(
             [
-                'user_id'     => auth()->id(),
+                'user_id' => auth()->id(),
                 'feedback_id' => null,
-                'data_hora'   => date('Y-m-d H:i:s'),
-                'retorno'     => false,
+                'data_hora' => date('Y-m-d H:i:s'),
+                'retorno' => false,
             ]
         );
 
@@ -414,10 +425,10 @@ class RouteController extends Controller
         # Registrar uma nova requisição com base no cenário atual
         $newRequest = RequestController::parallelStore(
             [
-                'user_id'     => auth()->id(),
+                'user_id' => auth()->id(),
                 'feedback_id' => null,
-                'data_hora'   => date('Y-m-d H:i:s'),
-                'retorno'     => false,
+                'data_hora' => date('Y-m-d H:i:s'),
+                'retorno' => false,
             ]
         );
 
@@ -455,9 +466,12 @@ class RouteController extends Controller
      */
     private function returnIntOrString(mixed $data)
     {
-        if ( is_null   ($data)) return null         ;
-        if ( is_numeric($data)) return intval($data);
-        if (!is_numeric($data)) return $data        ;
+        if (is_null($data))
+            return null;
+        if (is_numeric($data))
+            return intval($data);
+        if (!is_numeric($data))
+            return $data;
     }
 
 
@@ -486,11 +500,14 @@ class RouteController extends Controller
      */
     public function viewRouteDetails(int $id)
     {
-        $route = Route::find($id);
+        $itinerary = Itinerary::where('route_id', $id)->get();
+
+        if (count($itinerary) <= 0)
+            $itinerary = null;
 
         return response()->json([
             'status' => 200,
-            'route' => $route,
+            'itinerary' => $itinerary,
         ]);
     }
 }
