@@ -3,7 +3,7 @@
 @section('title', 'Busca por rotas - ???')
 
 @section('content')
-
+    <a href="{{ route('routes.view', ['id' => 3]) }}">Teste view routes</a>
     @if (session('error'))
         <div class="alert alert-danger container w-50 text-center mt-2" role="alert">
             <div>

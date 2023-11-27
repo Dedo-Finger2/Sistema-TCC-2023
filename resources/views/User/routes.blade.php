@@ -29,25 +29,6 @@
                 <a href="{{ route('feedback.create') }}">Quero dar meu feedback!</a>
             </div>
         @endif
-        <div class="modal fade modal-dialog modal-dialog-centere" id="exampleModal" tabindex="-1"
-            aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-2 text-center" id="exampleModalLabel">Itinerário</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        Id rota: <p id="id-route"></p>
-                        Id bus outbound: <p id="bus-outbound-id"></p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Fechar</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <div class="album py-5 bg-body-tertiary">
             <div class="container">
                 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 g-3">
@@ -65,9 +46,7 @@
                                             {{ $route->busOutbound->address->bairro }}</h4>
                                         <br>
                                         <div class="d-flex justify-content-between align-items-center">
-                                            <button type="button" class="btn btn-outline-success w-100"
-                                                data-bs-toggle="modal" id="view-button" data-bs-target="#exampleModal"
-                                                value="{{ $route->id }}">View</button>
+                                            <a href="{{ route('routes.view', ['id' => $route->id]) }}" class="btn btn-outline-success w-100">View</a>
                                         </div>
                                     </div>
                                 </div>
@@ -86,30 +65,4 @@
     </main>
 
     <a href="{{ route('feedback.create') }}">Quero dar meu feedback.</a>
-
-    <script>
-        const myModal = document.getElementById('myModal')
-        const myInput = document.getElementById('myInput')
-
-        $(document).on('click', '#view-button', function () {
-            var id = $(this).val();
-            // alert(teste);
-
-            $.ajax({
-                type: "GET",
-                url: "/itinerary/" + id,
-                success: function(response) {
-                    console.log(response.itinerary);
-                    $("#id-itinerary").text(response.itinerary.id);
-                    $("#bus-outbound-id").text(response.itinerary.bus_outbound_id);
-                }
-            });
-
-        });
-
-        // myModal.addEventListener('shown.bs.modal', () => {
-        //     myInput.focus(),
-        // })
-    </script>
-
 @endsection
