@@ -25,7 +25,7 @@ class GraphHandlerController extends Controller
         $tabelaTreis = $this->getOrigensSemRetorno(); // incompleto
         $tabelaQuatro = $this->getRequisicoesRecentes(); // incompleto
 
-        return view("Company.dashboard2", compact('tabelaUm', 'tabelaDois'));
+        return view("Company.dashboard2", compact('tabelaUm', 'tabelaDois', 'tabelaTreis'));
     }
 
     public function getDestinosComRetorno(
@@ -37,7 +37,7 @@ class GraphHandlerController extends Controller
     {
         $destinosRequisitados = RequestedLocation::select(
             'requested_locations.nome as nome',
-            DB::raw('COUNT(requested_locations.address_id) as total_requisicoes'),
+            DB::raw('COUNT(requested_locations.nome) as total_requisicoes'),
             DB::raw('MAX(requested_locations.created_at) as horario_mais_requisitado')
         )
             ->join('user_origins', 'requested_locations.id', '=', 'user_origins.requested_location_id')
@@ -53,7 +53,7 @@ class GraphHandlerController extends Controller
     {
         $destinosRequisitados = RequestedLocation::select(
             'requested_locations.nome as nome',
-            DB::raw('COUNT(requested_locations.address_id) as total_requisicoes'),
+            DB::raw('COUNT(requested_locations.nome) as total_requisicoes'),
             DB::raw('MAX(requested_locations.created_at) as horario_mais_requisitado')
         )
             ->join('user_origins', 'requested_locations.id', '=', 'user_origins.requested_location_id')
@@ -75,13 +75,15 @@ class GraphHandlerController extends Controller
     {
         $origensRequisitadas = UserOrigin::select(
             'user_origins.nome as nome',
-            DB::raw('COUNT(user_origins.address_id) as total_requisicoes'),
+            DB::raw('COUNT(user_origins.nome) as total_requisicoes'),
             DB::raw('MAX(user_origins.created_at) as horario_mais_requisitado')
         )
             ->join('requests', 'user_origins.request_id', '=', 'requests.id')
             ->groupBy('user_origins.nome')
-            ->where('requests.retorno_requisicao', 1)
+            ->where('requests.retorno_requisicao', 0)
             ->get();
+
+            return $origensRequisitadas;
     }
 
     public function getRequisicoesRecentes(

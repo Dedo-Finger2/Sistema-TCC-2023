@@ -69,6 +69,12 @@
         </table>
     </div>
 
+    @foreach($tabelaTreis as $item)
+        <p>{{ $item->nome }}
+        {{ $item->total_requisicoes }}
+        {{ $item->horario_mais_requisitado }}</p>
+    @endforeach
+
     <div class="container">
         <div class="row">
             <div class="col-md-6">

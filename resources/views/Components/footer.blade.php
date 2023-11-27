@@ -1,5 +1,5 @@
 <footer></footer>
-<footer class="text-center text-white fixed-bottom" style="background-color: #14bd60;">
+<footer class="text-center text-white" style="background-color: #14bd60;">
     <!-- Grid container -->
 
     <!-- Copyright -->
