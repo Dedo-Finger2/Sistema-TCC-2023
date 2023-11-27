@@ -80,11 +80,11 @@
                 <canvas id="origensTop5" style="max-width: 100%; max-height: 300px;"></canvas>
             </div>
             <div class="col-md-6">
-                <h3>Requisições por origem</h3>
+                <h3>Destinos mais requisitados por turno</h3>
                 <canvas id="requisicoesPorOrigem" style="max-width: 100%; max-height: 300px;"></canvas>
             </div>
             <div class="col-md-6">
-                <h3>Destinos mais requisitados por turno</h3>
+                <h3>Requisições por origem</h3>
                 <canvas id="requisicoesPorTurno" style="max-width: 100%; max-height: 300px;"></canvas>
             </div>
         </div>
@@ -114,7 +114,7 @@
             var myChart = new Chart(ctx, {
                 type: 'pie',
                 data: {
-                    labels: ['Categoria 1', 'Categoria 2', 'Categoria 3'],
+                    labels: ['Nova Vitória', 'Jardim Limoeiro', 'Novo Horizonte'],
                     datasets: [{
                         label: 'Exemplo de Gráfico de Pizza',
                         data: [30, 40, 30], // Dados de exemplo (substitua pelos seus dados)
@@ -142,14 +142,14 @@
             var myChart = new Chart(ctx, {
                 type: 'pie',
                 data: {
-                    labels: ['Categoria 1', 'Categoria 2', 'Categoria 3'],
+                    labels: ['Nova Vitória', 'Jardim Limoeiro', 'Novo Horizonte', 'Vila de Abrantes', 'Jaua'],
                     datasets: [{
                         label: 'Exemplo de Gráfico de Pizza',
                         data: [30, 40, 30], // Dados de exemplo (substitua pelos seus dados)
                         backgroundColor: [
                             'rgba(255, 99, 132, 0.6)',
                             'rgba(54, 162, 235, 0.6)',
-                            'rgba(255, 206, 86, 0.6)'
+                            'rgba(255, 206, 86, 0.6)',
                         ],
                         borderColor: [
                             'rgba(255, 99, 132, 1)',
@@ -165,6 +165,7 @@
             });
         });
 
+        // MUDAR PARA GRAFICO DE REQUISIÇÕES POR TURNO
         document.addEventListener('DOMContentLoaded', function() {
             var ctx = document.getElementById('requisicoesPorOrigem').getContext('2d');
             var myChart = new Chart(ctx, {
@@ -173,7 +174,7 @@
                     labels: ['Categoria 1', 'Categoria 2', 'Categoria 3'],
                     datasets: [{
                         label: 'Exemplo de Gráfico de Pizza',
-                        data: [30, 40, 30], // Dados de exemplo (substitua pelos seus dados)
+                        data: [30, 4, 30], // Dados de exemplo (substitua pelos seus dados)
                         backgroundColor: [
                             'rgba(255, 99, 132, 0.6)',
                             'rgba(54, 162, 235, 0.6)',
@@ -193,6 +194,7 @@
             });
         });
 
+        // TROCAR POR DESTINOS MAIS REQUISITADOS POR ORIGEM
         document.addEventListener('DOMContentLoaded', function() {
             var ctx = document.getElementById('requisicoesPorTurno').getContext('2d');
             var myChart = new Chart(ctx, {
