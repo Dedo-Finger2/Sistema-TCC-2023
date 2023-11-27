@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\BusInbound;
 use App\Models\BusOutbound;
 use App\Models\Itinerary;
+use App\Models\ItineraryHasRoute;
 use App\Models\RequestedLocation;
 use App\Models\Route;
 use App\Models\UserOrigin;
@@ -500,14 +501,21 @@ class RouteController extends Controller
      */
     public function viewRouteDetails(int $id)
     {
-        $itinerary = Itinerary::where('route_id', $id)->get();
+        # Pegar todos os itinerários que tem a rota solicitada
+        $itinerarios = Itinerary::whereHas('routes', function ($query) use ($id) {
+            $query->where('routes.id', $id);
+        })->get();
 
-        if (count($itinerary) <= 0)
-            $itinerary = null;
+        # Criar um array associativo de objetos onde a cahve deve ser o código do itinerário e os valores devem ser todas as rotas em objetos que aquele itinerário tem
+        $itinerariosRotas = $itinerarios->mapWithKeys(function ($itinerario) {
+            return [
+                $itinerario->codigo => $itinerario->routes
+            ];
+        });
 
-        return response()->json([
-            'status' => 200,
-            'itinerary' => $itinerary,
+        return view('User.itinerary', [
+            'itinerariosRotas' => $itinerariosRotas,
+            'rotaAtual' => $id,
         ]);
     }
 }

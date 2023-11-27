@@ -15,6 +15,7 @@ class Itinerary extends Model
 
     public function routes()
     {
-        return $this->belongsToMany(ItineraryHasRoute::class, 'itinerary_has_routes', 'id' . 'id');
+        return $this->belongsToMany(Route::class, 'itinerary_has_routes');
     }
+
 }

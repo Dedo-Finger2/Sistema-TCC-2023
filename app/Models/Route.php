@@ -32,7 +32,7 @@ class Route extends Model
 
     public function itineraries()
     {
-        return $this->belongsToMany(ItineraryHasRoute::class, 'itinerary_has_routes', 'id' . 'id');
+        return $this->belongsToMany(Itinerary::class, 'itinerary_has_routes', 'id', 'id');
 
     }
 
