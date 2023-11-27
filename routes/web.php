@@ -45,8 +45,8 @@ Route::get('/dashboard', [CompanyController::class, 'dashboard'])->name('compani
 Route::get('/registerCompany', [CompanyController::class, 'create'])->name('companies.create')->middleware('admin');
 Route::post('/registerCompany', [CompanyController::class, 'store'])->name('companies.store')->middleware('admin');
 
-
 Route::get('/dashboard2', [GraphHandlerController::class, 'index'])->name('companies.dashboard2');
+
 // Routes
 Route::get('/search', [RouteController::class, 'showSearchForm'])->name('routes.showSearchForm')->middleware('sharedAuth');
 Route::post('/search', [RouteController::class, 'searchRoutes'])->name('routes.searchRoutes')->middleware('sharedAuth');
