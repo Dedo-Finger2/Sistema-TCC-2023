@@ -20,25 +20,20 @@ class GraphHandlerController extends Controller
      */
     public function index(): \Illuminate\Contracts\View\View
     {
-        $tabelaUm = $this->getDestinosComRetorno(); // correto
-        $tabelaDois = $this->getDestinosSemRetorno(); // correto
-        $tabelaTreis = $this->getOrigensSemRetorno(); // incompleto
-        $tabelaQuatro = $this->getRequisicoesRecentes(); // incompleto
+        $tabelaUm = $this->getDestinosComRetorno(); // completo
+        $tabelaDois = $this->getDestinosSemRetorno(); // completo
+        $tabelaTreis = $this->getOrigensSemRetorno(); // completo
+        $tabelaQuatro = $this->getRequisicoesRecentes(); // completo
 
-        return view("Company.dashboard2", compact('tabelaUm', 'tabelaDois'));
+        return view("Company.dashboard2", compact('tabelaUm', 'tabelaDois', 'tabelaTreis', 'tabelaQuatro'));
     }
 
-    public function getDestinosComRetorno(
-        /*bool $retorno = false,
-        int $limite = 0,
-        bool $asc = false,
-        string $turno = "all"
-        */)
+    public function getDestinosComRetorno()
     {
         $destinosRequisitados = RequestedLocation::select(
             'requested_locations.nome as nome',
-            DB::raw('COUNT(requested_locations.address_id) as total_requisicoes'),
-            DB::raw('MAX(requested_locations.created_at) as horario_mais_requisitado')
+            DB::raw('COUNT(requested_locations.nome) as total_requisicoes'),
+            DB::raw('MAX(requested_locations.created_at) as horario_mais_recente')
         )
             ->join('user_origins', 'requested_locations.id', '=', 'user_origins.requested_location_id')
             ->join('requests', 'user_origins.request_id', '=', 'requests.id')
@@ -53,8 +48,8 @@ class GraphHandlerController extends Controller
     {
         $destinosRequisitados = RequestedLocation::select(
             'requested_locations.nome as nome',
-            DB::raw('COUNT(requested_locations.address_id) as total_requisicoes'),
-            DB::raw('MAX(requested_locations.created_at) as horario_mais_requisitado')
+            DB::raw('COUNT(requested_locations.nome) as total_requisicoes'),
+            DB::raw('MAX(requested_locations.created_at) as horario_mais_recente')
         )
             ->join('user_origins', 'requested_locations.id', '=', 'user_origins.requested_location_id')
             ->join('requests', 'user_origins.request_id', '=', 'requests.id')
@@ -65,60 +60,41 @@ class GraphHandlerController extends Controller
         return $destinosRequisitados;
     }
 
-
-    public function getOrigensSemRetorno(
-        /*bool $retorno = false,
-        int $limite = 0,
-        bool $asc = false,
-        string $turno = "all"
-        */)
+    public function getOrigensSemRetorno()
     {
         $origensRequisitadas = UserOrigin::select(
             'user_origins.nome as nome',
-            DB::raw('COUNT(user_origins.address_id) as total_requisicoes'),
-            DB::raw('MAX(user_origins.created_at) as horario_mais_requisitado')
+            DB::raw('COUNT(user_origins.nome) as total_requisicoes'),
+            DB::raw('MAX(requests.data_hora) horario_mais_recente')
         )
-            ->join('requests', 'user_origins.request_id', '=', 'requests.id')
-            ->where('requests.retorno_requisicao', true)
-            ->groupBy('user_origins.nome')
-            ->get();
+        ->join('requests', 'user_origins.request_id', '=', 'requests.id')
+        ->where('requests.retorno_requisicao', true)
+        ->groupBy('user_origins.nome' )
+        ->get();
+
+
+            return $origensRequisitadas;
     }
 
-    public function getRequisicoesRecentes(
-        bool $retorno = false,
-        int $limite = 0,
-        bool $asc = false,
-        string $turno = "all"
-    ) {
-        $destinosRequisitados = RequestedLocation::select(
+    public function getRequisicoesRecentes()
+    {
+        $requisicoesRecentes = RequestedLocation::select(
             'requested_locations.nome as nomeDestino',
             'user_origins.nome as nomeOrigem',
             'requests.retorno_requisicao as status',
-            DB::raw('MAX(requests.data_hora) as requisicaoRecente')
+            DB::raw('MAX(requests.data_hora) as horario_mais_recente')
         )
         ->join('user_origins', 'requested_locations.id', '=', 'user_origins.requested_location_id')
         ->join('requests', 'user_origins.request_id', '=', 'requests.id')
-        ->orderBy('requisicaoRecente', 'desc') // Ordena pela data mais recente
+        ->orderBy(DB::raw('MAX(requests.data_hora)'), 'desc') // Ordena pela data mais recente
         ->groupBy('requested_locations.nome', 'user_origins.nome', 'requests.retorno_requisicao')
         ->get();
 
+        return $requisicoesRecentes;
     }
 
-    public function getOrigensRequisicoes(
-        bool $retorno = false,
-        int $limite = 0,
-        bool $asc = false,
-        string $turno = "all"
-    ) {
-        # código...
-    }
-
-    public function getDestinoPorOrigem(
-        bool $retorno = false,
-        int $limite = 0,
-        bool $asc = false,
-        string $turno = "all"
-    ) {
+    public function getDestinoPorOrigem()
+    {
         # código...
     }
 }
