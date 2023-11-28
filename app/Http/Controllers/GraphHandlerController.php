@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Charts\TesteChart;
 use Illuminate\Http\Request;
 use App\Models\RequestedLocation;
 use App\Models\UserOrigin;
@@ -25,7 +26,14 @@ class GraphHandlerController extends Controller
         $tabelaTreis = $this->getOrigensSemRetorno(); // completo
         $tabelaQuatro = $this->getRequisicoesRecentes(); // completo
 
-        return view("Company.dashboard2", compact('tabelaUm', 'tabelaDois', 'tabelaTreis', 'tabelaQuatro'));
+        // Gráfico de teste
+        $chart = new TesteChart;
+        $chart->labels([
+            'Um', 'Dois', 'Tres',
+        ]);
+        $chart->dataset('Dataset1', 'pie', [1,2,3]);
+
+        return view("Company.dashboard2", compact('tabelaUm', 'tabelaDois', 'tabelaTreis', 'tabelaQuatro', 'chart'));
     }
 
     public function getDestinosComRetorno()

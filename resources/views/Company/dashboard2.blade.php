@@ -23,6 +23,12 @@
     <h1>Painel Controle Provisório</h1>
 
     <div class="container">
+
+        <div style="width: 400px">
+            {!! $chart->container() !!}
+        </div>
+
+        {!! $chart->script() !!}
         <!-- TABLE HTML -->
 
         <h2>Tabela um, Destinos mais requisitados com retorno</h2>
