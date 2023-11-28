@@ -5,17 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Itinerary extends Model
+class ItineraryHasRoute extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'codigo',
+        'route_id',
+        'itinerary_id',
     ];
-
-    public function routes()
-    {
-        return $this->belongsToMany(Route::class, 'itinerary_has_routes');
-    }
 
 }

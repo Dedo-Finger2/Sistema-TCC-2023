@@ -19,7 +19,7 @@ return new class extends Migration {
         Schema::create('requested_locations', function (Blueprint $table) {
             $table->id();
             $table->string('nome', 150)->nullable(false);
-            $table->foreignId('address_id')->constrained('addresses');
+            $table->foreignId('address_id')->nullable()->constrained('addresses');
             $table->timestamps();
         });
     }

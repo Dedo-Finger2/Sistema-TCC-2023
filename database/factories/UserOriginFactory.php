@@ -47,7 +47,7 @@ class UserOriginFactory extends Factory
             | name() método que gera nomes aleatorios
             | randomElemnt(ids do Model especifico)
             */
-            'nome' => $this->faker->name(),
+            'nome' => $this->faker->streetName(),
             'address_id' => $this->faker->randomElement($idEnderecos),
             'requested_location_id' => $this->faker->randomElement($idLocaisRequisitados),
             'user_id' => $this->faker->randomElement($idUsuarios),

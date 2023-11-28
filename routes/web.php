@@ -6,6 +6,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RouteController;
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\GraphHandlerController;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,7 +45,10 @@ Route::get('/dashboard', [CompanyController::class, 'dashboard'])->name('compani
 Route::get('/registerCompany', [CompanyController::class, 'create'])->name('companies.create')->middleware('admin');
 Route::post('/registerCompany', [CompanyController::class, 'store'])->name('companies.store')->middleware('admin');
 
+Route::get('/dashboard2', [GraphHandlerController::class, 'index'])->name('companies.dashboard2');
+
 // Routes
-Route::get('/search', [RouteController::class,'showSearchForm'])->name('routes.showSearchForm')->middleware('sharedAuth');
-Route::post('/search', [RouteController::class,'searchRoutes'])->name('routes.searchRoutes')->middleware('sharedAuth');
-Route::get('/routes', [RouteController::class,'showRoutes'])->name('routes.showRoutes')->middleware('sharedAuth');
+Route::get('/search', [RouteController::class, 'showSearchForm'])->name('routes.showSearchForm')->middleware('sharedAuth');
+Route::post('/search', [RouteController::class, 'searchRoutes'])->name('routes.searchRoutes')->middleware('sharedAuth');
+Route::get('/routes', [RouteController::class, 'showRoutes'])->name('routes.showRoutes')->middleware('sharedAuth');
+Route::get('/itinerary/{id}', [RouteController::class, 'viewRouteDetails'])->name('routes.view')->middleware('sharedAuth');

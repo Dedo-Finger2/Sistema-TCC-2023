@@ -3,12 +3,25 @@
 @section('title', 'Busca por rotas - ???')
 
 @section('content')
-
     @if (session('error'))
-        <div>
-            <h2>{{ session('error') }}</h2>
+        <div class="alert alert-danger container w-50 text-center mt-2" role="alert">
+            <div>
+                <h5 class="text-center alert-heading">Oops!</h5>
+                <hr>
+            </div>
+            <p>{{ session('error') }}</p>
+            <a href="{{ route('feedback.create') }}">Quero dar meu feedback!</a>
         </div>
-        <a href="{{ route('feedback.create') }}">Quero dar meu feedback.</a>
+    @endif
+
+    @if (session('success'))
+        <div class="alert alert-success container w-50 text-center mt-2" role="alert">
+            <div>
+                <h5 class="text-center alert-heading">Sucesso!</h5>
+                <hr>
+            </div>
+            <p>{{ session('success') }}</p>
+        </div>
     @endif
 
     <form action="{{ route('routes.searchRoutes') }}" method="POST">

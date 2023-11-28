@@ -30,4 +30,10 @@ class Route extends Model
         return $this->belongsTo(Address::class);
     }
 
+    public function itineraries()
+    {
+        return $this->belongsToMany(Itinerary::class, 'itinerary_has_routes', 'id', 'id');
+
+    }
+
 }
