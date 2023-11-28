@@ -42,8 +42,8 @@ class GraphHandlerController extends Controller
         )
             ->join('user_origins', 'requested_locations.id', '=', 'user_origins.requested_location_id')
             ->join('requests', 'user_origins.request_id', '=', 'requests.id')
+            ->where('requests.retorno_requisicao', true)
             ->groupBy('requested_locations.nome')
-            ->where('requests.retorno_requisicao', 1)
             ->get();
 
         return $destinosRequisitados;
@@ -58,8 +58,8 @@ class GraphHandlerController extends Controller
         )
             ->join('user_origins', 'requested_locations.id', '=', 'user_origins.requested_location_id')
             ->join('requests', 'user_origins.request_id', '=', 'requests.id')
+            ->where('requests.retorno_requisicao', false)
             ->groupBy('requested_locations.nome')
-            ->where('requests.retorno_requisicao', 0)
             ->get();
 
         return $destinosRequisitados;
@@ -79,8 +79,8 @@ class GraphHandlerController extends Controller
             DB::raw('MAX(user_origins.created_at) as horario_mais_requisitado')
         )
             ->join('requests', 'user_origins.request_id', '=', 'requests.id')
+            ->where('requests.retorno_requisicao', true)
             ->groupBy('user_origins.nome')
-            ->where('requests.retorno_requisicao', 1)
             ->get();
     }
 
@@ -98,8 +98,8 @@ class GraphHandlerController extends Controller
         )
         ->join('user_origins', 'requested_locations.id', '=', 'user_origins.requested_location_id')
         ->join('requests', 'user_origins.request_id', '=', 'requests.id')
-        ->groupBy('requested_locations.nome', 'user_origins.nome', 'requests.retorno_requisicao')
         ->orderBy('requisicaoRecente', 'desc') // Ordena pela data mais recente
+        ->groupBy('requested_locations.nome', 'user_origins.nome', 'requests.retorno_requisicao')
         ->get();
 
     }
