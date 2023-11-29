@@ -2,18 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Charts\TesteChart;
-use Illuminate\Http\Request;
-use App\Models\RequestedLocation;
+// Models importadas
+use App\Charts\TopRequisicoesRecentes;
 use App\Models\UserOrigin;
-use Illuminate\Support\Facades\DB;
-use PhpParser\Node\Expr\AssignOp\Coalesce;
+use Illuminate\Http\Request;
 
+// Charts importados
+use App\Charts\topOrigensChart;
+
+use App\Charts\TopDestinosChart;
+use App\Models\RequestedLocation;
+use Illuminate\Support\Facades\DB;
 use function Laravel\Prompts\select;
+use PhpParser\Node\Expr\AssignOp\Coalesce;
 
 class GraphHandlerController extends Controller
 {
-
     /**
      * Método responsável por retornar a tela de Dashboard das empresas.
      *
@@ -26,18 +30,33 @@ class GraphHandlerController extends Controller
         $tabelaTreis = $this->getOrigensSemRetorno(); // completo
         $tabelaQuatro = $this->getRequisicoesRecentes(); // completo
 
-<<<<<<< HEAD
-        return view("Company.dashboard2", compact('tabelaUm', 'tabelaDois', 'tabelaTreis'));
-=======
         // Gráfico de teste
-        $chart = new TesteChart;
+        $chart = new TopDestinosChart;
         $chart->labels([
             'Um', 'Dois', 'Tres',
         ]);
-        $chart->dataset('Dataset1', 'pie', [1,2,3]);
+        $chart->dataset('graficoUm', 'pie', [1,2,3]);
 
-        return view("Company.dashboard2", compact('tabelaUm', 'tabelaDois', 'tabelaTreis', 'tabelaQuatro', 'chart'));
->>>>>>> b04ad7e5890f4a46cad52263c4b81828ba7ca553
+        $chartDois = new TopOrigensChart;
+        $chartDois->labels([
+            'Um', 'Dois', 'Tres',
+        ]);
+        $chartDois->dataset('graficoDois', 'pie', [1,2,3]);
+
+        $chartTreis = new TopRequisicoesRecentes;
+        $chartTreis->labels([
+            'Um', 'Dois', 'Tres',
+        ]);
+        $chartTreis->dataset('graficoDois', 'line', [1,2,3]);
+
+        $chartQuatro = new TopRequisicoesRecentes;
+        $chartQuatro->labels([
+            'Um', 'Dois', 'Tres',
+        ]);
+        $chartQuatro->dataset('graficoDois', 'bar', [1,2,3]);
+
+        return view("Company.dashboard2",
+        compact('tabelaUm', 'tabelaDois', 'tabelaTreis', 'tabelaQuatro', 'chart', 'chartDois', 'chartTreis', 'chartQuatro'));
     }
 
     public function getDestinosComRetorno()
@@ -45,11 +64,7 @@ class GraphHandlerController extends Controller
         $destinosRequisitados = RequestedLocation::select(
             'requested_locations.nome as nome',
             DB::raw('COUNT(requested_locations.nome) as total_requisicoes'),
-<<<<<<< HEAD
-            DB::raw('MAX(requested_locations.created_at) as horario_mais_requisitado')
-=======
             DB::raw('MAX(requested_locations.created_at) as horario_mais_recente')
->>>>>>> b04ad7e5890f4a46cad52263c4b81828ba7ca553
         )
             ->join('user_origins', 'requested_locations.id', '=', 'user_origins.requested_location_id')
             ->join('requests', 'user_origins.request_id', '=', 'requests.id')
@@ -65,11 +80,7 @@ class GraphHandlerController extends Controller
         $destinosRequisitados = RequestedLocation::select(
             'requested_locations.nome as nome',
             DB::raw('COUNT(requested_locations.nome) as total_requisicoes'),
-<<<<<<< HEAD
-            DB::raw('MAX(requested_locations.created_at) as horario_mais_requisitado')
-=======
             DB::raw('MAX(requested_locations.created_at) as horario_mais_recente')
->>>>>>> b04ad7e5890f4a46cad52263c4b81828ba7ca553
         )
             ->join('user_origins', 'requested_locations.id', '=', 'user_origins.requested_location_id')
             ->join('requests', 'user_origins.request_id', '=', 'requests.id')
@@ -85,14 +96,6 @@ class GraphHandlerController extends Controller
         $origensRequisitadas = UserOrigin::select(
             'user_origins.nome as nome',
             DB::raw('COUNT(user_origins.nome) as total_requisicoes'),
-<<<<<<< HEAD
-            DB::raw('MAX(user_origins.created_at) as horario_mais_requisitado')
-        )
-            ->join('requests', 'user_origins.request_id', '=', 'requests.id')
-            ->groupBy('user_origins.nome')
-            ->where('requests.retorno_requisicao', 0)
-            ->get();
-=======
             DB::raw('MAX(requests.data_hora) horario_mais_recente')
         )
         ->join('requests', 'user_origins.request_id', '=', 'requests.id')
@@ -100,7 +103,6 @@ class GraphHandlerController extends Controller
         ->groupBy('user_origins.nome' )
         ->get();
 
->>>>>>> b04ad7e5890f4a46cad52263c4b81828ba7ca553
 
             return $origensRequisitadas;
     }
