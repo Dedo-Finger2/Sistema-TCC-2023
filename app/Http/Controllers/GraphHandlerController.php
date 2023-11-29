@@ -2,18 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Charts\TesteChart;
-use Illuminate\Http\Request;
-use App\Models\RequestedLocation;
+// Models importadas
+use App\Charts\TopRequisicoesRecentes;
 use App\Models\UserOrigin;
-use Illuminate\Support\Facades\DB;
-use PhpParser\Node\Expr\AssignOp\Coalesce;
+use Illuminate\Http\Request;
 
+// Charts importados
+use App\Charts\topOrigensChart;
+
+use App\Charts\TopDestinosChart;
+use App\Models\RequestedLocation;
+use Illuminate\Support\Facades\DB;
 use function Laravel\Prompts\select;
+use PhpParser\Node\Expr\AssignOp\Coalesce;
 
 class GraphHandlerController extends Controller
 {
-
     /**
      * Método responsável por retornar a tela de Dashboard das empresas.
      *
@@ -27,13 +31,32 @@ class GraphHandlerController extends Controller
         $tabelaQuatro = $this->getRequisicoesRecentes(); // completo
 
         // Gráfico de teste
-        $chart = new TesteChart;
+        $chart = new TopDestinosChart;
         $chart->labels([
             'Um', 'Dois', 'Tres',
         ]);
-        $chart->dataset('Dataset1', 'pie', [1,2,3]);
+        $chart->dataset('graficoUm', 'pie', [1,2,3]);
 
-        return view("Company.dashboard2", compact('tabelaUm', 'tabelaDois', 'tabelaTreis', 'tabelaQuatro', 'chart'));
+        $chartDois = new TopOrigensChart;
+        $chartDois->labels([
+            'Um', 'Dois', 'Tres',
+        ]);
+        $chartDois->dataset('graficoDois', 'pie', [1,2,3]);
+
+        $chartTreis = new TopRequisicoesRecentes;
+        $chartTreis->labels([
+            'Um', 'Dois', 'Tres',
+        ]);
+        $chartTreis->dataset('graficoDois', 'line', [1,2,3]);
+
+        $chartQuatro = new TopRequisicoesRecentes;
+        $chartQuatro->labels([
+            'Um', 'Dois', 'Tres',
+        ]);
+        $chartQuatro->dataset('graficoDois', 'bar', [1,2,3]);
+
+        return view("Company.dashboard2",
+        compact('tabelaUm', 'tabelaDois', 'tabelaTreis', 'tabelaQuatro', 'chart', 'chartDois', 'chartTreis', 'chartQuatro'));
     }
 
     public function getDestinosComRetorno()
