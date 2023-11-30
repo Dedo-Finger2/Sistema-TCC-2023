@@ -3,15 +3,17 @@
 namespace App\Http\Controllers;
 
 // Models importadas
-use App\Charts\TopRequisicoesRecentes;
 use App\Models\UserOrigin;
-use Illuminate\Http\Request;
+use App\Models\RequestedLocation;
 
 // Charts importados
-use App\Charts\topOrigensChart;
-
 use App\Charts\TopDestinosChart;
-use App\Models\RequestedLocation;
+use App\Charts\TopOrigensChart;
+use App\Charts\TopRequisicoesPorBairro;
+use App\Charts\TopRequisicoesRecentes;
+
+
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use function Laravel\Prompts\select;
 use PhpParser\Node\Expr\AssignOp\Coalesce;
@@ -25,12 +27,13 @@ class GraphHandlerController extends Controller
      */
     public function index(): \Illuminate\Contracts\View\View
     {
+        // DADOS DAS TABELAS
         $tabelaUm = $this->getDestinosComRetorno(); // completo
         $tabelaDois = $this->getDestinosSemRetorno(); // completo
         $tabelaTreis = $this->getOrigensSemRetorno(); // completo
         $tabelaQuatro = $this->getRequisicoesRecentes(); // completo
 
-        // Gráfico de teste
+        // Gráficos
         $chart = new TopDestinosChart;
         $chart->labels([
             'Um', 'Dois', 'Tres',
@@ -47,16 +50,17 @@ class GraphHandlerController extends Controller
         $chartTreis->labels([
             'Um', 'Dois', 'Tres',
         ]);
-        $chartTreis->dataset('graficoDois', 'line', [1,2,3]);
+        $chartTreis->dataset('graficoTreis', 'line', [1,2,3]);
 
         $chartQuatro = new TopRequisicoesRecentes;
         $chartQuatro->labels([
             'Um', 'Dois', 'Tres',
         ]);
-        $chartQuatro->dataset('graficoDois', 'bar', [1,2,3]);
+        $chartQuatro->dataset('graficoQuatro', 'bar', [1,2,3]);
 
-        return view("Company.dashboard2",
-        compact('tabelaUm', 'tabelaDois', 'tabelaTreis', 'tabelaQuatro', 'chart', 'chartDois', 'chartTreis', 'chartQuatro'));
+        return view("Company.dashboard2", //Retorna a view
+        compact('tabelaUm', 'tabelaDois', 'tabelaTreis', 'tabelaQuatro',  //Retorna os dados das tabelas
+        'chart', 'chartDois', 'chartTreis', 'chartQuatro')); //Retorna os graficos
     }
 
     public function getDestinosComRetorno()

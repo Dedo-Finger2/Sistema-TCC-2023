@@ -92,7 +92,6 @@
         </table>
 
         <h2>Tabela quatro, buscas mais recentes</h2>
-        comite
         <hr>
         <table id="tabela4" class="table table-striped nowrap" style="width:100%">
             <thead>
@@ -104,7 +103,6 @@
                 </tr>
             </thead>
             <tbody>
-
                 @foreach ($tabelaQuatro as $item)
                     <tr>
                         <td>{{ $item->nomeDestino }}</td>
