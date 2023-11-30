@@ -27,7 +27,7 @@ Route::get('/', function () {
 // Auth
 Route::get('/login', [LoginController::class, 'login'])->name('login');
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
-Route::post('/login', [LoginController::class, 'store'])->name('store');
+Route::post('/login', [LoginController::class, 'store'])->name('auth');
 
 // User
 Route::get('/users', [UserController::class, 'index'])->name('users.index')->middleware('sharedAuth');

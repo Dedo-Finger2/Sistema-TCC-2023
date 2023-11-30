@@ -29,7 +29,6 @@ class UserController extends Controller
         $busInbounds = BusInbound::all();
         $routes = Route::all();
         $requestedLocations = RequestedLocation::all();
-        $buses = Bus::all();
         $requests = UserRequest::all();
 
         return view("User.index", compact("users", "feedbacks", "addresses", "companies", "itineraries", "busOutbounds", "routes", "requestedLocations", "buses", "busInbounds", "requests"));

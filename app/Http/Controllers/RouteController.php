@@ -63,7 +63,7 @@ class RouteController extends Controller
 
             return redirect()
                 ->back()
-                ->with('error', 'Nenhuma rota foi encontrada com o destino requisitado. Sua requisição foi registrada para futuras melhorias no transporte público.');
+                ->with('error', 'Nenhuma rota foi encontrada com o destino e origem requisitados. Sua requisição foi registrada para futuras melhorias no transporte público.');
         }
 
         # Cenário 02: Usuário digitou um destino que não existe, mas digitou uma origem que existe
@@ -100,7 +100,8 @@ class RouteController extends Controller
 
             return redirect()
                 ->route('routes.showRoutes')
-                ->with('routesFound', $routesFound);
+                ->with('routesFound', $routesFound)
+                ->with('success', 'Sua requisição foi registrada!');
         } else {
             # Registra toda uma nova requisição (Requisição[0], Origem_Requisitada[null] e Local_Requisitado[null])
             $this->registerNoRouteRequest($requestedBusOutbound, $requestedBusInbound);

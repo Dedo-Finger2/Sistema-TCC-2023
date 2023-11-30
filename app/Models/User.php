@@ -34,8 +34,10 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+
+
     /**
-     * The attributes that should be cast.
+     * Ações que serão tomadas automaticamente para os campos
      *
      * @var array<string, string>
      */
