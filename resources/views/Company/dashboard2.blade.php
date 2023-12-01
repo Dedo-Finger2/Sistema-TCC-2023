@@ -123,7 +123,7 @@
 
                 <label>Top 5 destinos</label>
                 <div style="max-width: 100%; max-height: 300px;">
-                    {!! $chart->container() !!}
+                    {!! $graficoUm->container() !!}
                 </div>
             </div>
 
@@ -190,7 +190,7 @@
             @parent
             <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-            {!! $chart->script() !!}
+            {!! $graficoUm->script() !!}
             {!! $chartDois->script() !!}
             {!! $chartTreis->script() !!}
             {!! $chartQuatro->script() !!}
