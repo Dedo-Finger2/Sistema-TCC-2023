@@ -39,7 +39,7 @@
 
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('logout') }}" class="nav-link text-white">Logout</a>
+                    <a href="{{ route('logout') }}" class="btn btn-danger bg-gradient">Logout</a>
                 </li>
                 <!--FIM DO DROPDOWN-->
             </ul>

@@ -17,9 +17,7 @@ class CompanyController extends Controller
      */
     public function index(): \Illuminate\Contracts\View\View
     {
-        $companies = Company::all();
-
-        return view("Company.index", compact("companies"));
+        return view("Company.index");
     }
 
 
