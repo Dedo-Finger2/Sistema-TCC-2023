@@ -3,16 +3,22 @@
 namespace App\Http\Controllers;
 
 // Models importadas
+
 use App\Charts\TopDestinosOrigemRequisicoes;
 use App\Charts\TopRequisicoesRecentes;
 use App\Models\UserOrigin;
-use Illuminate\Http\Request;
+use App\Models\RequestedLocation;
 
 // Charts importados
-use App\Charts\TopOrigensChart;
 
+use App\Charts\TopOrigensChart;
 use App\Charts\TopDestinosChart;
-use App\Models\RequestedLocation;
+use App\Charts\TopOrigensChart;
+use App\Charts\TopRequisicoesPorBairro;
+use App\Charts\TopRequisicoesRecentes;
+
+
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use function Laravel\Prompts\select;
 use PhpParser\Node\Expr\AssignOp\Coalesce;
@@ -26,36 +32,62 @@ class GraphHandlerController extends Controller
      */
     public function index(): \Illuminate\Contracts\View\View
     {
-        $this->getDestinoPorOrigem();
+        // DADOS DAS TABELAS
+
         $tabelaUm = $this->getDestinosComRetorno(); // completo
         $tabelaDois = $this->getDestinosSemRetorno(); // completo
         $tabelaTreis = $this->getOrigensSemRetorno(); // completo
         $tabelaQuatro = $this->getRequisicoesRecentes(); // completo
 
-        // Gráfico de teste
-        $chart = new TopDestinosChart;
-        $chart->labels([
-            'Um', 'Dois', 'Tres',
-        ]);
-        $chart->dataset('graficoUm', 'pie', [1,2,3]);
+        // DADOS DOS  GRÁFICOS 1
+        $graficoUm = $this->getTop5Destinos();
+        $destinosProcurados = [];
+        $totalBuscas = [];
 
+        foreach ($graficoUm as $dadosGraficos1) {
+            // Adicionando cada nome de destino ao array $destinosProcurados
+            $destinosProcurados[] = $dadosGraficos1->nome_destino;
+
+            // Adicionando cada total de buscas ao array $totalBuscas
+            $totalBuscas[] = $dadosGraficos1->total_requisicoes;
+        }
+
+        // Gráfico 1
+        $chart = new TopDestinosChart;
+        $chart->labels($destinosProcurados);
+        $chart->dataset('Buscas: ', 'pie', $totalBuscas);
+
+
+        // DADOS DO GRAFICO 2
+        $graficoDois = $this->getTop5Origens();
+        $origensBuscadas = [];
+        $totalBuscas = [];
+
+        foreach ($graficoDois as $dadosGraficos2) {
+            // Adicionando cada nome de destino ao array $destinosProcurados
+            $origensBuscadas[] = $dadosGraficos2->nome_origem;
+
+            // Adicionando cada total de buscas ao array $totalBuscas
+            $totalBuscas[] = $dadosGraficos2->total_requisicoes;
+        }
+
+        // Grafico 2
         $chartDois = new TopOrigensChart;
-        $chartDois->labels([
-            'Um', 'Dois', 'Tres',
-        ]);
-        $chartDois->dataset('graficoDois', 'pie', [1,2,3]);
+        $chartDois->labels($origensBuscadas);
+        $chartDois->dataset('Origem da busca: ', 'pie', $totalBuscas);
+
 
         $chartTreis = new TopRequisicoesRecentes;
         $chartTreis->labels([
             'Um', 'Dois', 'Tres',
         ]);
-        $chartTreis->dataset('graficoDois', 'line', [1,2,3]);
+        $chartTreis->dataset('graficoTreis', 'line', [1,2,3]);
 
         $chartQuatro = new TopRequisicoesRecentes;
         $chartQuatro->labels([
             'Um', 'Dois', 'Tres',
         ]);
-        $chartQuatro->dataset('graficoDois', 'bar', [1,2,3]);
+        $chartQuatro->dataset('graficoQuatro', 'bar', [1,2,3]);
 
         // Destinos -> Origem | Total requisições
         $destinoOrigemRequisicoes = new TopDestinosOrigemRequisicoes;
@@ -128,6 +160,33 @@ class GraphHandlerController extends Controller
 
         return $requisicoesRecentes;
     }
+
+    public function getTop5Destinos()
+    {
+        $top5Destinos = RequestedLocation::select(
+            'requested_locations.nome as nome_destino',
+            DB::raw('COUNT(requested_locations.nome) as total_requisicoes'),
+        )
+        ->orderBy(DB::raw('COUNT(requested_locations.nome)'), 'desc', 'limit', '=', 5)
+        ->groupBy('requested_locations.nome')
+        ->take(5)
+        ->get();
+
+        return $top5Destinos;
+    }
+
+    public function getTop5Origens()
+    {
+        $top5Origens = UserOrigin::select(
+            'user_origins.nome as nome_origem',
+            DB::raw('COUNT(user_origins.nome) as total_requisicoes'),
+        )
+        ->orderBy( DB::raw('COUNT(user_origins.nome)'), 'desc', 'limit', '=', 5) // Ordena pela data mais recente
+        ->groupBy('user_origins.nome')
+        ->take(5)
+        ->get();
+
+        return $top5Origens;
 
     // Gráficos
 
