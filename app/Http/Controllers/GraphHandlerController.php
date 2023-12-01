@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 // Models importadas
 
-use App\Charts\TopDestinosOrigemRequisicoes;
-use App\Charts\TopRequisicoesRecentes;
 use App\Models\UserOrigin;
 use App\Models\RequestedLocation;
 
@@ -13,8 +11,8 @@ use App\Models\RequestedLocation;
 
 use App\Charts\TopOrigensChart;
 use App\Charts\TopDestinosChart;
-use App\Charts\TopOrigensChart;
 use App\Charts\TopRequisicoesPorBairro;
+use App\Charts\TopDestinosOrigemRequisicoes;
 use App\Charts\TopRequisicoesRecentes;
 
 
@@ -39,24 +37,8 @@ class GraphHandlerController extends Controller
         $tabelaTreis = $this->getOrigensSemRetorno(); // completo
         $tabelaQuatro = $this->getRequisicoesRecentes(); // completo
 
-        // DADOS DOS  GRÁFICOS 1
-        $graficoUm = $this->getTop5Destinos();
-        $destinosProcurados = [];
-        $totalBuscas = [];
-
-        foreach ($graficoUm as $dadosGraficos1) {
-            // Adicionando cada nome de destino ao array $destinosProcurados
-            $destinosProcurados[] = $dadosGraficos1->nome_destino;
-
-            // Adicionando cada total de buscas ao array $totalBuscas
-            $totalBuscas[] = $dadosGraficos1->total_requisicoes;
-        }
-
         // Gráfico 1
-        $chart = new TopDestinosChart;
-        $chart->labels($destinosProcurados);
-        $chart->dataset('Buscas: ', 'pie', $totalBuscas);
-
+        $graficoUm = new TopDestinosChart;
 
         // DADOS DO GRAFICO 2
         $graficoDois = $this->getTop5Origens();
@@ -81,6 +63,8 @@ class GraphHandlerController extends Controller
         $chartTreis->labels([
             'Um', 'Dois', 'Tres',
         ]);
+
+
         $chartTreis->dataset('graficoTreis', 'line', [1,2,3]);
 
         $chartQuatro = new TopRequisicoesRecentes;
@@ -93,7 +77,7 @@ class GraphHandlerController extends Controller
         $destinoOrigemRequisicoes = new TopDestinosOrigemRequisicoes;
 
         return view("Company.dashboard2",
-        compact('tabelaUm', 'tabelaDois', 'tabelaTreis', 'tabelaQuatro', 'chart', 'chartDois', 'chartTreis', 'chartQuatro', 'destinoOrigemRequisicoes'));
+        compact('tabelaUm', 'tabelaDois', 'tabelaTreis', 'tabelaQuatro', 'graficoUm', 'chartDois', 'chartTreis', 'chartQuatro', 'destinoOrigemRequisicoes'));
     }
 
     public function getDestinosComRetorno()
@@ -161,7 +145,7 @@ class GraphHandlerController extends Controller
         return $requisicoesRecentes;
     }
 
-    public function getTop5Destinos()
+    public static function getTop5Destinos()
     {
         $top5Destinos = RequestedLocation::select(
             'requested_locations.nome as nome_destino',
@@ -170,7 +154,8 @@ class GraphHandlerController extends Controller
         ->orderBy(DB::raw('COUNT(requested_locations.nome)'), 'desc', 'limit', '=', 5)
         ->groupBy('requested_locations.nome')
         ->take(5)
-        ->get();
+        ->get()
+        ->toArray();
 
         return $top5Destinos;
     }
@@ -187,7 +172,7 @@ class GraphHandlerController extends Controller
         ->get();
 
         return $top5Origens;
-
+    }
     // Gráficos
 
     public static function getDestinoPorOrigem()
@@ -215,3 +200,4 @@ class GraphHandlerController extends Controller
         return $data;
     }
 }
+
