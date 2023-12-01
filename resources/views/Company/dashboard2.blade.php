@@ -1,6 +1,6 @@
 @extends('layout') {{-- Buscando o layout padrão e aplicando nesta página --}}
 
-@section('title', 'Painel de controle - ???') {{-- Inserindo o título desta página --}}
+@section('title', 'Painel de controle') {{-- Inserindo o título desta página --}}
 
 {{-- Sessão onde vai ser colocado todo o conteúdo do body desta página --}}
 
@@ -147,6 +147,13 @@
                         {!! $chartQuatro->container() !!}
                     </div>
                 </div>
+                {{-- NEW --}}
+                <div class="col-md-6 mb-5">
+                    <label>Destinos mais requisitados por origem</label>
+                    <div style="width: 80rem; max-height: 600px;">
+                        {!! $destinoOrigemRequisicoes->container() !!}
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -187,4 +194,6 @@
             {!! $chartDois->script() !!}
             {!! $chartTreis->script() !!}
             {!! $chartQuatro->script() !!}
+            {{-- New --}}
+            {!! $destinoOrigemRequisicoes->script() !!}
         @endsection

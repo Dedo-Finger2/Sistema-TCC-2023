@@ -1,6 +1,6 @@
 <!--Arquivo modificado-->
 
-@extends('layoutWithoutNavFooter') {{-- Buscando o layout padrão e aplicando nesta página --}}
+@extends('layout') {{-- Buscando o layout padrão e aplicando nesta página --}}
 
 @section('title', 'Login - ???') {{-- Inserindo o título desta página --}}
 

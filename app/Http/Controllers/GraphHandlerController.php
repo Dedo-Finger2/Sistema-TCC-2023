@@ -3,10 +3,15 @@
 namespace App\Http\Controllers;
 
 // Models importadas
+
+use App\Charts\TopDestinosOrigemRequisicoes;
+use App\Charts\TopRequisicoesRecentes;
 use App\Models\UserOrigin;
 use App\Models\RequestedLocation;
 
 // Charts importados
+
+use App\Charts\TopOrigensChart;
 use App\Charts\TopDestinosChart;
 use App\Charts\TopOrigensChart;
 use App\Charts\TopRequisicoesPorBairro;
@@ -28,6 +33,7 @@ class GraphHandlerController extends Controller
     public function index(): \Illuminate\Contracts\View\View
     {
         // DADOS DAS TABELAS
+
         $tabelaUm = $this->getDestinosComRetorno(); // completo
         $tabelaDois = $this->getDestinosSemRetorno(); // completo
         $tabelaTreis = $this->getOrigensSemRetorno(); // completo
@@ -83,9 +89,11 @@ class GraphHandlerController extends Controller
         ]);
         $chartQuatro->dataset('graficoQuatro', 'bar', [1,2,3]);
 
-        return view("Company.dashboard2", //Retorna a view
-        compact('tabelaUm', 'tabelaDois', 'tabelaTreis', 'tabelaQuatro',  //Retorna os dados das tabelas
-        'chart', 'chartDois', 'chartTreis', 'chartQuatro')); //Retorna os graficos
+        // Destinos -> Origem | Total requisições
+        $destinoOrigemRequisicoes = new TopDestinosOrigemRequisicoes;
+
+        return view("Company.dashboard2",
+        compact('tabelaUm', 'tabelaDois', 'tabelaTreis', 'tabelaQuatro', 'chart', 'chartDois', 'chartTreis', 'chartQuatro', 'destinoOrigemRequisicoes'));
     }
 
     public function getDestinosComRetorno()
@@ -179,6 +187,31 @@ class GraphHandlerController extends Controller
         ->get();
 
         return $top5Origens;
-    }
 
+    // Gráficos
+
+    public static function getDestinoPorOrigem()
+    {
+        $destinosOrigemRequisicoes = UserOrigin::select(
+            'user_origins.nome as nome_origem', 'requested_locations.nome as nome_destino',
+            DB::raw('COUNT(requested_locations.nome) as total_requisicoes'),
+        )
+        ->join('requested_locations', 'user_origins.requested_location_id', '=', 'requested_locations.id')
+        ->orderBy(DB::raw('COUNT(requested_locations.nome)'), 'desc')
+        ->groupBy('user_origins.nome', 'requested_locations.nome' )
+        ->take(5)
+        ->get();
+
+        $data = [];
+
+        foreach ($destinosOrigemRequisicoes as $item) {
+           $data[] = [
+                'nome_origem' => $item->getAttributes()['nome_origem'],
+                'nome_destino' => $item->getAttributes()['nome_destino'],
+                'total_requisicoes' => $item->getAttributes()['total_requisicoes'],
+           ];
+        }
+
+        return $data;
+    }
 }
