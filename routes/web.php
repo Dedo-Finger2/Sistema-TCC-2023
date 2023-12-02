@@ -6,7 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RouteController;
 use App\Http\Controllers\CompanyController;
-use App\Http\Controllers\GraphHandlerController;
+use App\Http\Controllers\DashboardController;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
@@ -45,7 +45,8 @@ Route::get('/dashboard', [CompanyController::class, 'dashboard'])->name('compani
 Route::get('/registerCompany', [CompanyController::class, 'create'])->name('companies.create');
 Route::post('/registerCompany', [CompanyController::class, 'store'])->name('companies.store');
 
-Route::get('/dashboard2', [GraphHandlerController::class, 'index'])->name('companies.dashboard2');
+Route::get('/dashboardTabela', [DashboardController::class, 'tabelas'])->name('companies.dashboardTabela');
+Route::get('/dashboardGraficos', [DashboardController::class, 'graficos'])->name('companies.dashboardGraficos');
 
 // Routes
 Route::get('/search', [RouteController::class, 'showSearchForm'])->name('routes.showSearchForm')->middleware('sharedAuth');

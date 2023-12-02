@@ -3,7 +3,7 @@
 namespace App\Charts;
 
 use ConsoleTVs\Charts\Classes\Chartjs\Chart;
-use App\Http\Controllers\GraphHandlerController;
+use App\Http\Controllers\DashboardController;
 
 class TopOrigensChart extends Chart
 {
@@ -16,7 +16,7 @@ class TopOrigensChart extends Chart
     {
         parent::__construct();
 
-        $data =  GraphHandlerController::getTop5Origens();
+        $data =  DashboardController::getTop5Origens();
 
         $labels = array_map(function($item) {
             return $item['nome_origem'];
