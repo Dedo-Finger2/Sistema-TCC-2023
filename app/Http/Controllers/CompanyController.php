@@ -61,6 +61,6 @@ class CompanyController extends Controller
     {
         $companies = Company::all();
 
-        return view('Company.dashboard', compact('companies'));
+        return view('Company.index', compact('companies'));
     }
 }

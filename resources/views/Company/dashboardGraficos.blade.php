@@ -29,15 +29,14 @@
 
         <div class="row">
             <div class="col-md-6">
-
-                <label>Top 5 destinos</label>
-                <div style="max-width: 100%; max-height: 300px;">
+                <label class="fs-3"  class="fs-3">Top 5 destinos</label>
+                <div class="pl-1" style="max-width: 100%; max-height: 300px;">
                     {!! $graficoUm->container() !!}
                 </div>
             </div>
 
             <div class="col-md-6">
-                <label>Top 5 origens</label>
+                <label class="fs-3"> Top 5 origens</label>
                 <div style="max-width: 100%; max-height: 300px;">
                     {!! $graficoDois->container() !!}
                 </div>
@@ -46,13 +45,13 @@
         </div>
 
         <div class="col-md-6">
-            <label>Requisições por origem</label>
+            <label class="fs-3"> Requisições por origem</label>
             <div style="width: 1200px; max-height: 300px;">
                 {!! $graficoQuatro->container() !!}
             </div>
 
             <div class="col-md-6">
-                <label>Destinos mais requisitados por turno</label>
+                <label class="fs-3">Destinos mais requisitados por turno</label>
                 <div style="width: 1200px; max-height: 300px;">
                     {!! $graficoTreis->container() !!}
                 </div>

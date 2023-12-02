@@ -150,9 +150,9 @@
                             src="https://th.bing.com/th/id/R.fdd177877d3d7628167fde8ba0c8cc7f?rik=EHe5KIBFHl1%2bng&riu=http%3a%2f%2fwww.cen.eu%2fnews%2fbrief-news%2fPublishingImages%2fBusinessMenTalk_Feedback-bubble_Copyright-BoBaa22_shutterstock_190537427.jpg&ehk=fs%2bQbs2oKWGWxtg4XCMpyxVDDAoIbvT0LOSif51Uetc%3d&risl=&pid=ImgRaw&r=0"
                             alt="..." />
                         <div class="card-body p-4">
-                            <a class="text-decoration-none link-dark stretched-link" href="#!">
-                                <h5 class="card-title mb-3">Feedbacks
-                                </h5>
+                            <a class="text-decoration-none link-dark stretched-link"
+                            href="{{ route('companies.dashboardTabela') }}">
+                            <h5 class="card-title mb-3">Feedbacks</h5>
                             </a>
                             <p class="card-text mb-0">Some more quick example text to build on the card title and make up
                                 the bulk of the card's content.</p>
