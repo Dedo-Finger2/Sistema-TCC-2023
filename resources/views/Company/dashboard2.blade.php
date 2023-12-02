@@ -130,70 +130,63 @@
             <div class="col-md-6">
                 <label>Top 5 origens</label>
                 <div style="max-width: 100%; max-height: 300px;">
-                    {!! $chartDois->container() !!}
+                    {!! $graficoDois->container() !!}
                 </div>
             </div>
+
+        </div>
+
+            <div class="col-md-6">
+                <label>Requisições por origem</label>
+                <div style="width: 1200px; max-height: 300px;">
+                    {!! $graficoQuatro->container() !!}
+                </div>
 
                 <div class="col-md-6">
                     <label>Destinos mais requisitados por turno</label>
-                    <div style="max-width: 100%; max-height: 300px;">
-                        {!! $chartTreis->container() !!}
+                    <div style="width: 1200px; max-height: 300px;">
+                        {!! $graficoTreis->container() !!}
                     </div>
-                </div>
-
-                <div class="col-md-6">
-                    <label>Requisições por origem</label>
-                    <div style="max-width: 100%; max-height: 300px;">
-                        {!! $chartQuatro->container() !!}
-                    </div>
-                </div>
-                {{-- NEW --}}
-                <div class="col-md-6 mb-5">
-                    <label>Destinos mais requisitados por origem</label>
-                    <div style="width: 80rem; max-height: 600px;">
-                        {!! $destinoOrigemRequisicoes->container() !!}
-                    </div>
-                </div>
             </div>
         </div>
+    </div>
+    </div>
 
 
-            <!-- Graficos JS -->
-            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Graficos JS -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-            <!-- TABELA JS -->
-            <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-            <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
-            <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
-            <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
-            <script src="https://cdn.datatables.net/responsive/2.5.0/js/responsive.bootstrap5.min.js"></script>
+    <!-- TABELA JS -->
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.5.0/js/responsive.bootstrap5.min.js"></script>
 
-            <script>
-                // --TABELAS--
-                new DataTable('#tabela1', {
-                    responsive: true
-                });
+    <script>
+        // --TABELAS--
+        new DataTable('#tabela1', {
+            responsive: true
+        });
 
-                new DataTable('#tabela2', {
-                    responsive: true
-                });
+        new DataTable('#tabela2', {
+            responsive: true
+        });
 
-                new DataTable('#tabela3', {
-                    responsive: true
-                });
+        new DataTable('#tabela3', {
+            responsive: true
+        });
 
-                new DataTable('#tabela4', {
-                    responsive: true
-                });
-            </script>
+        new DataTable('#tabela4', {
+            responsive: true
+        });
+    </script>
 
-            @parent
-            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    @parent
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-            {!! $graficoUm->script() !!}
-            {!! $chartDois->script() !!}
-            {!! $chartTreis->script() !!}
-            {!! $chartQuatro->script() !!}
-            {{-- New --}}
-            {!! $destinoOrigemRequisicoes->script() !!}
-        @endsection
+    {!! $graficoUm->script() !!}
+    {!! $graficoDois->script() !!}
+    {!! $graficoTreis->script() !!}
+    {!! $graficoQuatro->script() !!}
+@endsection
