@@ -3,7 +3,7 @@
 namespace App\Charts;
 
 use ConsoleTVs\Charts\Classes\Chartjs\Chart;
-use App\Http\Controllers\GraphHandlerController;
+use App\Http\Controllers\DashboardController;
 
 class TopRequisicoesPorTurno extends Chart
 {
@@ -16,7 +16,7 @@ class TopRequisicoesPorTurno extends Chart
     {
         parent::__construct();
 
-        $data = GraphHandlerController::getRequisicoesPorTurno();
+        $data = DashboardController::getRequisicoesPorTurno();
 
         $labels = array_map(function($item) {
             return $item['periodo_do_dia'];

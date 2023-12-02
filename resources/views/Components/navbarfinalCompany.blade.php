@@ -22,10 +22,10 @@
                     <!-- fazendo o dropdown ficar a esquerda-->
                     <ul class="dropdown-menu dropdown-menu-end">
                         <li>
-                            <a href="{{ route('companies.dashboard2') }}" class="dropdown-item">Gráficos</a>
+                            <a href="{{ route('companies.dashboardGraficos') }}" class="dropdown-item">Gráficos</a>
                         </li>
                         <li>
-                            <a href="#" class="dropdown-item">Tabelas</a>
+                            <a href="{{route('companies.dashboardTabela')}}" class="dropdown-item">Tabelas</a>
                         </li>
                         <li>
                             <a href="#" class="dropdown-item">Do</a>

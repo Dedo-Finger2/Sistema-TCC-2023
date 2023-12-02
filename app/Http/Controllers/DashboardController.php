@@ -4,31 +4,32 @@ namespace App\Http\Controllers;
 
 // Models importadas
 
+use App\Models\Feedback;
 use App\Models\UserOrigin;
-use Illuminate\Http\Request;
 use App\Charts\TopOrigensChart;
 
 // Charts importados
 
 use App\Charts\TopDestinosChart;
 use App\Models\RequestedLocation;
-use Illuminate\Support\Facades\DB;
-
-
-use App\Models\Request as Requests;
-use function Laravel\Prompts\select;
 use App\Charts\TopRequisicoesPorTurno;
-use PhpParser\Node\Expr\AssignOp\Coalesce;
 use App\Charts\TopDestinosOrigemRequisicoes;
 
-class GraphHandlerController extends Controller
+
+use function Laravel\Prompts\select;
+use App\Models\Request as Requests;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use PhpParser\Node\Expr\AssignOp\Coalesce;
+
+class DashboardController extends Controller
 {
     /**
      * Método responsável por retornar a tela de Dashboard das empresas.
      *
      * @return \Illuminate\Contracts\View\View
      */
-    public function index(): \Illuminate\Contracts\View\View
+    public function tabelas(): \Illuminate\Contracts\View\View
     {
         // DADOS DAS TABELAS
 
@@ -36,7 +37,14 @@ class GraphHandlerController extends Controller
         $tabelaDois = $this->getDestinosSemRetorno(); // completo
         $tabelaTreis = $this->getOrigensSemRetorno(); // completo
         $tabelaQuatro = $this->getRequisicoesRecentes(); // completo
+        $tabelaFeedbacks = $this->getFeedbacks();
 
+
+        return view("Company.dashboardTabelas", compact('tabelaUm', 'tabelaDois', 'tabelaTreis', 'tabelaQuatro', 'tabelaFeedbacks'));
+    }
+
+    public function graficos(): \Illuminate\Contracts\View\View
+    {
         // Gráficos
         $graficoUm = new TopDestinosChart;
 
@@ -46,8 +54,7 @@ class GraphHandlerController extends Controller
 
         $graficoQuatro = new TopRequisicoesPorTurno;
 
-        return view("Company.dashboard2",
-        compact('tabelaUm', 'tabelaDois', 'tabelaTreis', 'tabelaQuatro', 'graficoUm', 'graficoDois', 'graficoTreis', 'graficoQuatro'));
+        return view("Company/dashboardGraficos", compact('graficoUm', 'graficoDois', 'graficoTreis', 'graficoQuatro'));
     }
 
     public function getDestinosComRetorno()
@@ -115,6 +122,16 @@ class GraphHandlerController extends Controller
         return $requisicoesRecentes;
     }
 
+    public function getFeedbacks()
+    {
+        $feedbacks = Feedback::select(
+            'comentario',  'data', 'feedback')
+            ->orderBy('data', 'desc')
+            ->get();
+
+            return $feedbacks;
+    }
+
     public static function getTop5Destinos()
     {
         $top5Destinos = RequestedLocation::select(
@@ -129,6 +146,7 @@ class GraphHandlerController extends Controller
 
         return $top5Destinos;
     }
+
 
     public static function getTop5Origens()
     {
@@ -178,5 +196,7 @@ class GraphHandlerController extends Controller
 
         return $requisicoesPorTurno;
     }
+
+
 }
 

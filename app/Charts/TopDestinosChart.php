@@ -3,7 +3,7 @@
 namespace App\Charts;
 
 
-use App\Http\Controllers\GraphHandlerController;
+use App\Http\Controllers\DashboardController;
 use ConsoleTVs\Charts\Classes\Chartjs\Chart;
 
 class TopDestinosChart extends Chart
@@ -17,7 +17,7 @@ class TopDestinosChart extends Chart
     {
         parent::__construct();
 
-        $data =  GraphHandlerController::getTop5Destinos();
+        $data =  DashboardController::getTop5Destinos();
 
         $labels = array_map(function($item) {
             return $item['nome_destino'];

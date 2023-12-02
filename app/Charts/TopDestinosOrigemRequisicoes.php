@@ -2,7 +2,7 @@
 
 namespace App\Charts;
 
-use App\Http\Controllers\GraphHandlerController;
+use App\Http\Controllers\DashboardController;
 use ConsoleTVs\Charts\Classes\ChartJs\Chart;
 
 class TopDestinosOrigemRequisicoes extends Chart
@@ -16,7 +16,7 @@ class TopDestinosOrigemRequisicoes extends Chart
     {
         parent::__construct();
 
-        $data = GraphHandlerController::getDestinoPorOrigem();
+        $data = DashboardController::getDestinoPorOrigem();
 
         $labels = array_map(function($item) {
             return $item['nome_origem'] . ' > ' . $item['nome_destino'];
