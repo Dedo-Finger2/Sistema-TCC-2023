@@ -28,14 +28,14 @@
         </div>
 
         <div class="row">
-            <div class="col-md-6">
-                <label class="fs-3"  class="fs-3">Top 5 destinos</label>
-                <div class="pl-1" style="max-width: 100%; max-height: 300px;">
+            <div class="col-md-6 mb-5">
+                <label class="fs-3" class="fs-3">Top 5 destinos</label>
+                <div class="" style="max-width: 100%; max-height: 300px;">
                     {!! $graficoUm->container() !!}
                 </div>
             </div>
 
-            <div class="col-md-6">
+            <div class="col-md-6 mb-5">
                 <label class="fs-3"> Top 5 origens</label>
                 <div style="max-width: 100%; max-height: 300px;">
                     {!! $graficoDois->container() !!}
@@ -44,13 +44,13 @@
 
         </div>
 
-        <div class="col-md-6">
+        <div class="col-md-6 mt-5">
             <label class="fs-3"> Requisições por origem</label>
             <div style="width: 1200px; max-height: 300px;">
                 {!! $graficoQuatro->container() !!}
             </div>
 
-            <div class="col-md-6">
+            <div class="col-md-6 mb-5">
                 <label class="fs-3">Destinos mais requisitados por turno</label>
                 <div style="width: 1200px; max-height: 300px;">
                     {!! $graficoTreis->container() !!}
@@ -59,7 +59,6 @@
         </div>
     </div>
     </div>
-
 
     <!-- Graficos JS -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
