@@ -5,21 +5,21 @@ namespace App\Http\Controllers;
 // Models importadas
 
 use App\Models\UserOrigin;
-use App\Models\RequestedLocation;
+use Illuminate\Http\Request;
+use App\Charts\TopOrigensChart;
 
 // Charts importados
 
-use App\Charts\TopOrigensChart;
 use App\Charts\TopDestinosChart;
-use App\Charts\TopRequisicoesPorBairro;
-use App\Charts\TopDestinosOrigemRequisicoes;
-use App\Charts\TopRequisicoesRecentes;
-
-
-use Illuminate\Http\Request;
+use App\Models\RequestedLocation;
 use Illuminate\Support\Facades\DB;
+
+
+use App\Models\Request as Requests;
 use function Laravel\Prompts\select;
+use App\Charts\TopRequisicoesPorTurno;
 use PhpParser\Node\Expr\AssignOp\Coalesce;
+use App\Charts\TopDestinosOrigemRequisicoes;
 
 class GraphHandlerController extends Controller
 {
@@ -37,47 +37,17 @@ class GraphHandlerController extends Controller
         $tabelaTreis = $this->getOrigensSemRetorno(); // completo
         $tabelaQuatro = $this->getRequisicoesRecentes(); // completo
 
-        // Gráfico 1
+        // Gráficos
         $graficoUm = new TopDestinosChart;
 
-        // DADOS DO GRAFICO 2
-        $graficoDois = $this->getTop5Origens();
-        $origensBuscadas = [];
-        $totalBuscas = [];
+        $graficoDois = new TopOrigensChart;
 
-        foreach ($graficoDois as $dadosGraficos2) {
-            // Adicionando cada nome de destino ao array $destinosProcurados
-            $origensBuscadas[] = $dadosGraficos2->nome_origem;
+        $graficoTreis = new TopDestinosOrigemRequisicoes;
 
-            // Adicionando cada total de buscas ao array $totalBuscas
-            $totalBuscas[] = $dadosGraficos2->total_requisicoes;
-        }
-
-        // Grafico 2
-        $chartDois = new TopOrigensChart;
-        $chartDois->labels($origensBuscadas);
-        $chartDois->dataset('Origem da busca: ', 'pie', $totalBuscas);
-
-
-        $chartTreis = new TopRequisicoesRecentes;
-        $chartTreis->labels([
-            'Um', 'Dois', 'Tres',
-        ]);
-
-
-        $chartTreis->dataset('graficoTreis', 'line', [1,2,3]);
-
-        $chartQuatro = new TopRequisicoesRecentes;
-        $chartQuatro->labels([
-            'Um', 'Dois', 'Tres',
-        ]);
-        $chartQuatro->dataset('graficoQuatro', 'bar', [1,2,3]);
-
-        // Destinos -> Origem | Total requisições
-        $destinoOrigemRequisicoes = new TopDestinosOrigemRequisicoes;
+        $graficoQuatro = new TopRequisicoesPorTurno;
 
         return view("Company.dashboard2",
-        compact('tabelaUm', 'tabelaDois', 'tabelaTreis', 'tabelaQuatro', 'graficoUm', 'chartDois', 'chartTreis', 'chartQuatro', 'destinoOrigemRequisicoes'));
+        compact('tabelaUm', 'tabelaDois', 'tabelaTreis', 'tabelaQuatro', 'graficoUm', 'graficoDois', 'graficoTreis', 'graficoQuatro'));
     }
 
     public function getDestinosComRetorno()
@@ -160,7 +130,7 @@ class GraphHandlerController extends Controller
         return $top5Destinos;
     }
 
-    public function getTop5Origens()
+    public static function getTop5Origens()
     {
         $top5Origens = UserOrigin::select(
             'user_origins.nome as nome_origem',
@@ -169,7 +139,8 @@ class GraphHandlerController extends Controller
         ->orderBy( DB::raw('COUNT(user_origins.nome)'), 'desc', 'limit', '=', 5) // Ordena pela data mais recente
         ->groupBy('user_origins.nome')
         ->take(5)
-        ->get();
+        ->get()
+        ->toArray();
 
         return $top5Origens;
     }
@@ -185,19 +156,27 @@ class GraphHandlerController extends Controller
         ->orderBy(DB::raw('COUNT(requested_locations.nome)'), 'desc')
         ->groupBy('user_origins.nome', 'requested_locations.nome' )
         ->take(5)
-        ->get();
+        ->get()
+        ->toArray();
 
-        $data = [];
+        return $destinosOrigemRequisicoes;
+    }
 
-        foreach ($destinosOrigemRequisicoes as $item) {
-           $data[] = [
-                'nome_origem' => $item->getAttributes()['nome_origem'],
-                'nome_destino' => $item->getAttributes()['nome_destino'],
-                'total_requisicoes' => $item->getAttributes()['total_requisicoes'],
-           ];
-        }
+    public static function getRequisicoesPorTurno()
+    {
+        $requisicoesPorTurno = Requests::select(
+        DB::raw('COUNT(id) as total_requisicoes'))
+        ->selectRaw("CASE
+                        WHEN EXTRACT(HOUR FROM data_hora) < 12 THEN 'manhã'
+                        WHEN EXTRACT(HOUR FROM data_hora) < 18 THEN 'tarde'
+                        ELSE 'noite'
+                    END as periodo_do_dia")
+        ->groupBy('periodo_do_dia')
+        ->take(3)
+        ->get()
+        ->toArray();
 
-        return $data;
+        return $requisicoesPorTurno;
     }
 }
 
