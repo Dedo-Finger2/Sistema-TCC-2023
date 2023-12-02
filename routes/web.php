@@ -40,10 +40,10 @@ Route::get('/feedback', [FeedbackController::class, 'create'])->name('feedback.c
 Route::post('/feedback', [FeedbackController::class, 'store'])->name('feedback.store')->middleware('sharedAuth');
 
 // Companies
-Route::get('/companies', [CompanyController::class, 'index'])->name('companies.index')->middleware('admin');
+Route::get('/company-home', [CompanyController::class, 'index'])->name('companies.home')->middleware('admin');
 Route::get('/dashboard', [CompanyController::class, 'dashboard'])->name('companies.dashboard')->middleware('admin');
-Route::get('/registerCompany', [CompanyController::class, 'create'])->name('companies.create')->middleware('admin');
-Route::post('/registerCompany', [CompanyController::class, 'store'])->name('companies.store')->middleware('admin');
+Route::get('/registerCompany', [CompanyController::class, 'create'])->name('companies.create');
+Route::post('/registerCompany', [CompanyController::class, 'store'])->name('companies.store');
 
 Route::get('/dashboard2', [GraphHandlerController::class, 'index'])->name('companies.dashboard2');
 

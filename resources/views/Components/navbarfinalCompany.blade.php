@@ -11,18 +11,21 @@
             <!-- adicionando uma margem a esquerda pros itens de menu ficar na direita-->
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
+                    <a href="{{ route('companies.home') }}" class="nav-link text-white">Home</a>
+                </li>
+                <li class="nav-item">
                     <a href="{{ route('routes.showSearchForm') }}" class="nav-link text-white">Buscar rotas</a>
                 </li>
                 <!-- CRIANDO UM DROPDOWN-->
                 <li class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle text-white" data-bs-toggle="dropdown">???</a>
+                    <a href="#" class="nav-link dropdown-toggle text-white" data-bs-toggle="dropdown">Opções</a>
                     <!-- fazendo o dropdown ficar a esquerda-->
                     <ul class="dropdown-menu dropdown-menu-end">
                         <li>
-                            <a href="#" class="dropdown-item">Arembepe</a>
+                            <a href="{{ route('companies.dashboard2') }}" class="dropdown-item">Gráficos</a>
                         </li>
                         <li>
-                            <a href="#" class="dropdown-item">Melhor lugar</a>
+                            <a href="#" class="dropdown-item">Tabelas</a>
                         </li>
                         <li>
                             <a href="#" class="dropdown-item">Do</a>
@@ -35,9 +38,15 @@
                         </li>
                     </ul>
                 </li>
-                <li class="me-5">
+
+                <li class="nav-item me-5">
 
                 </li>
+
+                <li class="nav-item">
+                    <a class="nav-link text-white">{{ Auth::guard('admin')->user()->nome }}</a>
+                </li>
+
                 <li class="nav-item">
                     <a href="{{ route('logout') }}" class="btn btn-danger bg-gradient">Logout</a>
                 </li>

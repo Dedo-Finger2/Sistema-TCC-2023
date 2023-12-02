@@ -1,6 +1,6 @@
 <!--Arquivo Modificado-->
 
-@extends('layoutWithoutNavFooter') {{-- Buscando o layout padrão e aplicando nesta página --}}
+@extends('layout') {{-- Buscando o layout padrão e aplicando nesta página --}}
 
 @section('title', 'Cadastro - Usuário') {{-- Inserindo o título desta página --}}
 
