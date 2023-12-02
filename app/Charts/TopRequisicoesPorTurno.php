@@ -5,7 +5,7 @@ namespace App\Charts;
 use ConsoleTVs\Charts\Classes\Chartjs\Chart;
 use App\Http\Controllers\GraphHandlerController;
 
-class TopOrigensChart extends Chart
+class TopRequisicoesPorTurno extends Chart
 {
     /**
      * Initializes the chart.
@@ -16,18 +16,18 @@ class TopOrigensChart extends Chart
     {
         parent::__construct();
 
-        $data =  GraphHandlerController::getTop5Origens();
+        $data = GraphHandlerController::getRequisicoesPorTurno();
 
         $labels = array_map(function($item) {
-            return $item['nome_origem'];
+            return $item['periodo_do_dia'];
         }, $data);
 
         $total_requisicoes = array_map(function($item) {
             return $item['total_requisicoes'];
         }, $data);
 
-        // Gráfico 1
         $this->labels($labels)
-        ->dataset('Total de requisições ', 'pie', $total_requisicoes);
+            ->dataset('Total de requisições', 'line', $total_requisicoes);
+
     }
 }

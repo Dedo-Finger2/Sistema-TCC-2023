@@ -29,9 +29,6 @@ class TopDestinosChart extends Chart
 
         // Gráfico 1
         $this->labels($labels)
-        ->dataset('Total de requisições ', 'pie', $total_requisicoes)
-        ->backgroundColor('rgba(75, 192, 192, 0.2)')
-        ->color('rgba(75, 192, 192, 1)');
-        dd($data);
+        ->dataset('Total de requisições ', 'pie', $total_requisicoes);
     }
 }
