@@ -4,12 +4,12 @@
             <div class="col-auto">
                 <div class="small m-0 text-white">Copyright &copy; TCC - 2023 - SENAI</div>
             </div>
-            <div class="col-auto">
-                <a class="link-light small" href="#!">Privacy</a>
+            <div class="col-auto text-whie">
+                <a class="link-light small text-white" href="#!">Privacy</a>
                 <span class="text-white mx-1">&middot;</span>
-                <a class="link-light small" href="#!">Terms</a>
+                <a class="link-light small text-white" href="#!">Terms</a>
                 <span class="text-white mx-1">&middot;</span>
-                <a class="link-light small" href="#!">Contact</a>
+                <a class="link-light small text-white" href="#!">Contact</a>
             </div>
         </div>
     </div>

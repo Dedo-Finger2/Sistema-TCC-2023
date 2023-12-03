@@ -49,7 +49,7 @@
 
 </head>
 
-<body class="overflow-hidden">
+<body>
     @if (Auth::guard('admin')->check())
         @include('Components.navbarfinalCompany')
     @elseif (Auth::guard('web')->check())

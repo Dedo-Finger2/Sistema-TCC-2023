@@ -16,8 +16,11 @@
                 <li class="nav-item">
                     <a href="{{ route('routes.showSearchForm') }}" class="nav-link text-white">Buscar rotas</a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('companies.dashboardGraficos') }}" class="nav-link text-white">Dashboard</a>
+                </li>
                 <!-- CRIANDO UM DROPDOWN-->
-                <li class="nav-item dropdown">
+                {{-- <li class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle text-white" data-bs-toggle="dropdown">Opções</a>
                     <!-- fazendo o dropdown ficar a esquerda-->
                     <ul class="dropdown-menu dropdown-menu-end">
@@ -37,7 +40,7 @@
                             <a href="#" class="dropdown-item">WRYYYYYYYYY</a>
                         </li>
                     </ul>
-                </li>
+                </li> --}}
 
                 <li class="nav-item me-5">
 

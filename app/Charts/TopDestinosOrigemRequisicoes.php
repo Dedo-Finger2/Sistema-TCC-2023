@@ -18,16 +18,17 @@ class TopDestinosOrigemRequisicoes extends Chart
 
         $data = DashboardController::getDestinoPorOrigem();
 
-        $labels = array_map(function($item) {
+        $labels = array_map(function ($item) {
             return $item['nome_origem'] . ' > ' . $item['nome_destino'];
         }, $data);
 
-        $total_requisicoes = array_map(function($item) {
+        $total_requisicoes = array_map(function ($item) {
             return $item['total_requisicoes'];
         }, $data);
 
         $this->labels($labels)
-            ->dataset('Total de requisições', 'bar', $total_requisicoes);
+            ->dataset('Total de requisições', 'bar', $total_requisicoes)
+            ->backgroundColor('#3ae374');
 
     }
 }

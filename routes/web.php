@@ -45,7 +45,7 @@ Route::get('/dashboard', [CompanyController::class, 'dashboard'])->name('compani
 Route::get('/registerCompany', [CompanyController::class, 'create'])->name('companies.create');
 Route::post('/registerCompany', [CompanyController::class, 'store'])->name('companies.store');
 
-Route::get('/dashboardTabela', [DashboardController::class, 'tabelas'])->name('companies.dashboardTabela');
+Route::get('/dashboardTabelas', [DashboardController::class, 'tabelas'])->name('companies.dashboardTabela');
 Route::get('/dashboardGraficos', [DashboardController::class, 'graficos'])->name('companies.dashboardGraficos');
 
 // Routes
@@ -53,3 +53,7 @@ Route::get('/search', [RouteController::class, 'showSearchForm'])->name('routes.
 Route::post('/search', [RouteController::class, 'searchRoutes'])->name('routes.searchRoutes')->middleware('sharedAuth');
 Route::get('/routes', [RouteController::class, 'showRoutes'])->name('routes.showRoutes')->middleware('sharedAuth');
 Route::get('/itinerary/{id}', [RouteController::class, 'viewRouteDetails'])->name('routes.view')->middleware('sharedAuth');
+
+Route::get('/teste', function(){
+   return view('teste');
+});
