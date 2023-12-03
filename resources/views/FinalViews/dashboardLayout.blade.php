@@ -13,7 +13,7 @@
 	<!-- Ícones -->
 	<link rel="stylesheet" type="text/css" href=" https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css ">
 	<!-- Custom CSS -->
-	<link rel="stylesheet" type="text/css" href="../../css/menu.css">
+	<link rel="stylesheet" type="text/css" href="../../css/dashboardLayout.css">
 	<!-- JS Bootstrap -->
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5/dist/js/bootstrap.bundle.min.js" defer></script>
 
@@ -121,15 +121,15 @@
                                     </li>
                                 </ul>
                             </li>
-            
+
                             <li class="nav-item me-5">
-            
+
                             </li>
-            
+
                             <li class="nav-item">
                                 <a class="nav-link text-white">{{ Auth::guard('admin')->user()->nome }}</a>
                             </li>
-            
+
                             <li class="nav-item">
                                 <a href="{{ route('logout') }}" class="btn btn-danger bg-gradient">Logout</a>
                             </li>
@@ -158,7 +158,7 @@
 	</section>
 
 	<!-- JS para a sidebar -->
-	<script src="../../js/barrademenu.js"></script>
+	<script src="../../js/dashboardLayout.js"></script>
 </body>
 
 </html>
