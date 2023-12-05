@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 // Models importadas
 
 use App\Models\Feedback;
+use App\Models\User;
 use App\Models\UserOrigin;
 use App\Charts\TopOrigensChart;
 
@@ -47,15 +48,72 @@ class DashboardController extends Controller
     {
         // Gráficos
         $graficoUm = new TopDestinosChart;
-
         $graficoDois = new TopOrigensChart;
-
         $graficoTreis = new TopDestinosOrigemRequisicoes;
-
         $graficoQuatro = new TopRequisicoesPorTurno;
 
-        return view("Company/dashboardGraficos", compact('graficoUm', 'graficoDois', 'graficoTreis', 'graficoQuatro'));
+        // Outros dados
+        $totalRequisicoes = $this->getAllRequests();
+        $porcentagemFeedbackPositivo = $this->getPercentPositiveFeedbacks();
+        $porcentagemLocaisSemRetorno = $this->getPercentNoReturnRequestedLocations();
+        $usuariosRegistrados = $this->getTotalUsersRegistered();
+
+        return view("Company/dashboardGraficos", compact(
+            'graficoUm',
+            'graficoDois',
+            'graficoTreis',
+            'graficoQuatro',
+            'totalRequisicoes',
+            'porcentagemFeedbackPositivo',
+            'porcentagemLocaisSemRetorno',
+            'usuariosRegistrados',
+        ));
     }
+
+
+    private function getAllRequests()
+    {
+        $requestes = Requests::all();
+
+        return count($requestes);
+    }
+
+
+    private function getPercentPositiveFeedbacks()
+    {
+        $positiveFeedbacks = Feedback::where('feedback', 1)->get();
+        $negativeFeedbacks = Feedback::where('feedback', 0)->get();
+
+        (float)$total = (float)count($positiveFeedbacks) + (float)count($negativeFeedbacks);
+
+        (float)$percentPositive = ((float)count($positiveFeedbacks) / (float)$total) * 100;
+        (float)$percentNegative = ((float)count($negativeFeedbacks) / (float)$total) * 100;
+
+        return $percentPositive;
+    }
+
+
+    private function getPercentNoReturnRequestedLocations()
+    {
+        $returnRequestedLocationsWithoutReturn = RequestedLocation::where('address_id', null)->get();
+        $returnRequestedLocationsWithReturn = RequestedLocation::where('address_id', "!=",null)->get();
+
+        (float)$total = (float)count($returnRequestedLocationsWithoutReturn) + (float)count($returnRequestedLocationsWithReturn);
+
+        (float)$percentNoReturnRequested = ((float)count($returnRequestedLocationsWithoutReturn) / (float)$total) * 100;
+        (float)$percentWithReturnRequested = ((float)count($returnRequestedLocationsWithReturn) / (float)$total) * 100;
+
+        return number_format($percentNoReturnRequested, 2);
+    }
+
+
+    private function getTotalUsersRegistered()
+    {
+        $users = User::all();
+
+        return count($users);
+    }
+
 
     public function getDestinosComRetorno()
     {
@@ -96,13 +154,13 @@ class DashboardController extends Controller
             DB::raw('COUNT(user_origins.nome) as total_requisicoes'),
             DB::raw('MAX(requests.data_hora) horario_mais_recente')
         )
-        ->join('requests', 'user_origins.request_id', '=', 'requests.id')
-        ->where('requests.retorno_requisicao', true)
-        ->groupBy('user_origins.nome' )
-        ->get();
+            ->join('requests', 'user_origins.request_id', '=', 'requests.id')
+            ->where('requests.retorno_requisicao', true)
+            ->groupBy('user_origins.nome')
+            ->get();
 
 
-            return $origensRequisitadas;
+        return $origensRequisitadas;
     }
 
     public function getRequisicoesRecentes()
@@ -113,11 +171,11 @@ class DashboardController extends Controller
             'requests.retorno_requisicao as status',
             DB::raw('MAX(requests.data_hora) as horario_mais_recente')
         )
-        ->join('user_origins', 'requested_locations.id', '=', 'user_origins.requested_location_id')
-        ->join('requests', 'user_origins.request_id', '=', 'requests.id')
-        ->orderBy(DB::raw('MAX(requests.data_hora)'), 'desc') // Ordena pela data mais recente
-        ->groupBy('requested_locations.nome', 'user_origins.nome', 'requests.retorno_requisicao')
-        ->get();
+            ->join('user_origins', 'requested_locations.id', '=', 'user_origins.requested_location_id')
+            ->join('requests', 'user_origins.request_id', '=', 'requests.id')
+            ->orderBy(DB::raw('MAX(requests.data_hora)'), 'desc') // Ordena pela data mais recente
+            ->groupBy('requested_locations.nome', 'user_origins.nome', 'requests.retorno_requisicao')
+            ->get();
 
         return $requisicoesRecentes;
     }
@@ -125,11 +183,14 @@ class DashboardController extends Controller
     public function getFeedbacks()
     {
         $feedbacks = Feedback::select(
-            'comentario',  'data', 'feedback')
+            'comentario',
+            'data',
+            'feedback'
+        )
             ->orderBy('data', 'desc')
             ->get();
 
-            return $feedbacks;
+        return $feedbacks;
     }
 
     public static function getTop5Destinos()
@@ -138,11 +199,11 @@ class DashboardController extends Controller
             'requested_locations.nome as nome_destino',
             DB::raw('COUNT(requested_locations.nome) as total_requisicoes'),
         )
-        ->orderBy(DB::raw('COUNT(requested_locations.nome)'), 'desc', 'limit', '=', 5)
-        ->groupBy('requested_locations.nome')
-        ->take(5)
-        ->get()
-        ->toArray();
+            ->orderBy(DB::raw('COUNT(requested_locations.nome)'), 'desc', 'limit', '=', 5)
+            ->groupBy('requested_locations.nome')
+            ->take(5)
+            ->get()
+            ->toArray();
 
         return $top5Destinos;
     }
@@ -154,11 +215,11 @@ class DashboardController extends Controller
             'user_origins.nome as nome_origem',
             DB::raw('COUNT(user_origins.nome) as total_requisicoes'),
         )
-        ->orderBy( DB::raw('COUNT(user_origins.nome)'), 'desc', 'limit', '=', 5) // Ordena pela data mais recente
-        ->groupBy('user_origins.nome')
-        ->take(5)
-        ->get()
-        ->toArray();
+            ->orderBy(DB::raw('COUNT(user_origins.nome)'), 'desc', 'limit', '=', 5) // Ordena pela data mais recente
+            ->groupBy('user_origins.nome')
+            ->take(5)
+            ->get()
+            ->toArray();
 
         return $top5Origens;
     }
@@ -167,15 +228,16 @@ class DashboardController extends Controller
     public static function getDestinoPorOrigem()
     {
         $destinosOrigemRequisicoes = UserOrigin::select(
-            'user_origins.nome as nome_origem', 'requested_locations.nome as nome_destino',
+            'user_origins.nome as nome_origem',
+            'requested_locations.nome as nome_destino',
             DB::raw('COUNT(requested_locations.nome) as total_requisicoes'),
         )
-        ->join('requested_locations', 'user_origins.requested_location_id', '=', 'requested_locations.id')
-        ->orderBy(DB::raw('COUNT(requested_locations.nome)'), 'desc')
-        ->groupBy('user_origins.nome', 'requested_locations.nome' )
-        ->take(5)
-        ->get()
-        ->toArray();
+            ->join('requested_locations', 'user_origins.requested_location_id', '=', 'requested_locations.id')
+            ->orderBy(DB::raw('COUNT(requested_locations.nome)'), 'desc')
+            ->groupBy('user_origins.nome', 'requested_locations.nome')
+            ->take(5)
+            ->get()
+            ->toArray();
 
         return $destinosOrigemRequisicoes;
     }
@@ -183,16 +245,17 @@ class DashboardController extends Controller
     public static function getRequisicoesPorTurno()
     {
         $requisicoesPorTurno = Requests::select(
-        DB::raw('COUNT(id) as total_requisicoes'))
-        ->selectRaw("CASE
+            DB::raw('COUNT(id) as total_requisicoes')
+        )
+            ->selectRaw("CASE
                         WHEN EXTRACT(HOUR FROM data_hora) < 12 THEN 'manhã'
                         WHEN EXTRACT(HOUR FROM data_hora) < 18 THEN 'tarde'
                         ELSE 'noite'
                     END as periodo_do_dia")
-        ->groupBy('periodo_do_dia')
-        ->take(3)
-        ->get()
-        ->toArray();
+            ->groupBy('periodo_do_dia')
+            ->take(3)
+            ->get()
+            ->toArray();
 
         return $requisicoesPorTurno;
     }

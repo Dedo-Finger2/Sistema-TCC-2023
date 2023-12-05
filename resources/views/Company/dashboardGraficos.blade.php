@@ -7,42 +7,103 @@
 @stop
 
 @section('content')
+    {{-- Info extra --}}
+    <div class="row">
+        <div class="col md-3">
+            <div class="card bg-dark bg-gradient shadow-sm">
+                <div class="card-body">
+                    <h4>Total de requisições</h4>
+                    <h2 class="card-text">{{ $totalRequisicoes }}</h2>
+                </div>
+            </div>
+        </div>
 
+        <div class="col md-3">
+            <div class="card bg-primary bg-gradient shadow-sm">
+                <div class="card-body">
+                    <h4>Usuários cadastrados</h4>
+                    <h2 class="card-text">{{ $usuariosRegistrados }}</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="col md-3">
+            <div class="card bg-info bg-gradient shadow-sm">
+                <div class="card-body">
+                    <h4>Locais sem retorno</h4>
+                    <h2 class="card-text">{{ $porcentagemLocaisSemRetorno }}%</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="col md-3">
+            <div class="card bg-@if ($porcentagemFeedbackPositivo > 50)success @elseif($porcentagemFeedbackPositivo < 50)danger @else warning @endif bg-gradient shadow-sm">
+                <div class="card-body">
+                    <h4>Média satisfação</h4>
+                    <h2 class="card-text">{{ $porcentagemFeedbackPositivo }}%</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr>
+    {{-- Pizzas --}}
     <div class="row">
         <div class="col-md-6">
-            <label class="fs-1" class="fs-3">Top 5 destinos</label>
-            <div class="" style="max-width: 100%; max-height: 300px;">
-                {!! $graficoUm->container() !!}
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="fw-bold"><strong>Top 5 destinos</strong></h5>
+                    <span class="small" style="color: gray;">Os 5 destinos mais requisitados.</span>
+                    <div class="" style="max-width: 100%; max-height: 300px;">
+                        {!! $graficoUm->container() !!}
+                    </div>
+                </div>
             </div>
         </div>
 
         <div class="col-md-6">
-            <label class="fs-3"> Top 5 origens</label>
-            <div style="max-width: 100%; max-height: 300px;">
-                {!! $graficoDois->container() !!}
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="fw-bold"><strong>Top 5 origens</strong></h5>
+                    <span class="small" style="color: gray;">As 5 origens que mais requisitam um destino.</span>
+                    <div style="max-width: 100%; max-height: 300px;">
+                        {!! $graficoDois->container() !!}
+                    </div>
+                </div>
             </div>
         </div>
-
     </div>
 
-    <div class=" mt-5">
-        <label class="fs-3"> Requisições por origem</label>
-        <div class="w-100">
-            {!! $graficoQuatro->container() !!}
+    {{-- Linha --}}
+    <div class="mt-2">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="fw-bold"><strong>Destinos mais requisitados por turno</strong></h5>
+                <span class="small" style="color: gray;">Requisições por turno do dia.</span>
+                <div class="w-100">
+                    {!! $graficoQuatro->container() !!}
+                </div>
+            </div>
         </div>
     </div>
 
-    <div class=" ms-5" >
-        <label class="fs-3">Destinos mais requisitados por turno</label>
-        <div class="w-100" style="margin-left: -63px">
-            {!! $graficoTreis->container() !!}
+    {{-- Barra --}}
+    <div class=" ms-5">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="fw-bold"><strong>Requisições por origem</strong></h5>
+                <span class="small" style="color: gray;">Destino mais requisitado por origem no formato: Origem > Destino.</span>
+                <div class="w-100" style="margin-left: -63px">
+                    {!! $graficoTreis->container() !!}
+                </div>
+            </div>
         </div>
     </div>
 
+    {{-- Espaçamento --}}
     <div class="text-white">
         .
     </div>
-
     <div class="text-white">
         .
     </div>
@@ -57,26 +118,6 @@
     <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.5.0/js/responsive.bootstrap5.min.js"></script>
 
-    <script>
-        // --TABELAS--
-        new DataTable('#tabela1', {
-            responsive: true
-        });
-
-        new DataTable('#tabela2', {
-            responsive: true
-        });
-
-        new DataTable('#tabela3', {
-            responsive: true
-        });
-
-        new DataTable('#tabela4', {
-            responsive: true
-        });
-    </script>
-
-    @parent
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     {!! $graficoUm->script() !!}
