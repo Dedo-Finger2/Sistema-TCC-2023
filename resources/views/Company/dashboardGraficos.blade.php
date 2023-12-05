@@ -47,7 +47,7 @@
     </div>
 
     <hr>
-    {{-- Pizzas --}}
+    {{-- Pizzas + Linhas --}}
     <div class="row">
         <div class="col-md-8">
 
@@ -97,9 +97,6 @@
             </div>
         </div>
     </div>
-
-    {{-- Linha --}}
-
 
     {{-- Barra --}}
     <div class=" ms-5">
