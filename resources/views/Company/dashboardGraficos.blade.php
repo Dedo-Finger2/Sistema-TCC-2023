@@ -49,7 +49,34 @@
     <hr>
     {{-- Pizzas --}}
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-8">
+
+            <div class="">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="fw-bold"><strong>Destinos mais requisitados por ano</strong></h5>
+                        <span class="small" style="color: gray;">Requisições nos ultimos 3 anos.</span>
+                        <div class="w-100" style="height: 31.3vh">
+                            {!! $graficoCinco->container() !!}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-2">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="fw-bold"><strong>Destinos mais requisitados por turno</strong></h5>
+                        <span class="small" style="color: gray;">Requisições por turno do dia.</span>
+                        <div class="w-100" style="height: 31.3vh">
+                            {!! $graficoQuatro->container() !!}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
             <div class="card">
                 <div class="card-body">
                     <h5 class="fw-bold"><strong>Top 5 destinos</strong></h5>
@@ -59,9 +86,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-
-        <div class="col-md-6">
             <div class="card">
                 <div class="card-body">
                     <h5 class="fw-bold"><strong>Top 5 origens</strong></h5>
@@ -75,17 +99,7 @@
     </div>
 
     {{-- Linha --}}
-    <div class="mt-2">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="fw-bold"><strong>Destinos mais requisitados por turno</strong></h5>
-                <span class="small" style="color: gray;">Requisições por turno do dia.</span>
-                <div class="w-100">
-                    {!! $graficoQuatro->container() !!}
-                </div>
-            </div>
-        </div>
-    </div>
+
 
     {{-- Barra --}}
     <div class=" ms-5">
@@ -124,6 +138,7 @@
     {!! $graficoDois->script() !!}
     {!! $graficoTreis->script() !!}
     {!! $graficoQuatro->script() !!}
+    {!! $graficoCinco->script() !!}
 
 @stop
 

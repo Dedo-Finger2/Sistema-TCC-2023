@@ -15,6 +15,7 @@ use App\Charts\TopDestinosChart;
 use App\Models\RequestedLocation;
 use App\Charts\TopRequisicoesPorTurno;
 use App\Charts\TopDestinosOrigemRequisicoes;
+use App\Charts\TopRequisicoesPorAno;
 
 
 use function Laravel\Prompts\select;
@@ -51,6 +52,7 @@ class DashboardController extends Controller
         $graficoDois = new TopOrigensChart;
         $graficoTreis = new TopDestinosOrigemRequisicoes;
         $graficoQuatro = new TopRequisicoesPorTurno;
+        $graficoCinco = new TopRequisicoesPorAno;
 
         // Outros dados
         $totalRequisicoes = $this->getAllRequests();
@@ -63,6 +65,7 @@ class DashboardController extends Controller
             'graficoDois',
             'graficoTreis',
             'graficoQuatro',
+            'graficoCinco',
             'totalRequisicoes',
             'porcentagemFeedbackPositivo',
             'porcentagemLocaisSemRetorno',
@@ -70,7 +73,7 @@ class DashboardController extends Controller
         ));
     }
 
-
+    // Info extra
     private function getAllRequests()
     {
         $requestes = Requests::all();
@@ -113,7 +116,24 @@ class DashboardController extends Controller
 
         return count($users);
     }
+    // Fim info etra
 
+
+    // Gráficos
+
+    public static function getRequisicoesPorAno()
+    {
+        $requisicoesPorAno = Requests::select(
+            DB::raw('COUNT(id) as total_requisicoes, YEAR(data_hora) as ano_requisicao')
+        )
+            ->groupBy('ano_requisicao')
+            ->orderBy('ano_requisicao', 'desc')
+            ->take(3)
+            ->get()
+            ->toArray();
+
+        return $requisicoesPorAno;
+    }
 
     public function getDestinosComRetorno()
     {
