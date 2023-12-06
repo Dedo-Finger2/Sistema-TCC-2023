@@ -92,7 +92,7 @@ class DashboardController extends Controller
         (float)$percentPositive = ((float)count($positiveFeedbacks) / (float)$total) * 100;
         (float)$percentNegative = ((float)count($negativeFeedbacks) / (float)$total) * 100;
 
-        return $percentPositive;
+        return number_format($percentPositive,2);
     }
 
 

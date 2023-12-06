@@ -28,7 +28,12 @@ class TopDestinosOrigemRequisicoes extends Chart
 
         $this->labels($labels)
             ->dataset('Total de requisições', 'bar', $total_requisicoes)
-            ->backgroundColor('#3ae374');
-
+            ->backgroundColor([
+                '#3ae374', // Cor personalizada para a primeira barra
+                '#39d98e', // Cor personalizada para a segunda barra
+                '#27ae60', // Cor personalizada para a terceira barra
+                '#1e8449', // Cor personalizada para a quarta barra
+                '#0e4429', // Cor personalizada para a quinta barra
+            ]);
     }
 }

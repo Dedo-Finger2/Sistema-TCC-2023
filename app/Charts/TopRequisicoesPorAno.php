@@ -27,7 +27,10 @@ class TopRequisicoesPorAno extends Chart
         }, $data);
 
         $this->labels(array_reverse($labels))
-            ->dataset('Total de requisições', 'line', array_reverse($total_requisicoes));
-
+            ->dataset('Total de requisições', 'line', array_reverse($total_requisicoes))
+            ->backgroundColor('rgba(54, 162, 235, 0.2)') // Cor personalizada para o gráfico de linha
+            ->options([
+                'borderColor' => 'rgba(54, 162, 235, 1)', // Cor personalizada para a borda da linha
+            ]);
     }
 }
