@@ -27,7 +27,11 @@ class TopRequisicoesPorTurno extends Chart
         }, $data);
 
         $this->labels($labels)
-            ->dataset('Total de requisições', 'line', $total_requisicoes);
-
-    }
+            ->dataset('Total de requisições', 'line', $total_requisicoes)
+            ->backgroundColor('rgba(54, 162, 235, 0.2)') // Cor personalizada para o gráfico de linha
+            ->backgroundColor('rgba(54, 162, 235, 0.2)') // Cor personalizada para o gráfico de linha
+            ->options([
+                'borderColor' => 'rgba(54, 162, 235, 1)', // Cor personalizada para a borda da linha
+            ]);
+        }
 }
