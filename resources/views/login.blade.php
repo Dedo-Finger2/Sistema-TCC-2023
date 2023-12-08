@@ -2,7 +2,7 @@
 
 @extends('layout') {{-- Buscando o layout padrão e aplicando nesta página --}}
 
-@section('title', 'Login - ???') {{-- Inserindo o título desta página --}}
+@section('title', 'Login') {{-- Inserindo o título desta página --}}
 
 {{-- Sessão onde vai ser colocado todo o conteúdo do body desta página --}}
 @section('content')
@@ -16,10 +16,12 @@
                     <h2 class="mt-3">Busca de rotas e visualização de itinerários</h2>
                 </div>
                 <div class="content mt-5 text-left">
-                    <h2 class="text-left">Bem-vindo</h2>
+                    <h2 class="text-left">Bem-vindo!</h2>
                     <p class="text-left">
                     <p>
-                        bla bla bla.
+                        Você esta no BuscaRota, uma solução que eventualmente sera integrada a um sistema de busca por ônibus do vai card, como o kim.
+                        No sistema atual você pode buscar uma rota baseada nas rotas já predefinidadas. <br>
+                        Para buscar faça login!
                     </p>
                 </div>
             </div>
