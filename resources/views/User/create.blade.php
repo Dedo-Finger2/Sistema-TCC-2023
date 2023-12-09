@@ -42,8 +42,8 @@
                         </div>
                     @endif
                     <div class="text-center">
-                        <img src="https://raw.githubusercontent.com/Dedo-Finger2/Sistema-TCC-2023/main/resources/imgs/logo_tcc_nobg.png"
-                            class="img-fluid" style="width: 100px" alt="">
+                        <img src="https://raw.githubusercontent.com/Dedo-Finger2/Sistema-TCC-2023/main/resources/imgs/logo-com-titulo-nobg.png"
+                            class="img-fluid" style="width: 275px" alt="logo">
                     </div>
                     <div class="container-title">
                         <h2 class="text-center">Cadastro de Usuário</h2>
