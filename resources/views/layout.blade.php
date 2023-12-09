@@ -17,6 +17,7 @@
 
     <!-- Ícones -->
     <link rel="stylesheet" type="text/css" href=" https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css ">
+    <link rel="shortcut icon" href="https://raw.githubusercontent.com/Joice-Almeida/Sistema-TCC-2023/main/resources/imgs/logo_tcc.png">
 
     <!-- CSS da aplicação -->
     <link rel="stylesheet" href="../css/app.css">
