@@ -13,35 +13,12 @@
                 <li class="nav-item">
                     <a href="{{ route('routes.showSearchForm') }}" class="nav-link text-white">Buscar rotas</a>
                 </li>
-                <!-- CRIANDO UM DROPDOWN-->
-                <li class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle text-white" data-bs-toggle="dropdown">???</a>
-                    <!-- fazendo o dropdown ficar a esquerda-->
-                    <ul class="dropdown-menu dropdown-menu-end">
-                        <li>
-                            <a href="#" class="dropdown-item">Arembepe</a>
-                        </li>
-                        <li>
-                            <a href="#" class="dropdown-item">Melhor lugar</a>
-                        </li>
-                        <li>
-                            <a href="#" class="dropdown-item">Do</a>
-                        </li>
-                        <li>
-                            <a href="#" class="dropdown-item">Mundo</a>
-                        </li>
-                        <li>
-                            <a href="#" class="dropdown-item">WRYYYYYYYYY</a>
-                        </li>
-                    </ul>
-                </li>
                 <li class="me-5">
 
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('logout') }}" class="btn btn-danger bg-gradient">Logout</a>
                 </li>
-                <!--FIM DO DROPDOWN-->
             </ul>
         </div>
     </div>
