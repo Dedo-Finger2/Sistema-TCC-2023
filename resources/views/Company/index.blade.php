@@ -42,26 +42,22 @@
                         <div class="col mb-5 h-100">
                             <i class="text-success fa-solid fa-house"></i>
                             <h2 class="h5">Home</h2>
-                            <p class="mb-0">Paragraph of text beneath the heading to explain the heading. Here is just a
-                                bit more text.</p>
+                            <p class="mb-0">Bem vindo! aqui você pode acessar o painel de controle entre os graficos ou tabelas diretamente!</p>
                         </div>
                         <div class="col mb-5 h-100">
                             <i class="text-success fa-solid fa-table"></i>
                             <h2 class="h5">Tabelas</h2>
-                            <p class="mb-0">Paragraph of text beneath the heading to explain the heading. Here is just a
-                                bit more text.</p>
+                            <p class="mb-0">Abaixo clique no card "tabelas" para acessar as tabelas, e os feedbacks dos usuarios.</p>
                         </div>
                         <div class="col mb-5 mb-md-0 h-100">
                             <i class="text-success fa-solid fa-chart-pie"></i>
                             <h2 class="h5">Gráficos</h2>
-                            <p class="mb-0">Paragraph of text beneath the heading to explain the heading. Here is just a
-                                bit more text.</p>
+                            <p class="mb-0">Abaixo clique no card em "graficos" para acessar os graficos com as informações das requisições das buscas dos usuarios.</p>
                         </div>
                         <div class="col h-100">
                             <i class="text-success fa-solid fa-comments"></i>
                             <h2 class="h5">Feedbacks</h2>
-                            <p class="mb-0">Paragraph of text beneath the heading to explain the heading. Here is just a
-                                bit more text.</p>
+                            <p class="mb-0">Abaixo clique no card em "feedbacks" as tabelas, e os feedbacks dos usuarios, o sistema permite os usuarios fazerem comentarios positivos ou negativos, acerca do novo sistema de transporte.</p>
                         </div>
                     </div>
                 </div>
@@ -74,15 +70,16 @@
             <div class="row gx-5 justify-content-center">
                 <div class="col-lg-10 col-xl-7">
                     <div class="text-center">
-                        <div class="fs-4 mb-4 fst-italic">"Daqui pra frente é só pra trás!"</div>
+                        <div class="fs-4 mb-4 fst-italic">"implementar um procedimento de coleta e tratamento sistemático de dados que permita identificar
+                            problemas e possíveis soluções de mobilidade nas cidades de maior porte"</div>
                         <div class="d-flex align-items-center justify-content-center">
                             <img class="rounded-circle me-3"
-                                src="https://th.bing.com/th/id/OIP.RjS4o4cri1_Is8GHEXp4eQHaEK?rs=1&pid=ImgDetMain"
+                                src="https://yt3.googleusercontent.com/ytc/APkrFKb7vZtF--CAnHeTZBxmgzkBMkhmr6QQnToVv0DN=s900-c-k-c0x00ffffff-no-rj"
                                 alt="..." width="50" height="47" />
                             <div class="fw-bold">
-                                Emmanuel Dias
+                                Recomendações TCU acerca de mobilidade urbana
                                 <span class="fw-bold text-success mx-1">/</span>
-                                CEO, Pesquisa de Satisfação
+                                TCU, tribunal de contas da união
                             </div>
                         </div>
                     </div>
@@ -97,8 +94,9 @@
                 <div class="col-lg-8 col-xl-6">
                     <div class="text-center">
                         <h2 class="fw-bolder">Acesso às telas</h2>
-                        <p class="lead fw-normal text-muted mb-5">Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                            Eaque fugit ratione dicta mollitia. Officiis ad.</p>
+                        <p class="lead fw-normal text-muted mb-5">Detalhes das requisições e feedbacks dos usuarios,
+                            divididos entre tabelas e graficos, os graficos são os 5 mais procurados,
+                            enquanto as tabelas possuem o detalhamento dos mais requisitados</p>
                     </div>
                 </div>
             </div>
@@ -113,8 +111,7 @@
                                 href="{{ route('companies.dashboardGraficos') }}">
                                 <h5 class="card-title mb-3">Gráficos</h5>
                             </a>
-                            <p class="card-text mb-0">Some quick example text to build on the card title and make up the
-                                bulk of the card's content.</p>
+                            <p class="card-text mb-0">Aqui você pode ver uma relação dos 5 destinos mais requisitados, os 5 bairros com mais requisições, entre outros</p>
                         </div>
                         <div class="card-footer p-4 pt-0 bg-transparent border-top-0">
                             <div class="d-flex align-items-end justify-content-between">
@@ -133,9 +130,7 @@
                             href="{{ route('companies.dashboardTabela') }}">
                             <h5 class="card-title mb-3">Tabelas</h5>
                             </a>
-                            <p class="card-text mb-0">This text is a bit longer to illustrate the adaptive height of each
-                                card. Some quick example text to build on the card title and make up the bulk of the card's
-                                content.</p>
+                            <p class="card-text mb-0">Detalhes das requisições mais feitas com rotas para atendelas e sem rotas </p>
                         </div>
                         <div class="card-footer p-4 pt-0 bg-transparent border-top-0">
                             <div class="d-flex align-items-end justify-content-between">
@@ -154,8 +149,8 @@
                             href="{{ route('companies.dashboardTabela') }}">
                             <h5 class="card-title mb-3">Feedbacks</h5>
                             </a>
-                            <p class="card-text mb-0">Some more quick example text to build on the card title and make up
-                                the bulk of the card's content.</p>
+                            <p class="card-text mb-0">Aqui você pode ver as tabelas com os detalhes das requisições,
+                                e uma tabela com os feedbacks dos usuarios negativo e positivos acerca do novo sistema de transporte público</p>
                         </div>
                         <div class="card-footer p-4 pt-0 bg-transparent border-top-0">
                             <div class="d-flex align-items-end justify-content-between">
