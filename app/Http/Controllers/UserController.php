@@ -57,9 +57,15 @@ class UserController extends Controller
      */
     public function store(Request $request): \Illuminate\Http\RedirectResponse
     {
-        $user = $request->all();
-        $user['password'] = bcrypt($request->password);
-        $user = User::create($user);
+        $data = $request->validate([
+            'nome' => ['string', 'required'],
+            'email' => ['email', 'required', 'unique:users'],
+            'address_id' => ['required', 'exists:addresses,id'],
+            'password' => ['required','min:6'],
+        ]);
+        $data['password'] = bcrypt($data['password']);
+
+        $user = User::create($data);
 
         Auth::login($user);
 

@@ -13,15 +13,19 @@
                 <div class="d-flex align-items-center mt-5">
                     <img src="https://raw.githubusercontent.com/Dedo-Finger2/Sistema-TCC-2023/main/resources/imgs/logo_tcc_nobg_white.png"
                         class="shadow-lg" alt="Logo" style="width: 75px;" class="me-2 rounded-3 mt-2">
-                    <h2 class="mt-3">Busca de rotas e visualização de itinerários</h2>
+                    <h2 class="mt-3">BuscaRotas - Busque uma rota e contribua para a gestão do transporte público</h2>
                 </div>
                 <div class="content mt-5 text-left">
                     <h2 class="text-left">Bem-vindo!</h2>
                     <p class="text-left">
                     <p>
-                        Você esta no BuscaRota, uma solução que eventualmente sera integrada a um sistema de busca por ônibus do vai card, como o kim.
-                        No sistema atual você pode buscar uma rota baseada nas rotas já predefinidadas. <br>
-                        Para buscar faça login!
+                        Você esta no BuscaRota, uma solução que eventualmente sera integrada a um sistema de busca por
+                        ônibus do Vai Card, como por exemplo o Kim.
+                        No sistema atual você pode buscar uma rota baseada no endereço que você digitou/escolheu da lista de
+                        endereços. <br>
+                        Os dados coletados da usa busca são de suma importância para auxiliar na gestão de transporte
+                        público, tornando-o mais flexível a necessidade da população! Faça seu cadastro para poder fazer sua
+                        primeira busca!
                     </p>
                 </div>
             </div>
