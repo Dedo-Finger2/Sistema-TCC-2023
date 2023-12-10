@@ -9,11 +9,10 @@
             <div class="row py-lg-5">
                 <div class="col-lg-6 col-md-8 mx-auto">
                     <h1 class="fw-bold text-success">Busca de Rotas</h1>
-                    <p class="lead text-body-secondary">Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat
-                        ducimus qui, expedita esse illum magni. Ut aperiam unde officia molestiae, minus beatae quia
-                        recusandae ullam repudiandae! Aut impedit blanditiis perspiciatis corrupti vero voluptatibus
-                        consectetur? Explicabo, velit! Pariatur totam harum, ratione accusamus aut cupiditate esse quisquam
-                        quasi, maxime aspernatur, consequuntur consectetur!</p>
+                    <p class="lead text-body-secondary">Bem-vindo a tela de busca de rotas! Aqui você poderá digitar o nome de um endereço que gostaria de ir (seu destino)
+                        e um endereço que representa um lugar próximo ao seu, ou o endereço em que você se encontra no momento (sua origem). Com os dois devidamente preenchidos
+                        você poderá clicar no botão de "Buscar" e visualizar os resultados!
+                    </p>
                 </div>
                 <hr>
                 @if (session('error'))
@@ -21,6 +20,12 @@
                         <h2 class="text-center alert-heading">Oops!</h2>
                         <p>{{ session('error') }}</p>
                         <a href="{{ route('feedback.create') }}">Quero dar meu feedback.</a>
+                    </div>
+                @endif
+                @if (session('success'))
+                    <div class="alert alert-success text-center w-50 mx-auto" role="alert">
+                        <h2 class="text-center alert-heading">Sucesso!</h2>
+                        <p>{{ session('success') }}</p>
                     </div>
                 @endif
             </div>

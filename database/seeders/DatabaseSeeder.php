@@ -20,13 +20,13 @@ class DatabaseSeeder extends Seeder
         \App\Models\Feedback::factory(25)->create();
         \App\Models\BusOutbound::factory(25)->create();
         \App\Models\BusInbound::factory(25)->create();
-        \App\Models\Route::factory(25)->create();
+        \App\Models\Route::factory(200)->create();
         // \App\Models\Bus::factory(5)->create();
         \App\Models\Itinerary::factory(25)->create();
         \App\Models\RequestedLocation::factory(25)->create();
         \App\Models\Request::factory(25)->create();
         \App\Models\UserOrigin::factory(25)->create();
-        \App\Models\ItineraryHasRoute::factory(25)->create();
+        \App\Models\ItineraryHasRoute::factory(100)->create();
 
         \App\Models\Company::factory()->create([
             "nome" => "admin",

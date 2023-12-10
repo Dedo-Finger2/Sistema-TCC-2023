@@ -10,13 +10,10 @@
             <section class="py-2 text-center container">
                 <div class="row py-lg-5">
                     <div class="col-lg-6 col-md-8 mx-auto">
-                        <h1 class="fw-bold text-success">Visualização do(s) itinerário(s)</h1>
-                        <p class="lead text-body-secondary">Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat
-                            ducimus qui, expedita esse illum magni. Ut aperiam unde officia molestiae, minus beatae quia
-                            recusandae ullam repudiandae! Aut impedit blanditiis perspiciatis corrupti vero voluptatibus
-                            consectetur? Explicabo, velit! Pariatur totam harum, ratione accusamus aut cupiditate esse
-                            quisquam
-                            quasi, maxime aspernatur, consequuntur consectetur!</p>
+                        <h1 class="fw-bold text-success">Visualização detalhada da rota</h1>
+                        <p class="lead text-body-secondary">Bem-vindo a tela de visualização detalhada da rota! Aqui você vê mais detalhes da rota que selecionou na tela anterior.
+                            Todas as Idas e Voltas que compõe essa rota são encontradas aqui.
+                        </p>
                     </div>
                 </div>
                 <hr>
@@ -56,6 +53,10 @@
                 </div>
                 <hr>
             @endforeach
+            <div class="text-white mb-5">.</div>
+            <div class="text-white mb-5">.</div>
+            <div class="text-white mb-5">.</div>
+            <div class="text-white mb-5">.</div>
         @else
             {{-- TODO: Implementar uma forma de voltar pra tela de listagem sem perder tudo --}}
             <div class="text-center mb-5 mt-5">

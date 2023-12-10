@@ -10,11 +10,10 @@
             <div class="row py-lg-5">
                 <div class="col-lg-6 col-md-8 mx-auto">
                     <h1 class="fw-bold text-success">Dando Feedback</h1>
-                    <p class="lead text-body-secondary">Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat
-                        ducimus qui, expedita esse illum magni. Ut aperiam unde officia molestiae, minus beatae quia
-                        recusandae ullam repudiandae! Aut impedit blanditiis perspiciatis corrupti vero voluptatibus
-                        consectetur? Explicabo, velit! Pariatur totam harum, ratione accusamus aut cupiditate esse quisquam
-                        quasi, maxime aspernatur, consequuntur consectetur!</p>
+                    <p class="lead text-body-secondary">Bem-vindo a tela de feedback! Aqui você pode dar uma sugestão ou fazer uma pequena reclamação para que possamos
+                        entender as atuais dificuldades e proporcionar uma melhor experiência a você, usuário! Não esqueça de se atentar ao checkbox de "Feedback positivo", caso
+                        seu feedback seja positivo então selecione ele, caso contrário, deixe como está.
+                    </p>
                 </div>
             </div>
             <hr>

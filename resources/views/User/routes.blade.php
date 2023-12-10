@@ -1,6 +1,6 @@
 @extends('layout') {{-- Buscando o layout padrão e aplicando nesta página --}}
 
-@section('title', 'Visualizando rotas - ???') {{-- Inserindo o título desta página --}}
+@section('title', 'Visualizando rotas') {{-- Inserindo o título desta página --}}
 
 {{-- Sessão onde vai ser colocado todo o conteúdo do body desta página --}}
 @section('content')
@@ -10,11 +10,10 @@
             <div class="row py-lg-5">
                 <div class="col-lg-6 col-md-8 mx-auto">
                     <h1 class="fw-bold text-success">Listagem de Rotas</h1>
-                    <p class="lead text-body-secondary">Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat
-                        ducimus qui, expedita esse illum magni. Ut aperiam unde officia molestiae, minus beatae quia
-                        recusandae ullam repudiandae! Aut impedit blanditiis perspiciatis corrupti vero voluptatibus
-                        consectetur? Explicabo, velit! Pariatur totam harum, ratione accusamus aut cupiditate esse quisquam
-                        quasi, maxime aspernatur, consequuntur consectetur!</p>
+                    <p class="lead text-body-secondary">Bem-vindo a tela de listagem de rotas! Aqui você consegue visualizar uma prévia do resultado que foi obtido
+                        com seu destino e origem requisitados ao nosso sistema na tela anterior. É possível ainda assim ver mais detalhes de uma rota específica.
+                        OBS: Se atente ao horário das rotas, podem ser as mesmas, mas os horários são diferentes!
+                    </p>
                 </div>
             </div>
             <hr>
@@ -57,7 +56,7 @@
                                             {{ $route->busOutbound->address->bairro }}</h4>
                                         <br>
                                         <div class="d-flex justify-content-between align-items-center">
-                                            <a href="{{ route('routes.view', ['id' => $route->id]) }}" class="btn btn-outline-success w-100">View</a>
+                                            <a href="{{ route('routes.view', ['id' => $route->id]) }}" class="btn btn-outline-success w-100">Ver mais detalhes</a>
                                         </div>
                                     </div>
                                 </div>

@@ -21,8 +21,8 @@
         <div class="col-md-6">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="fw-bold"><strong>Tabela um, Destinos mais requisitados com retorno</strong></h5>
-                    <span class="small" style="color: gray;">Requisições nos ultimos 3 anos.</span>
+                    <h5 class="fw-bold"><strong>Destinos com retorno</strong></h5>
+                    <span class="small" style="color: gray;">Destinos mais requisitados com retorno.</span>
                     <div class="table-responsive">
                         <hr>
                         <table id="tabela1" class="table table-striped nowrap table-responsive-tcc" style="width:100%">
@@ -51,8 +51,8 @@
         <div class="col-md-6">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="fw-bold"><strong>Tabela dois, Destinos mais requisitados sem retorno</strong></h5>
-                    <span class="small" style="color: gray;">Requisições nos ultimos 3 anos.</span>
+                    <h5 class="fw-bold"><strong>Destinos sem retorno</strong></h5>
+                    <span class="small" style="color: gray;">Destinos mais requisitados sem retorno.</span>
                     <div class="table-responsive">
                         <hr>
                         <table id="tabela2" class="table table-striped nowrap table-responsive-tcc" style="width:100%">
@@ -83,8 +83,8 @@
         <div class="col-md-5">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="fw-bold"><strong>Tabela três, Origens mais requisitadas sem retorno</strong></h5>
-                    <span class="small" style="color: gray;">Requisições nos ultimos 3 anos.</span>
+                    <h5 class="fw-bold"><strong>Origens sem retorno</strong></h5>
+                    <span class="small" style="color: gray;">Origens mais requisitadas sem retorno.</span>
                     <div class="table-responsive">
                         <hr>
                         <table id="tabela3" class="table table-striped nowrap table-responsive-tcc" style="width:100%">
@@ -113,8 +113,8 @@
         <div class="col-md-7">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="fw-bold"><strong>Tabela quatro, buscas mais recentes</strong></h5>
-                    <span class="small" style="color: gray;">Requisições nos ultimos 3 anos.</span>
+                    <h5 class="fw-bold"><strong>Log de requisições</strong></h5>
+                    <span class="small" style="color: gray;">Log das buscas mais recentes feitas.</span>
                     <div class="table-responsive">
                         <hr>
                         <table id="tabela4" class="table table-striped nowrap table-responsive-tcc" style="width:100%">
@@ -148,7 +148,7 @@
             <div class="card">
                 <div class="card-body">
                     <h5 class="fw-bold"><strong>Tabela de feedbacks</strong></h5>
-                    <span class="small" style="color: gray;">Requisições nos ultimos 3 anos.</span>
+                    <span class="small" style="color: gray;">Todos os feedabacks feitos.</span>
                     <div class="table-responsive">
                         <hr>
                         <table id="tabela5" class="table table-striped nowrap table-responsive-tcc" style="width:100%">

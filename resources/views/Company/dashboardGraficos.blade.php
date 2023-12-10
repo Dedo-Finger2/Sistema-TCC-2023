@@ -37,7 +37,7 @@
         </div>
 
         <div class="col md-3">
-            <div class="card bg-@if ($porcentagemFeedbackPositivo > 50)success @elseif($porcentagemFeedbackPositivo < 50)danger @else warning @endif bg-gradient shadow-sm">
+            <div class="card bg-@if ($porcentagemFeedbackPositivo > 50)success @elseif($porcentagemFeedbackPositivo < 50)danger @elseif($porcentagemFeedbackPositivo == 50)warning @endif bg-gradient shadow-sm">
                 <div class="card-body">
                     <h4>Média satisfação</h4>
                     <h2 class="card-text">{{ $porcentagemFeedbackPositivo }}%</h2>
