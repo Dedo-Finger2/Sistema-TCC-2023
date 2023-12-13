@@ -39,7 +39,7 @@ class DashboardController extends Controller
         $tabelaDois = $this->getDestinosSemRetorno(); // completo
         $tabelaTreis = $this->getOrigensSemRetorno(); // completo
         $tabelaQuatro = $this->getRequisicoesRecentes(); // completo
-        $tabelaFeedbacks = $this->getFeedbacks();
+        $tabelaFeedbacks = $this->getFeedbacks(); // completo
 
 
         return view("Company.dashboardTabelas", compact('tabelaUm', 'tabelaDois', 'tabelaTreis', 'tabelaQuatro', 'tabelaFeedbacks'));

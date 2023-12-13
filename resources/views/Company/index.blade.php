@@ -130,7 +130,7 @@
                             href="{{ route('companies.dashboardTabela') }}">
                             <h5 class="card-title mb-3">Tabelas</h5>
                             </a>
-                            <p class="card-text mb-0">Detalhes das requisições mais feitas com rotas para atendelas e sem rotas </p>
+                            <p class="card-text mb-0">Detalhes das requisições mais feitas, com rotas para atendelas e sem rotas disponiveis para o local requisitado, ou origem da requisição</p>
                         </div>
                         <div class="card-footer p-4 pt-0 bg-transparent border-top-0">
                             <div class="d-flex align-items-end justify-content-between">
