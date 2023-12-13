@@ -9,11 +9,14 @@ class Address extends Model
 {
     use HasFactory;
 
+
     protected $fillable = [
         'logradouro',
         'bairro',
         'cidade',
     ];
+
+
 
     public function users()
     {

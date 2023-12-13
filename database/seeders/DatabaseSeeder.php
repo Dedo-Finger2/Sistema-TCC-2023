@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\Address;
 
 class DatabaseSeeder extends Seeder
 {
@@ -12,21 +13,47 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        \App\Models\Address::factory(25)->create();
-        \App\Models\User::factory(5)->create();
-        // \App\Models\Company::factory(25)->create();
-        // $this->call(AdminSeeder::class);
-        // $this->call(UserSeeder::class);
-        \App\Models\Feedback::factory(25)->create();
-        \App\Models\BusOutbound::factory(25)->create();
-        \App\Models\BusInbound::factory(25)->create();
-        \App\Models\Route::factory(200)->create();
-        // \App\Models\Bus::factory(5)->create();
-        \App\Models\Itinerary::factory(25)->create();
-        \App\Models\RequestedLocation::factory(25)->create();
-        \App\Models\Request::factory(25)->create();
-        \App\Models\UserOrigin::factory(25)->create();
-        \App\Models\ItineraryHasRoute::factory(100)->create();
+        $bairros = [
+            'Piacaveira',
+            'Arembepe',
+            'Phoc III',
+            'Vilaa d Abrantes',
+            'Dois d Julho',
+            'Santo Antônio',
+            'Monte Gordo',
+            'Areias',
+            'Catu d Abrantes',
+            'Ponto Certo',
+            'Nova Vitoria',
+            'Barra do Jacuipe',
+            'Verde Horizonte',
+            'Gleba B',
+            'Camacari d Dentro',
+            'Novo Horizonte',
+            'Gleba E',
+            'Barra d Pojuca',
+            'Buri Satuba',
+            'Vilaa da Paz',
+            'Gravata',
+            'Parque Florestal',
+            'Buri d Abrantes',
+            'Parafuso',
+            'Parque das Mangabas',
+            'Ficam II',
+            'Phoc II',
+            'Parque Verde',
+            'Jaua',
+            'Cajazeiras',
+            'Machadinho'
+        ];
+
+        foreach ($bairros as $bairro) {
+            Address::factory()->create([
+            'logradouro' => 'defaut',
+                'bairro' => $bairro,
+                'cidade' => 'camaçari'
+            ]);
+        }
 
         \App\Models\Company::factory()->create([
             "nome" => "admin",
@@ -41,6 +68,22 @@ class DatabaseSeeder extends Seeder
             "password" => bcrypt("123"),
             "address_id" => 1,
         ]);
+
+        // \App\Models\Address::factory(25)->create();
+        \App\Models\User::factory(5)->create();
+        // \App\Models\Company::factory(25)->create();
+        // $this->call(AdminSeeder::class);
+        // $this->call(UserSeeder::class);
+        \App\Models\Feedback::factory(200)->create();
+        \App\Models\BusOutbound::factory(1600)->create();
+        \App\Models\BusInbound::factory(1600)->create();
+        \App\Models\Route::factory(1600)->create();
+        // \App\Models\Bus::factory(5)->create();
+        \App\Models\Itinerary::factory(1600)->create();
+        \App\Models\RequestedLocation::factory(100)->create();
+        \App\Models\Request::factory(100)->create();
+        \App\Models\UserOrigin::factory(200)->create();
+        \App\Models\ItineraryHasRoute::factory(1600)->create();
 
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',

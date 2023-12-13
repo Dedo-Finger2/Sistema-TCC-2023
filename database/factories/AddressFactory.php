@@ -16,6 +16,8 @@ class AddressFactory extends Factory
      */
     public function definition(): array
     {
+
+
         return [
             /*
             | ----------------------------------------------
@@ -28,9 +30,10 @@ class AddressFactory extends Factory
             | streetName() - Gera nomes de ruas aleatórios
             | city() - Gera nomes de cidades aleatórios
             */
-            'logradouro' => $this->faker->address(),
-            'bairro' => $this->faker->streetName(),
-            'cidade' => $this->faker->city(),
+
+            // 'logradouro' => $this->faker->address(),
+            // 'bairro' => $this->faker->streetName(),
+            // 'cidade' => $this->faker->city(),
         ];
     }
 }
