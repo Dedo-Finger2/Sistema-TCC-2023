@@ -74,16 +74,16 @@ class DatabaseSeeder extends Seeder
         // \App\Models\Company::factory(25)->create();
         // $this->call(AdminSeeder::class);
         // $this->call(UserSeeder::class);
-        \App\Models\Feedback::factory(200)->create();
-        \App\Models\BusOutbound::factory(1600)->create();
-        \App\Models\BusInbound::factory(1600)->create();
-        \App\Models\Route::factory(1600)->create();
+        \App\Models\Feedback::factory(1)->create();
+        \App\Models\BusOutbound::factory(200)->create();
+        \App\Models\BusInbound::factory(200)->create();
+        \App\Models\Route::factory(300)->create();
         // \App\Models\Bus::factory(5)->create();
-        \App\Models\Itinerary::factory(1600)->create();
-        \App\Models\RequestedLocation::factory(100)->create();
-        \App\Models\Request::factory(100)->create();
-        \App\Models\UserOrigin::factory(200)->create();
-        \App\Models\ItineraryHasRoute::factory(1600)->create();
+        \App\Models\Itinerary::factory(300)->create();
+        \App\Models\RequestedLocation::factory(25)->create();
+        \App\Models\Request::factory(25)->create();
+        \App\Models\UserOrigin::factory(25)->create();
+        \App\Models\ItineraryHasRoute::factory(500)->create();
 
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',
