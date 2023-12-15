@@ -60,7 +60,7 @@
         @else
             {{-- TODO: Implementar uma forma de voltar pra tela de listagem sem perder tudo --}}
             <div class="text-center mb-5 mt-5">
-                <h1>Nenhum itinerário encontado para a rota Nº{{ $rotaAtual }}.</h1>
+                <h1>Não foi possível encontrar mais detalhes da rota.</h1>
             </div>
 
             <div class="text-white mb-5">.</div>

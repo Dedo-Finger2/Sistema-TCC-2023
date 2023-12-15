@@ -63,7 +63,6 @@ class RouteController extends Controller
         # Coletar o ID do endereço do destino requisitado pelo usuário
         $requestedBusInbound = $this->returnIntOrString($request->busInbound);
 
-
         // * IDA_ONIBUS & VOLTA_ONIBUS * \\
 
         # Coletar os IDs das idasOnibus (destino) que possuem o endereço de destino requisitado pelo usuário
@@ -90,7 +89,7 @@ class RouteController extends Controller
                 ->back()
                 ->with('error', 'Nenhuma rota foi encontrada com o destino requisitado. Sua requisição foi registrada para futuras melhorias no transporte público.');
         }
-
+        // dd(count($this->serachWithoutOrigin($busOutbounds)));
         # Cenário 03: Usuário digitou uma origem que não existe, mas digitou um destino que existe
         if (!$busInbounds && count($this->serachWithoutOrigin($busOutbounds)) > 0) {
             # Faça uma busca sem levar a origem em consideração
@@ -137,7 +136,7 @@ class RouteController extends Controller
      * @param Collection $busOutbounds - ID ida onibus
      * @return mixed - Rotas ou false
      */
-    private function serachWithOrigin(Collection $busInbounds, Collection $busOutbounds)
+    private function serachWithOrigin(mixed $busInbounds, mixed $busOutbounds)
     {
         # Ativar permissão de usar o group by em colunas que não usam funções como SUM e COUNT
         DB::statement("SET sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))");
@@ -151,7 +150,7 @@ class RouteController extends Controller
         if (count($routesFound) > 0)
             return $routesFound;
         else
-            return false;
+            return [];
     }
 
 
@@ -174,7 +173,7 @@ class RouteController extends Controller
         if (count($routesFound) > 0)
             return $routesFound;
         else
-            return false;
+            return [];
     }
 
 
