@@ -31,9 +31,9 @@ class AddressFactory extends Factory
             | city() - Gera nomes de cidades aleatórios
             */
 
-            // 'logradouro' => $this->faker->address(),
-            // 'bairro' => $this->faker->streetName(),
-            // 'cidade' => $this->faker->city(),
+            'logradouro' => $this->faker->address(),
+            'bairro' => $this->faker->streetName(),
+            'cidade' => $this->faker->city(),
         ];
     }
 }

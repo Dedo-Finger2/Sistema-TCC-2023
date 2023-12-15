@@ -2,6 +2,7 @@
 
 namespace Tests\Unit;
 
+use SebastianBergmann\Type\VoidType;
 use Tests\TestCase;
 use App\Models\User;
 use App\Models\Address;
@@ -46,5 +47,31 @@ class UserTest extends TestCase
             'email' => 'email2@example.com',
             'address_id' => $address->id,
         ]);
+    }
+
+    public function test_user_autenticate(): void
+    {
+        // Cria um endereço de teste
+        $address = Address::factory()->create([
+            'logradouro' => 'Teste123',
+            'bairro' => 'Teste',
+            'cidade' => "Camaçari",
+        ]);
+
+        // Cria novo usuário
+        $user = User::factory()->create([
+            'email' => 'test@example.com',
+            'password' => '123',
+            'address_id' => $address->id,
+        ]);
+
+        // Envia os dados para a rota de login
+        $this->post("/login", [
+            'email' => $user->email,
+            'password' => '123',
+        ]);
+
+        // Verifica se o usuário está autenticado como usuário
+        $this->assertAuthenticatedAs($user, "web");
     }
 }
