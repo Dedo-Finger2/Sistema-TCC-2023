@@ -4,32 +4,31 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
+class CreateAddressesTable extends Migration
+{
     /**
      * Run the migrations.
+     *
+     * @return void
      */
-    public function up(): void
+    public function up()
     {
-        /*
-        | ------------------------
-        | Tabela de Endereços
-        | ------------------------
-        | nesta tabela vamos estar guardando dados sobre os endereços que temos.
-        */
         Schema::create('addresses', function (Blueprint $table) {
-            $table->id();
-            $table->string('logradouro', 255)->nullable(false); // Logradouro do endereço
-            $table->string('bairro', 100)->nullable(false);     // Bairro do endereço
-            $table->string('cidade', 75)->nullable(false);
-            $table->timestamps();
+            $table->id('address_id');
+            $table->string('street', 255);
+            $table->string('neighborhood', 100);
+            $table->string('city', 75);
+            $table->timestamps();  // Add this line if you want timestamps (created_at and updated_at)
         });
     }
 
     /**
      * Reverse the migrations.
+     *
+     * @return void
      */
-    public function down(): void
+    public function down()
     {
         Schema::dropIfExists('addresses');
     }
-};
+}

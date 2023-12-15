@@ -4,34 +4,31 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
+class CreateUsersTable extends Migration
+{
     /**
      * Run the migrations.
+     *
+     * @return void
      */
-    public function up(): void
-    {       /*
-           | ------------------------
-           | Tabela de Usuarios
-           | ------------------------
-           | nesta tabela vão estar os dados dos usuários que se cadastrarem no nosso sistema.
-           */
+    public function up()
+    {
         Schema::create('users', function (Blueprint $table) {
-            $table->id();
-            $table->string('nome')->nullable(false);
-            $table->string('email')->nullable(false)->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password')->nullable(false);;
-            $table->foreignId('address_id')->nullable(false)->constrained('addresses');
-            $table->rememberToken();
-            $table->timestamps();
+            $table->id('user_id');
+            $table->string('name', 100);
+            $table->string('email', 255)->unique();
+            $table->string('password', 16);
+            $table->timestamps();  // Add this line if you want timestamps (created_at and updated_at)
         });
     }
 
     /**
      * Reverse the migrations.
+     *
+     * @return void
      */
-    public function down(): void
+    public function down()
     {
         Schema::dropIfExists('users');
     }
-};
+}

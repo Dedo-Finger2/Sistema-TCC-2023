@@ -4,33 +4,31 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
+class CreateFeedbackTable extends Migration
+{
     /**
      * Run the migrations.
+     *
+     * @return void
      */
-    public function up(): void
+    public function up()
     {
-        /*
-        | ------------------------
-        | Tabela de Feedbacks
-        | ------------------------
-        | nesta tabela vamos guardar os feedbacks que os usuários darem para as requisições que fizeram no nosso sistema.
-        */
-        Schema::create('feedback', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('user_id')->constrained('users'); // Chanve Estrangeira Usuário
-            $table->string('comentario', 255)->nullable(true); // comentário do usuário
-            $table->date('data')->nullable(false);                    // data do feedback
-            $table->boolean('feedback')->nullable(false);            // indicação do feedback: positivo = TRUE, negativo = FALSE
-            $table->timestamps();
+        Schema::create('feedbacks', function (Blueprint $table) {
+            $table->id('feedback_id');
+            $table->text('comment')->nullable();
+            $table->date('date');
+            $table->tinyInteger('feedback');
+            $table->timestamps();  // Add this line if you want timestamps (created_at and updated_at)
         });
     }
 
     /**
      * Reverse the migrations.
+     *
+     * @return void
      */
-    public function down(): void
+    public function down()
     {
-        Schema::dropIfExists('feedback');
+        Schema::dropIfExists('feedbacks');
     }
-};
+}

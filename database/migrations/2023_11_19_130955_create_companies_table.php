@@ -4,37 +4,32 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
+class CreateCompaniesTable extends Migration
+{
     /**
      * Run the migrations.
+     *
+     * @return void
      */
-    public function up(): void
+    public function up()
     {
-        /*
-        | ------------------------
-        | Tabela de Empresa
-        | ------------------------
-        | nesta tabela vamos estar guardando dados sobre as empresa que vão usar o sistema.
-        | essa tabela também é usada como referência das empresas dos próprios ônibus.
-        | as empresas serão como administradores no nosso sistema, são eles que vão acessar o Painel de Controle
-        */
         Schema::create('companies', function (Blueprint $table) {
-            $table->id();
-            $table->string('nome')->nullable(false);
-            $table->string('email')->nullable(false)->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password')->nullable(false);;
-            $table->string('cnpj')->nullable(false);
-            $table->rememberToken();
-            $table->timestamps();
+            $table->id('company_id');
+            $table->string('name', 100);
+            $table->string('email', 250)->unique();
+            $table->string('cnpj', 18)->unique();
+            $table->string('password', 16);
+            $table->timestamps();  // Add this line if you want timestamps (created_at and updated_at)
         });
     }
 
     /**
      * Reverse the migrations.
+     *
+     * @return void
      */
-    public function down(): void
+    public function down()
     {
         Schema::dropIfExists('companies');
     }
-};
+}

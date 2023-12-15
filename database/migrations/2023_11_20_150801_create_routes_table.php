@@ -4,31 +4,29 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
+class CreateRoutesTable extends Migration
+{
     /**
      * Run the migrations.
+     *
+     * @return void
      */
-    public function up(): void
+    public function up()
     {
-        /*
-        | ------------------------
-        | Tabela de Rotas
-        | ------------------------
-        | nesta tabela vamos estar armazenando as rotas feitas pelos ônibus.
-        */
         Schema::create('routes', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('bus_outbound_id')->constrained('bus_outbounds');
-            $table->foreignId('bus_inbound_id')->constrained('bus_inbounds');
-            $table->timestamps();
+            $table->id('route_id');
+            $table->string('title', 45);
+            $table->timestamps();  // Add this line if you want timestamps (created_at and updated_at)
         });
     }
 
     /**
      * Reverse the migrations.
+     *
+     * @return void
      */
-    public function down(): void
+    public function down()
     {
         Schema::dropIfExists('routes');
     }
-};
+}
