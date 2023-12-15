@@ -25,10 +25,24 @@ class RouteController extends Controller
      */
     public function showSearchForm(): \Illuminate\Contracts\View\View
     {
-        $busOutbounds = BusOutbound::with('address')->get();
-        $busInbounds = BusInbound::with('address')->get();
+        $busOutbounds = BusOutbound::with('address')->get()->toArray();
+        $busInbounds = BusInbound::with('address')->get()->toArray();
 
-        return view('User.search', compact('busOutbounds', 'busInbounds'));
+        $addressesOutboundIds = array_map(function ($item) {
+            return $item['address_id'];
+        }, $busOutbounds);
+
+        $addressesInboundIds = array_map(function ($item) {
+            return $item['address_id'];
+        }, $busInbounds);
+
+        $addressesOutbound = Address::whereIn('id', $addressesOutboundIds)->get();
+        $addressesInbound = Address::whereIn('id', $addressesInboundIds)->get();
+
+        return view('User.search', [
+            'busOutbounds' => $addressesOutbound,
+            'busInbounds' => $addressesInbound,
+        ]);
     }
 
 
@@ -45,8 +59,10 @@ class RouteController extends Controller
 
         # Coletar o ID do endereço da origem requisitada pelo usuário
         $requestedBusOutbound = $this->returnIntOrString($request->busOutbound);
+
         # Coletar o ID do endereço do destino requisitado pelo usuário
         $requestedBusInbound = $this->returnIntOrString($request->busInbound);
+
 
         // * IDA_ONIBUS & VOLTA_ONIBUS * \\
 

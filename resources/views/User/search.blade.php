@@ -49,7 +49,7 @@
                             <label class="form-label" for="origem">Origem:</label>
                             <select name="busInbound" id="origem" class="select-single form-select">
                                 @foreach ($busInbounds as $busInbound)
-                                    <option value="{{ $busInbound->address->id }}">{{ $busInbound->address->bairro }}
+                                    <option value="{{ $busInbound->id }}">{{ $busInbound->bairro }}
                                     </option>
                                 @endforeach
                             </select><br>
@@ -59,7 +59,7 @@
                             <label class="form-label" for="destino">Destino:</label>
                             <select name="busOutbound" id="destino" class="select-single form-select">
                                 @foreach ($busOutbounds as $busOutbound)
-                                    <option value="{{ $busOutbound->address->id }}">{{ $busOutbound->address->bairro }}
+                                    <option value="{{ $busOutbound->id }}">{{ $busOutbound->bairro }}
                                     </option>
                                 @endforeach
                             </select><br>
