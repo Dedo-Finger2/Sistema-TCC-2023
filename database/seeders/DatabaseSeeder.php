@@ -1054,13 +1054,13 @@ class DatabaseSeeder extends Seeder
             "cnpj" => "12.345.678/9012-34",
         ]);
 
-        foreach (array_values(array_unique($bairros)) as $bairro) {
-            Address::factory()->create([
-            'logradouro' => 'defaut',
-                'bairro' => $bairro,
-                'cidade' => 'Camaçari'
-            ]);
-        }
+        // foreach (array_values(array_unique($bairros)) as $bairro) {
+        //     Address::factory()->create([
+        //     'logradouro' => 'defaut',
+        //         'bairro' => $bairro,
+        //         'cidade' => 'Camaçari'
+        //     ]);
+        // }
 
         // \App\Models\Address::factory(25)->create();
         \App\Models\User::factory()->create([

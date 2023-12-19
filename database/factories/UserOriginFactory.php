@@ -35,6 +35,8 @@ class UserOriginFactory extends Factory
         $idRequisicoes = Request::all()->pluck('id');
         $idUsuarios = User::all()->pluck('id');
 
+        $endereco = Address::find($this->faker->randomElement($idEnderecos));
+
         return [
             /*
             | ----------------------------------------------
@@ -47,8 +49,8 @@ class UserOriginFactory extends Factory
             | name() método que gera nomes aleatorios
             | randomElemnt(ids do Model especifico)
             */
-            'nome' => $this->faker->streetName(),
-            'address_id' => $this->faker->randomElement($idEnderecos),
+            'nome' => $endereco->bairro,
+            'address_id' => $endereco->id,
             'requested_location_id' => $this->faker->randomElement($idLocaisRequisitados),
             'user_id' => $this->faker->randomElement($idUsuarios),
             'request_id' => $this->faker->randomElement($idRequisicoes),

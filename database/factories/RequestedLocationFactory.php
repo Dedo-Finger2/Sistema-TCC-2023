@@ -28,6 +28,7 @@ class RequestedLocationFactory extends Factory
         | pluck('id') - Pega apenas o ID de todos os dados da tabela
         */
         $idEnderecos = Address::all()->pluck('id');
+        $endereco = Address::find($this->faker->randomElement($idEnderecos));
 
         return [
             /*
@@ -40,8 +41,8 @@ class RequestedLocationFactory extends Factory
             | streetName() - Gera nome de ruas aleatórios
             | randomElement() - Pega um item aleatório de um array passado como parâmetro
             */
-            'nome' => $this->faker->streetName(),
-            'address_id' => $this->faker->randomElement($idEnderecos),
+            'nome' => $endereco->bairro,
+            'address_id' => $endereco->id,
         ];
     }
 }
