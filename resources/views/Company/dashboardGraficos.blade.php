@@ -30,7 +30,7 @@
         <div class="col md-3">
             <div class="card bg-info bg-gradient shadow-sm">
                 <div class="card-body">
-                    <h4>Locais sem retorno</h4>
+                    <h4>Destinos sem retorno</h4>
                     <h2 class="card-text">{{ $porcentagemLocaisSemRetorno }}%</h2>
                 </div>
             </div>

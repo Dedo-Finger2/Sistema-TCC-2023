@@ -40,9 +40,13 @@ class DashboardController extends Controller
         $tabelaTreis = $this->getOrigensSemRetorno(); // completo
         $tabelaQuatro = $this->getRequisicoesRecentes(); // completo
         $tabelaFeedbacks = $this->getFeedbacks(); // completo
+        $tabelaSeis = $this->getOrigensComRetorno(); // completo
+
+        $destinosNaoCadastrados = $this->getDestinosNaoCadastrados(); // completo
+        $origensNaoCadastradas = $this->getOrigensNaoCadastrados(); // completo
 
 
-        return view("Company.dashboardTabelas", compact('tabelaUm', 'tabelaDois', 'tabelaTreis', 'tabelaQuatro', 'tabelaFeedbacks'));
+        return view("Company.dashboardTabelas", compact('tabelaUm', 'tabelaDois', 'tabelaTreis', 'tabelaQuatro', 'tabelaFeedbacks', 'destinosNaoCadastrados', 'origensNaoCadastradas', 'tabelaSeis'));
     }
 
     public function graficos(): \Illuminate\Contracts\View\View
@@ -145,10 +149,41 @@ class DashboardController extends Controller
             ->join('user_origins', 'requested_locations.id', '=', 'user_origins.requested_location_id')
             ->join('requests', 'user_origins.request_id', '=', 'requests.id')
             ->where('requests.retorno_requisicao', true)
+            ->where('requested_locations.address_id', '!=', null)
             ->groupBy('requested_locations.nome')
             ->get();
 
         return $destinosRequisitados;
+    }
+
+    public function getDestinosNaoCadastrados()
+    {
+        $data = RequestedLocation::select(
+            'requested_locations.nome as nome',
+            DB::raw('COUNT(requested_locations.nome) as total_requisicoes'),
+        )
+            ->join('user_origins', 'requested_locations.id', '=', 'user_origins.requested_location_id')
+            ->join('requests', 'user_origins.request_id', '=', 'requests.id')
+            ->where('requested_locations.address_id', "=", null)
+            ->where('requests.retorno_requisicao', false)
+            ->groupBy('requested_locations.nome')
+            ->get();
+
+        return $data;
+    }
+    
+    public function getOrigensNaoCadastrados()
+    {
+        $data = UserOrigin::select(
+            'user_origins.nome as nome',
+            DB::raw('COUNT(user_origins.nome) as total_requisicoes'),
+        )
+            ->join('requests', 'user_origins.request_id', '=', 'requests.id')
+            ->where('user_origins.address_id', '=', null)
+            ->groupBy('user_origins.nome')
+            ->get();
+
+        return $data;
     }
 
     public function getDestinosSemRetorno()
@@ -161,6 +196,7 @@ class DashboardController extends Controller
             ->join('user_origins', 'requested_locations.id', '=', 'user_origins.requested_location_id')
             ->join('requests', 'user_origins.request_id', '=', 'requests.id')
             ->where('requests.retorno_requisicao', false)
+            ->where('requested_locations.address_id', '!=', null)
             ->groupBy('requested_locations.nome')
             ->get();
 
@@ -175,7 +211,25 @@ class DashboardController extends Controller
             DB::raw('MAX(requests.data_hora) horario_mais_recente')
         )
             ->join('requests', 'user_origins.request_id', '=', 'requests.id')
+            ->where('requests.retorno_requisicao', false)
+            ->where('user_origins.address_id', '!=', null)
+            ->groupBy('user_origins.nome')
+            ->get();
+
+
+        return $origensRequisitadas;
+    }
+
+    public function getOrigensComRetorno()
+    {
+        $origensRequisitadas = UserOrigin::select(
+            'user_origins.nome as nome',
+            DB::raw('COUNT(user_origins.nome) as total_requisicoes'),
+            DB::raw('MAX(requests.data_hora) horario_mais_recente')
+        )
+            ->join('requests', 'user_origins.request_id', '=', 'requests.id')
             ->where('requests.retorno_requisicao', true)
+            ->where('user_origins.address_id', '!=', null)
             ->groupBy('user_origins.nome')
             ->get();
 
